@@ -7,37 +7,30 @@
 
 Jordi Boronat
 
-#### Technologies used:
-
-- HTML & Handlebars, CSS & SASS
-- JavaScript (ES6)
-- Express:
-    MongoDB, Mongoose, Bcrypt, Passport
-
 
 ### Endpoints
 
  | Method        |  Path          | Response(200)  | Action  |
   | ------------- | ------------- | ------------- | ------------- |
-  |GET| `/`  | Homepage  |
-  |GET| `/recipes` | List of all recipes |
-  |GET| `/recipes/:id` | Recipe details page |
-  |GET| `/recipes/:id/send` | Recipe details page |
-  |POST| `/recipes/:id/send` | Recipe details page |
-  |GET| `/login` | Log in form  |
-  |POST| `/login` | Send log in form  |
-  |GET| `/signup` | Sign up form  |
-  |POST| `/signup` | Send sign up form  |
-  |GET| `/logout` | Send log out action  |
-  |GET| `/profile` | User's profile  |
-  |GET| `/profile/edit?id=` | Edit user's profile form  |
-  |POST| `/profile/edit?id=` | Send edited user's profile form  |
-  |GET| `/profile/delete?id=` | Delete user's profile page  |
-  |POST| `/profile/delete?id=` | Confirm user delete  |
-  |GET| `/profile/recipes` | User's posted recipes |
-  |GET| `/profile/recipes/:id` | Recipe details page |
-  |POST| `/profile/recipes/delete?id=` | Remove movie/serie from likes list  |
-  |GET| `/profile/friends` | User's posted recipes |
+  |GET| `/`  || Homepage  |
+  |GET| `/recipes` || List of all recipes |
+  |GET| `/recipes/:id` || Recipe details page |
+  |GET| `/recipes/:id/send` || Recipe details page |
+  |POST| `/recipes/:id/send` || Recipe details page |
+  |GET| `/login` || Log in form  |
+  |POST| `/login` || Send log in form  |
+  |GET| `/signup` || Sign up form  |
+  |POST| `/signup` || Send sign up form  |
+  |GET| `/logout` || Send log out action  |
+  |GET| `/profile` || User's profile  |
+  |GET| `/profile/edit?id=` || Edit user's profile form  |
+  |POST| `/profile/edit?id=` || Send edited user's profile form  |
+  |GET| `/profile/delete?id=` || Delete user's profile page  |
+  |POST| `/profile/delete?id=` || Confirm user delete  |
+  |GET| `/profile/recipes` || User's posted recipes |
+  |GET| `/profile/recipes/:id` || Recipe details page |
+  |POST| `/profile/recipes/delete?id=` || Remove movie/serie from likes list  |
+  |GET| `/profile/friends` || User's posted recipes |
   
 
 <!-- 
