@@ -8,7 +8,18 @@
 Jordi Boronat
 
 
-### Endpoints
+### Endpoints API Rest
+
+ | Method        |  Path          | Response(200)  | Action  |
+  | ------------- | ------------- | ------------- | ------------- |
+  |GET| `/getAllRecipes`  |[recipes]| All recipes  |
+  |GET| `/getOneRecipe` | {recipe} | Get selected Recipe |
+  |POST| `/newRecipe` | {Newrecipe} | Recipe details page |
+  |PUT| `/editRecipe/:recipe_id` |{newRecipe}| Add new recipe |
+  |POST| `/deleteRecipe/:recide_id` | {deletedRecipe}| Delete recipe |
+  
+  
+<!-- ### Endpoints
 
  | Method        |  Path          | Response(200)  | Action  |
   | ------------- | ------------- | ------------- | ------------- |
@@ -31,7 +42,7 @@ Jordi Boronat
   |GET| `/profile/recipes/:id` || Recipe details page |
   |POST| `/profile/recipes/delete?id=` || Remove movie/serie from likes list  |
   |GET| `/profile/friends` || User's posted recipes |
-  
+   -->
 
 <!-- 
 ### Models
