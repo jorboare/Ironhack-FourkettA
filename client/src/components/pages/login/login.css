@@ -1,0 +1,8 @@
+.images-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.login-container {
+    margin-top: 80px;
+}

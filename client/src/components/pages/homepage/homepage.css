@@ -1,6 +1,6 @@
 .hero {
     height: 400px;
-    background-color: grey;
+    background-color: #ffefc1;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -11,10 +11,13 @@
 .hero h1 {
     font-weight: 900;
     font-size: 60px;
+    color: white
 }
 
 .homepage-btn .btn {
     margin-right: 15px;
     border-radius: 25px;
     padding-bottom:10px;
+    background-color: #c49a27;
+    border: none
 }

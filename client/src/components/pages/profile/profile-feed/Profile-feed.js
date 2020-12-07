@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Profile-feed.css'
-import { Card, ListGroup } from 'react-bootstrap'
+
 
 class Navbar extends Component {
 
@@ -20,8 +20,10 @@ class Navbar extends Component {
                 {this.state.recipes.map((elm, idx) => {
                     return (
                         <div className='feed'>
-                            <h5 className='recipe-name' key={elm._id} > {elm.name}</h5>
-                            <p key={idx}>Raciones: 4 | Ingredientes: lista de ingredientes</p>
+                            <div className='feed-card'>
+                                <h5 className='recipe-name'> {elm.name}</h5>
+                                <p>Raciones: 4 | Ingredientes: lista de ingredientes</p>
+                            </div>
                         </div>
                     )
                 })}

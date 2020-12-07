@@ -1,10 +1,18 @@
-.feed{
+.feed-card{
 height: 90px;
   margin-top: 15px;
   border: 1px solid grey;
   border-radius: 10px;
   padding:10px;
   font-family: 'Noto Sans JP', sans-serif;
+}
+.feed{
+  transition: .5s;
+   border-radius: 10px;
+}
+
+.feed:hover {
+  background-color:#ffefc1;
 }
 
 .feed p{

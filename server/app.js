@@ -14,6 +14,7 @@ const app = express()
 
 require('./configs/cors.config')(app)
 require('./configs/middleware.config')(app)
+require('./configs/passport.config')(app)
 
 
 // Routes index

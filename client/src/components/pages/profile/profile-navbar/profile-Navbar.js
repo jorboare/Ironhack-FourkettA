@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import './profile-header.css'
 import ListGroup from 'react-bootstrap/ListGroup'
 import { Link } from 'react-router-dom'
 import './profile-Navbar.css'

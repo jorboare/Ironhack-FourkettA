@@ -15,17 +15,14 @@ const userSch = new Schema({
         type: String,
         required: true
     },
-    firstname: {
-        type: String,
-        required: true,
-    },
-    lastname: {
-        type: String,
-        required: true
-    },
     img: {
         type: String,
-
+    },
+    favRecipes: {
+        type: [String]
+    },
+    friends: {
+        type: [String]
     }
 }, { timestamps: true })
 
