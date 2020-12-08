@@ -1,14 +1,14 @@
-.feed-card{
-height: 90px;
+
+.feed{
+  transition: .5s;
+   border-radius: 10px;
+   height: 100px;
   margin-top: 15px;
   border: 1px solid grey;
   border-radius: 10px;
   padding:10px;
   font-family: 'Noto Sans JP', sans-serif;
-}
-.feed{
-  transition: .5s;
-   border-radius: 10px;
+  display: flex
 }
 
 .feed:hover {
@@ -18,13 +18,20 @@ height: 90px;
 .feed p{
      font-weight: 100;
 }
-.recipe-name{
 
+.recipe-name{
   font-weight: 400;
 font-size: 18px;
-  
 }
 
+.feed-card{
+  margin-left: 15px;
+}
+
+.recipe-img{
+  width: 130px;
+  border-radius: 15px;
+}
 .recipes{
     text-align: center
 }

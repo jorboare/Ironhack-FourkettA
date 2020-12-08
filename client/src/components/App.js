@@ -10,6 +10,8 @@ import Login from './pages/login/login'
 import AuthServices from './../service/auth.service'
 import { Redirect } from 'react-router-dom'
 import NewRecipe from './pages/new-recipe/New-recipe-form'
+import EditRecipe from './pages/edit-recipe/Edit-recipe-form'
+import RecipeDetails from './pages/recipe-details/Recipe-details'
 
 
 class App extends Component {
@@ -41,7 +43,9 @@ class App extends Component {
             <Route path='/' exact render={() => <Homepage />} />
             <Route path='/profile' exact render={() => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} /> : <Redirect to='/login' />} />
             <Route path="/recipes" exact render={() => <RecipesList />} />
-            <Route path="/newRecipe" render={() => <NewRecipe />} />
+            <Route path="/newRecipe" render={props => <NewRecipe loggedUser={this.state.loggedInUser} {...props} />} />
+            <Route path="/detail/:id" render={props => <RecipeDetails {...props} />} />
+            <Route path="/editRecipe/:id" render={props => <EditRecipe {...props} />} />
             <Route path="/signup" exact render={props => <Signup storeUser={this.setTheUser} {...props} />} />
             <Route path="/login" exact render={props => <Login storeUser={this.setTheUser} {...props} />} />
           </Switch>

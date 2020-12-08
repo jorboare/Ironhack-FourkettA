@@ -5,10 +5,10 @@ import Recipes from './../../../../service/recipes.service'
 import './profile.css'
 import RecipeCard from './../profile-feed/Recipe-card'
 import { Redirect } from 'react-router-dom'
-import Spinner from 'react-bootstrap/Spinner'
 
 
-import { Container, Row, Col } from 'react-bootstrap'
+
+import { Container, Row, Col, Spinner } from 'react-bootstrap'
 
 
 export default class Profile extends Component {

@@ -8,32 +8,24 @@ const recipeSchema = new Schema({
     },
     type: {
         type: String,
-        enum: ['vegetarian', 'vegan', 'regular'],
-        default: 'regular'
+        enum: ['vegetariana', 'vegana', 'normal'],
+        default: 'normal'
     },
-    ingredients: [{
-        food: {
-            type: String,
-            required: true
-        },
-        quantity: {
-            type: String
-        },
-        measure: {
-            type: String,
-            enum: ['gr', 'kg', 'ml', 'l', 'cds']
-        }
-
-    }],
+    ingredients: {
+        type: String,
+        required: true,
+        default: 'ingredientes'
+    },
     origin: {
         type: String
     },
     instructions: {
-        type: [String],
-        required: true
+        type: String,
+        required: true,
+        default: 'instrucciones'
     },
     servings: {
-        type: Number
+        type: String
     },
     updated: {
         type: Date,
@@ -46,8 +38,8 @@ const recipeSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Users'
     },
-    imgs: {
-        type: [String]
+    img: {
+        type: String
     }
 
 },
@@ -58,3 +50,15 @@ const recipeSchema = new Schema({
 const Recipes = mongoose.model('Recipe', recipeSchema)
 
 module.exports = Recipes
+
+
+
+// ingredients: [{
+//     food: {
+//         type: String,
+//         required: true
+//     },
+//     quantity: {
+//         type: String
+//     }
+// }]
