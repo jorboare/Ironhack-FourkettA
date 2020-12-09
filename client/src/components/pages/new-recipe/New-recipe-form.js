@@ -121,7 +121,7 @@ export default class NewRecipe extends Component {
                             </Form.Group>
                             <Form.Group controlId="name">
                                 <Form.Label>País de origen:</Form.Label>
-                                <Form.Control type="text" placeholder="País de origen (opcional)" name='origin' value={this.state.recipe.origin} onChange={this.handleInputChange} />
+                                <Form.Control type="text" placeholder="Rellenar en caso de tener una nacionalidad concreta" name='origin' value={this.state.recipe.origin} onChange={this.handleInputChange} />
                             </Form.Group>
                             <Form.Group controlId="name">
                                 <Form.Label>Raciones:</Form.Label>

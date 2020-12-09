@@ -38,9 +38,6 @@ router.post('/signup', (req, res) => {
 })
 
 
-
-
-
 router.post('/login', (req, res, next) => {
 
     passport.authenticate('local', (err, theUser, failureDetails) => {
@@ -70,5 +67,40 @@ router.post('/logout', (req, res) => {
 
 router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'Unauthorized' }))
 
+//Find Recipe Author
 
+router.get('/author', (req, res) => {
+
+    console.log(req.query.user_Id)
+
+    User
+        .findById(req.query.user_Id)
+        .then(author => res.json(author))
+        .catch(err => res.status(500).json(err))
+
+})
+//Find User by Username
+
+router.get('/userData', (req, res) => {
+
+    console.log(req.query.username)
+
+    User
+        .findOne({ username: req.query.username })
+        .then(user => res.json(user))
+        .catch(err => res.status(500).json(err))
+
+})
+
+//Update User
+router.put('/updateUser', (req, res) => {
+
+    console.log(req.query.user_Id)
+
+    User
+        .findByIdAndUpdate(req.query.user_Id, req.body)
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(500).json(err))
+
+})
 module.exports = router

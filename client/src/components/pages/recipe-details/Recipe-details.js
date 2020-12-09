@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import RecipeService from './../../../service/recipes.service'
+import AuthService from './../../../service/auth.service'
 import { Link } from 'react-router-dom'
 import './Recipe-details.css'
-import { Container, Row, Col, Spinner, Card, Button } from 'react-bootstrap'
+import { Container, Row, Col, Spinner, Button, Image, Modal } from 'react-bootstrap'
 
 
 export default class Detail extends Component {
@@ -11,20 +12,23 @@ export default class Detail extends Component {
         super(props)
 
         this.state = {
-            recipe: undefined
+            recipe: undefined,
+            author: undefined,
+            showModal: false,
+            loggedUser: undefined
         }
         this.recipeService = new RecipeService()
+        this.authService = new AuthService()
     }
 
     componentDidMount = () => {
-        console.log(this.props.match.params.id)
 
         this.recipeService
             .getRecipeDetails(this.props.match.params.id)
-            .then(res => {
-                this.setState({ recipe: res.data })
-                console.log(this.state.recipe)
-            })
+            .then(res => this.setState({ recipe: res.data }))
+            .then(() => this.authService.findAuthor(this.state.recipe.author))
+            .then(author => this.setState({ author: author.data }))
+            .then(() => this.setState({ loggedUser: this.props.loggedUser }))
             .catch(err => console.log(err))
 
     }
@@ -39,49 +43,63 @@ export default class Detail extends Component {
             .catch(err => console.log(err))
     }
 
+    handleModal = visible => this.setState({ showModal: visible })
+
     render() {
         return (
+            <>
+                <Container className='recipe-detail'>
 
-            <Container className='recipe-detail'>
+                    <Row>
 
-                <Row>
+                        <Col md={{ span: 10, offset: 1 }}>
+                            {this.state.recipe && this.state.author && this.state.loggedUser ?
+                                <>
+                                    <h3>{this.state.recipe.name}</h3>
+                                    <div className='created-by'>
+                                        <p>Añadida por:</p>
+                                        <figure>
+                                            <Image className='recipe-author-img' src={this.state.author.img} />
+                                        </figure>
+                                        <p>{this.state.author.username}</p>
+                                    </div>
+                                    <Image className='recipe-img-cover' src={this.state.recipe.img} />
+                                    <p>Raciones: {this.state.recipe.servings}</p>
+                                    <p>Tiempo de preparación: {this.state.recipe.time} minutos</p>
+                                    <p>Tipo de receta: {this.state.recipe.type}</p>
+                                    <p> {this.state.recipe.origin}</p>
+                                    <p>Ingredientes:</p>
+                                    <p>{this.state.recipe.ingredients}</p>
+                                    <p>Instrucciones:</p>
+                                    <p>{this.state.recipe.instructions}</p>
+                                    {this.state.author._id === this.state.loggedUser._id &&
+                                        <>
+                                            <Button variant="dark" className='btn' onClick={() => this.handleModal(true)}>Eliminar receta</Button>
+                                            <Link to={`/editRecipe/${this.state.recipe._id}`}>
+                                                <Button variant="dark" className='btn'>Editar receta</Button>
+                                            </Link>
+                                        </>
+                                    }
+                                </>
+                                :
+                                <Spinner animation="border" variant="warning" />
+                            }
+                        </Col>
 
-                    <Col md={{ span: 10, offset: 1 }}>
-                        {this.state.recipe ?
-
-                            <Card style={{ width: '100%' }}>
-                                {this.state.recipe.img && <Card.Img variant="top" src={this.state.recipe.img} />}
-                                <Card.Body>
-                                    <Card.Title>{this.state.recipe.name}</Card.Title>
-                                    <Card.Text>Raciones: {this.state.recipe.servings}
-                                    </Card.Text>
-                                    <Card.Text>Tiempo de preparación: {this.state.recipe.time} minutos
-                                    </Card.Text>
-                                    <Card.Text>
-                                        {this.state.recipe.origin}
-                                    </Card.Text>
-                                    <Card.Text>
-                                        {this.state.recipe.ingredients}
-                                    </Card.Text>
-                                    <Card.Text>
-                                        {this.state.recipe.instructions}
-                                    </Card.Text>
-                                    <Button variant="dark" className='btn' onClick={this.deleteArtist}>Eliminar receta</Button>
-                                    <Link to={`/editRecipe/${this.state.recipe._id}`}>
-                                        <Button variant="dark" className='btn'>Editar receta</Button>
-                                    </Link>
-                                </Card.Body>
-                            </Card> :
-
-                            <Spinner animation="border" variant="warning" />
-                        }
-                    </Col>
-
-                </Row>
+                    </Row>
 
 
-            </Container>
+                </Container>
 
+                <Modal show={this.state.showModal} onHide={() => this.handleModal(false)}>
+                    <Modal.Body>
+                        <h3>¿Estás seguro que quieres eliminar la receta?</h3>
+                        <p>Si la eliminas no podrás recuperarla.</p>
+                        <Button variant="dark" className='btn' onClick={() => this.handleModal(false)}>Cancelar</Button>
+                        <Button variant="danger" className='btn' onClick={this.deleteArtist}>Eliminar receta</Button>
+                    </Modal.Body>
+                </Modal>
+            </>
         )
     }
 }

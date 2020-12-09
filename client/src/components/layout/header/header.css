@@ -6,3 +6,15 @@
     z-index: 300;
     background-color: #c49a27;
 }
+
+.header-img {
+    width:30px;
+    height:30px;
+    object-fit:cover;
+    border-radius: 50%;
+}
+
+.profile-link {
+    display:flex;
+    align-items: center
+}

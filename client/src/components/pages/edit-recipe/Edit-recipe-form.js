@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Form, Button, Container, Row, Col, Spinner } from 'react-bootstrap'
 import './Edit-recipe-form.css'
 import Recipes from '../../../service/recipes.service'
+import { Link } from 'react-router-dom'
 
 
 export default class EditRecipe extends Component {
@@ -82,7 +83,7 @@ export default class EditRecipe extends Component {
                                     </Form.Group>
                                     <Form.Group controlId="name">
                                         <Form.Label>País de origen:</Form.Label>
-                                        <Form.Control type="text" placeholder="País de origen (opcional)" name='origin' value={this.state.recipe.origin} onChange={this.handleInputChange} />
+                                        <Form.Control type="text" placeholder="En caso de tener" name='origin' value={this.state.recipe.origin} onChange={this.handleInputChange} />
                                     </Form.Group>
                                     <Form.Group controlId="name">
                                         <Form.Label>Raciones:</Form.Label>
@@ -115,7 +116,10 @@ export default class EditRecipe extends Component {
 
 
                                     <div className='add-sub-btns'>
-                                        <Button variant="primary" type="submit">Submit</Button>
+                                        <Button variant="primary" type="submit">Editar Receta</Button>
+                                        <Link to={`/detail/${this.props.match.params.id}`}>
+                                            <Button variant="primary" type="submit">Cancelar</Button>
+                                        </Link>
                                     </div>
                                 </Form>
                             </Col>

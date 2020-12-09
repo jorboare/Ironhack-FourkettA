@@ -1,7 +1,6 @@
 
-import { Col, Image, Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import Foto from './header.png'
+import { Col, Image } from 'react-bootstrap'
+
 import './profile-header.css'
 
 
@@ -12,7 +11,7 @@ const Info = props => {
     return (
         <>
             <Col xs={6} md={3} className='image-Col'>
-                <Image className='profile-img' src={Foto} />
+                <Image className='profile-img' src={user.img} />
             </Col>
             <Col xs={12} md={9} >
                 <section className='profile-info'>
@@ -21,10 +20,6 @@ const Info = props => {
                     </h3>
                     <p>Number of recipes: 15 | Friends: 30</p>
                 </section>
-                <Link to='/newRecipe'>
-                    <Button variant="dark" className='btn'>Añadir receta</Button>
-                </Link>
-
             </Col>
         </>
 

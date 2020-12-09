@@ -1,4 +1,4 @@
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav, Image } from 'react-bootstrap'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './header.css'
@@ -33,16 +33,15 @@ class Header extends Component {
                     <Navbar.Brand>_AppName</Navbar.Brand>
                 </Link>
                 <Nav className="mr-auto">
-                    <Link to='/recipes'>
-                        <Nav.Link as='div'>Recipes</Nav.Link>
-                    </Link>
+
                 </Nav>
                 <Nav className="mf-auto">
                     {this.props.loggedUser
                         ?
                         <>
-                            <Link to='/profile'>
-                                <Nav.Link as='div'>Perfil</Nav.Link>
+                            <Link to={`/profile/${this.props.loggedUser.username}`} className='profile-link'>
+                                <Image className='header-img' src={this.props.loggedUser.img}></Image>
+                                <Nav.Link as='div'>{this.props.loggedUser.username}</Nav.Link>
                             </Link>
                             <Nav.Link as='div' onClick={this.logOut}>Cerrar sesión</Nav.Link>
                         </>

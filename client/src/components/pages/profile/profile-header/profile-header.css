@@ -3,7 +3,9 @@
 }
 
 .profile-img {
-    width:200px;
+    height: 180px;
+    object-fit:cover;
+    width:180px;
     border-radius:50%;
     border: 10px solid white
 }

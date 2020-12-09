@@ -28,6 +28,7 @@ class App extends Component {
   setTheUser = user => this.setState({ loggedInUser: user }, () => console.log('El nuevo estado de App es:', this.state))
 
   componentDidMount = () => {
+
     this.authServices
       .isLoggedIn()
       .then(response => this.setTheUser(response.data))
@@ -41,10 +42,10 @@ class App extends Component {
         <main>
           <Switch>
             <Route path='/' exact render={() => <Homepage />} />
-            <Route path='/profile' exact render={() => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} /> : <Redirect to='/login' />} />
+            <Route path='/profile/:username' exact render={props => <Profile {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} />} />
             <Route path="/recipes" exact render={() => <RecipesList />} />
             <Route path="/newRecipe" render={props => <NewRecipe loggedUser={this.state.loggedInUser} {...props} />} />
-            <Route path="/detail/:id" render={props => <RecipeDetails {...props} />} />
+            <Route path="/detail/:id" render={props => <RecipeDetails loggedUser={this.state.loggedInUser} {...props} />} />
             <Route path="/editRecipe/:id" render={props => <EditRecipe {...props} />} />
             <Route path="/signup" exact render={props => <Signup storeUser={this.setTheUser} {...props} />} />
             <Route path="/login" exact render={props => <Login storeUser={this.setTheUser} {...props} />} />

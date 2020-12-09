@@ -1,3 +1,30 @@
 .recipe-detail {
     margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.recipe-img-cover{
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    width: 100%
+}
+
+.recipe-author-img {
+    height: 30px;
+    object-fit: cover;
+    width: 30px;
+    border-radius: 50%
+}
+
+.created-by{
+    display: flex;
+}
+
+.created-by p{
+    margin-right: 10px;
+}
+
+.created-by figure{
+    margin-right: 5px;
 }

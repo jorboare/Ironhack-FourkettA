@@ -29,7 +29,7 @@ class Signup extends Component {
             .signup(this.state)
             .then(theLoggedInUser => {
                 this.props.storeUser(theLoggedInUser.data)
-                this.props.history.push('/')        // redirección JS
+                this.props.history.push(`/profile/${theLoggedInUser.data.username}`)        // redirección JS
             })
             .catch(err => console.log('HA HABIDO UN ERROR', err))
     }
