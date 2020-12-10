@@ -15,10 +15,10 @@ const userSch = new Schema({
         type: String,
     },
     favRecipes: {
-        type: [String]
+        type: [Object]
     },
     friends: {
-        type: [String]
+        type: [Object]
     }
 }, { timestamps: true })
 

@@ -12,6 +12,7 @@ class Navbar extends Component {
         this.state = {
             recipes: undefined,
             showModal: false,
+            myRecipesSection: false
         }
 
         this.authService = new AuthService()
@@ -35,54 +36,108 @@ class Navbar extends Component {
             .catch(err => console.log(err))
     }
 
+    handleMyRecipesClick = () => {
+        this.props.showRecipes()
+
+        this.state.myRecipesSection ? this.setState({ myRecipesSection: false }) : this.setState({ myRecipesSection: true })
+
+
+    }
+
     render() {
 
         return (
             <>
                 <section className='profile-navbar'>
                     <Accordion defaultActiveKey="1">
+
                         <Card>
+
                             <Accordion.Toggle as={Card.Header} eventKey="0">
+
                                 Cuenta
+
                         </Accordion.Toggle>
+
                             <Accordion.Collapse eventKey="0">
+
                                 <Card.Body><Link to='/editProfile' className=' profile-navbar-btn'>Editar imagen</Link></Card.Body>
+
                             </Accordion.Collapse>
+
                             <Accordion.Collapse eventKey="0">
+
                                 <Card.Body ><Link to='#' onClick={() => this.handleModal(true)} className=' profile-navbar-btn delete-profile-btn'>Eliminar cuenta</Link></Card.Body>
+
                             </Accordion.Collapse>
+
                         </Card>
+
                     </Accordion>
+
                     <Accordion defaultActiveKey="1">
+
                         <Card>
+
                             <Accordion.Toggle as={Card.Header} eventKey="0">
+
                                 Recetas
+
                           </Accordion.Toggle>
+
                             <Accordion.Collapse eventKey="0">
+
                                 <Card.Body>
-                                    <Link to='/userRecipes' className='profile-navbar-btn'>
-                                        Mis recetas
-                                </Link>
+
+                                    <Link to='#' className='profile-navbar-btn' onClick={this.handleMyRecipesClick}>
+                                        {!this.state.myRecipesSection ?
+                                            'Mis recetas'
+                                            :
+                                            'Recientes'
+                                        }
+
+                                    </Link>
+
                                 </Card.Body>
+
                             </Accordion.Collapse>
+
                             <Accordion.Collapse eventKey="0">
+
                                 <Card.Body>
+
                                     <Link to='/newRecipe' className='profile-navbar-btn'>
+
                                         Añadir receta
+
                                 </Link>
+
                                 </Card.Body>
+
                             </Accordion.Collapse>
+
                         </Card>
+
                     </Accordion>
+
                     <Accordion defaultActiveKey="1">
+
                         <Card>
+
                             <Accordion.Toggle as={Card.Header} eventKey="0">
+
                                 Mis amigos
+
                         </Accordion.Toggle>
+
                             <Accordion.Collapse eventKey="0">
+
                                 <Card.Body>Amiguinchis por aquí</Card.Body>
+
                             </Accordion.Collapse>
+
                         </Card>
+
                     </Accordion>
                 </section>
 

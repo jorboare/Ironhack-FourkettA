@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import ProfileHeader from './../profile-header/profile-header'
 import ProfileNavbar from './../profile-navbar/profile-Navbar'
 import Recipes from './../../../../service/recipes.service'
+
 import UserService from './../../../../service/auth.service'
 import './profile.css'
 import RecipeCard from './../profile-feed/Recipe-card'
-import { Redirect } from 'react-router-dom'
+import UserRecipes from './../user-recipes/user.recipes'
+
 
 
 
@@ -20,7 +22,8 @@ export default class Profile extends Component {
             recipes: undefined,
             userProfile: undefined,
             showProfileNavbar: false,
-            allRendered: false
+            allRendered: false,
+            showUserRecipes: false
         }
 
         this.recipesList = new Recipes()
@@ -44,15 +47,17 @@ export default class Profile extends Component {
 
     handleFavButton = (recipeId) => {
         const favorites = this.props.loggedUser.favRecipes
-        favorites.push(recipeId)
 
-        console.log('RECETAS FAVORITAS USER:', favorites)
-
-        this.userService
-            .updateUser(this.props.loggedUser._id, { favRecipes: favorites })
-            .then(res => this.props.setTheUser(res.data))
+        this.recipesList
+            .getRecipeDetails(recipeId)
+            .then(recipe => favorites.push(recipe.data))
+            .then(() => this.userService.updateUser(this.props.loggedUser._id, { favRecipes: favorites }))
             .catch(err => console.log(err))
 
+    }
+
+    showUserRecipes = () => {
+        this.state.showUserRecipes ? this.setState({ showUserRecipes: false }) : this.setState({ showUserRecipes: true })
     }
 
     render() {
@@ -69,18 +74,29 @@ export default class Profile extends Component {
 
                             {this.state.showProfileNavbar === true &&
                                 <Col xs={6} md={3}>
-                                    <ProfileNavbar loggedUser={this.state.userProfile} {...this.props} />
+                                    <ProfileNavbar loggedUser={this.state.userProfile} {...this.props} showRecipes={this.showUserRecipes} />
                                 </Col>
                             }
 
-                            <Col xs={12} md={9} >
+                            {!this.state.showUserRecipes ?
+                                <Col xs={12} md={9} >
+                                    <section className='recipes-list'>
+                                        <h4>Recientes </h4>
 
-                                {this.state.recipes ?
-                                    this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)
-                                    :
-                                    <Spinner animation="border" variant="warning" />}
+                                        {this.state.recipes ?
+                                            this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)
+                                            :
+                                            <Spinner animation="border" variant="warning" />}
+                                    </section>
 
-                            </Col>
+                                </Col>
+                                :
+                                <Col xs={12} md={9} >
+                                    <section className='recipes-list'>
+                                        <h4>Mis recetas: </h4>
+                                        <UserRecipes recipes={this.state.recipes} loggedUser={this.props.loggedUser} />
+                                    </section>
+                                </Col>}
                         </Row>
                     </Container>
                     :

@@ -31,7 +31,6 @@ export default class NewRecipe extends Component {
 
     }
 
-
     add = (stateProp) => {
 
         if (stateProp === 'numIngredients') {
@@ -60,24 +59,13 @@ export default class NewRecipe extends Component {
             .newRecipe(this.state.recipe)
             .then(res => {
                 console.log(res)
-                this.props.history.push('/profile')
+                this.props.history.push(`/profile/${this.props.loggedUser.username}`)
 
 
             })
             .catch(err => console.log(err))
     }
     handleInputChange = e => {
-
-        // if (e.target.name === 'ingredients') {
-        //     // this.state.recipe.ingredients.push(e.target.value)
-        //     this.setState(prevState =>
-        //         ({
-        //             recipe: {
-        //                 ...prevState.recipe,
-        //                 [e.target.name]: e.target.value
-        //             }
-        //         }))
-        // }
 
         this.setState(prevState =>
             ({

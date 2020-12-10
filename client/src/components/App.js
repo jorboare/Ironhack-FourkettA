@@ -3,9 +3,8 @@ import './App.css';
 import Header from './layout/header/header'
 import { Switch, Route } from 'react-router-dom'
 import Homepage from './pages/homepage/homepage'
-import Profile from './pages/profile/profile/profile'
+import Profile from './pages/profile/profile-page/profile'
 import EditProfile from './pages/profile/edit-profile/edit-profile'
-import UserRecipes from './pages/profile/user-recipes/user.recipes'
 import Signup from './pages/auth/signup/signup'
 import Login from './pages/auth/login/login'
 import AuthServices from './../service/auth.service'
@@ -45,8 +44,6 @@ class App extends Component {
             <Route path='/' exact render={() => <Homepage />} />
             <Route path='/profile/:username' render={props => this.state.loggedInUser ? <Profile {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
             <Route path='/editProfile' render={props => this.state.loggedInUser ? <EditProfile {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
-
-            <Route path='/userRecipes' render={props => this.state.loggedInUser ? <UserRecipes {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
 
             <Route path="/newRecipe" render={props => <NewRecipe loggedUser={this.state.loggedInUser} {...props} />} />
             <Route path="/detail/:id" render={props => <RecipeDetails loggedUser={this.state.loggedInUser} {...props} />} />
