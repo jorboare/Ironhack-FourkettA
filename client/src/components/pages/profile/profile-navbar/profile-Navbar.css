@@ -9,4 +9,12 @@
     margin-top: 15px;
 }
 
+.profile-navbar-btn {
+    text-decoration: none;
+    color: black
+}
+.delete-profile-btn {
+    text-decoration: none;
+    color: #c40000
+}
 

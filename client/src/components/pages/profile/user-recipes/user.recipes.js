@@ -1,8 +1,14 @@
-import './Recipe-card.css'
+
 import { Container, Row, Col, Image, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-const RecipeCard = (props) => {
+const filterRecipes = recipe => {
+    console.log(recipe)
+}
+
+const UserRecipes = (props) => {
+
+
     return (
         <Link to={`/detail/${props._id}`} className='recipe-link'>
             <Container className='feed'>
@@ -25,4 +31,4 @@ const RecipeCard = (props) => {
     )
 }
 
-export default RecipeCard
+export default UserRecipes

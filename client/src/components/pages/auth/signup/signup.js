@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AuthService from './../../../service/auth.service'
+import AuthService from './../../../../service/auth.service'
 import './signup.css'
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
@@ -11,7 +11,6 @@ class Signup extends Component {
         this.state = {
             username: '',
             password: '',
-            email: '',
             img: ''
         }
 
@@ -29,7 +28,7 @@ class Signup extends Component {
             .signup(this.state)
             .then(theLoggedInUser => {
                 this.props.storeUser(theLoggedInUser.data)
-                this.props.history.push(`/profile/${theLoggedInUser.data.username}`)        // redirección JS
+                this.props.history.push(`/profile/${theLoggedInUser.data.username}`)
             })
             .catch(err => console.log('HA HABIDO UN ERROR', err))
     }
@@ -54,12 +53,10 @@ class Signup extends Component {
                                 <Form.Label>Contraseña</Form.Label>
                                 <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                             </Form.Group>
-                            <Form.Group controlId="email">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" name="email" value={this.state.email} onChange={this.handleInputChange} />
+                            <Form.Group controlId="img">
+                                <Form.Label>URL Image</Form.Label>
+                                <Form.Control type="text" name="img" value={this.state.img} onChange={this.handleInputChange} />
                             </Form.Group>
-
-
                             <Button variant="dark" type="submit">Registrarme</Button>
                         </Form>
                     </Col>

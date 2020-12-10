@@ -7,14 +7,14 @@ const User = require("../models/user.model")
 
 router.post('/signup', (req, res) => {
 
-    const { username, password, email, firstname, lastname } = req.body
+    const { username, password, img } = req.body
 
     if (!username || !password) {
         res.status(400).json({ message: 'Rellena todos los campos' })
         return
     }
 
-    if (password.length < 2) {
+    if (password.length < 4) {
         res.status(400).json({ message: 'Contraseña insegura' })
         return
     }
@@ -31,7 +31,7 @@ router.post('/signup', (req, res) => {
             const hashPass = bcrypt.hashSync(password, salt)
 
             User
-                .create({ username, password: hashPass, email, firstname, lastname })
+                .create({ username, password: hashPass, img })
                 .then(newUser => req.login(newUser, err => err ? res.status(500).json({ message: 'Login error' }) : res.status(200).json(newUser)))
                 .catch(() => res.status(500).json({ message: 'Error saving user to DB' }))
         })
@@ -99,6 +99,17 @@ router.put('/updateUser', (req, res) => {
 
     User
         .findByIdAndUpdate(req.query.user_Id, req.body)
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(500).json(err))
+
+})
+//Delete User
+router.get('/deleteUser', (req, res) => {
+
+    console.log(req.query.user_Id)
+
+    User
+        .findByIdAndDelete(req.query.user_Id, req.body)
         .then(updatedUser => res.json(updatedUser))
         .catch(err => res.status(500).json(err))
 

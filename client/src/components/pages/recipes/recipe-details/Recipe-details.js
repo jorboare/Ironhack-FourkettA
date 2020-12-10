@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import RecipeService from './../../../service/recipes.service'
-import AuthService from './../../../service/auth.service'
+import RecipeService from './../../../../service/recipes.service'
+import AuthService from './../../../../service/auth.service'
 import { Link } from 'react-router-dom'
 import './Recipe-details.css'
 import { Container, Row, Col, Spinner, Button, Image, Modal } from 'react-bootstrap'
@@ -33,7 +33,7 @@ export default class Detail extends Component {
 
     }
 
-    deleteArtist = () => {
+    deleteRecipe = () => {
         this.recipeService
             .deleteRecipe(this.props.match.params.id)
             .then(res => {
@@ -56,12 +56,14 @@ export default class Detail extends Component {
                             {this.state.recipe && this.state.author && this.state.loggedUser ?
                                 <>
                                     <h3>{this.state.recipe.name}</h3>
-                                    <div className='created-by'>
-                                        <p>Añadida por:</p>
-                                        <figure>
-                                            <Image className='recipe-author-img' src={this.state.author.img} />
-                                        </figure>
-                                        <p>{this.state.author.username}</p>
+                                    <div >
+                                        <p >Añadida por:
+                                            <Link to={`/profile/${this.state.author.username}`} className='created-by'>
+                                                <Image className='recipe-author-img' src={this.state.author.img} />
+                                                {this.state.author.username}
+                                            </Link>
+                                        </p>
+
                                     </div>
                                     <Image className='recipe-img-cover' src={this.state.recipe.img} />
                                     <p>Raciones: {this.state.recipe.servings}</p>
@@ -96,7 +98,7 @@ export default class Detail extends Component {
                         <h3>¿Estás seguro que quieres eliminar la receta?</h3>
                         <p>Si la eliminas no podrás recuperarla.</p>
                         <Button variant="dark" className='btn' onClick={() => this.handleModal(false)}>Cancelar</Button>
-                        <Button variant="danger" className='btn' onClick={this.deleteArtist}>Eliminar receta</Button>
+                        <Button variant="danger" className='btn' onClick={this.deleteRecipe}>Eliminar receta</Button>
                     </Modal.Body>
                 </Modal>
             </>

@@ -1,63 +1,100 @@
 import React, { Component } from 'react'
-import { Accordion, Card } from 'react-bootstrap'
+import { Accordion, Card, Modal, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import './profile-Navbar.css'
+import AuthService from './../../../../service/auth.service'
 
 class Navbar extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
-            recipes: undefined
+            recipes: undefined,
+            showModal: false,
         }
+
+        this.authService = new AuthService()
+    }
+
+    redirect = () => {
+        this.props.history.push()
+    }
+
+    handleModal = visible => this.setState({ showModal: visible })
+
+    deleteUser = () => {
+
+        console.log(this.props)
+        this.authService
+            .deleteUser(this.props.loggedUser._id)
+            .then(res => {
+                this.props.setTheUser(undefined)
+                this.props.history.push('/')
+            })
+            .catch(err => console.log(err))
     }
 
     render() {
 
         return (
-            <section className='profile-navbar'>
-                <Accordion defaultActiveKey="1">
-                    <Card>
-                        <Accordion.Toggle as={Card.Header} eventKey="0">
-                            Cuenta
+            <>
+                <section className='profile-navbar'>
+                    <Accordion defaultActiveKey="1">
+                        <Card>
+                            <Accordion.Toggle as={Card.Header} eventKey="0">
+                                Cuenta
                         </Accordion.Toggle>
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body>Editar cuenta</Card.Body>
-                        </Accordion.Collapse>
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body>Eliminar cuenta</Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                </Accordion>
-                <Accordion defaultActiveKey="1">
-                    <Card>
-                        <Accordion.Toggle as={Card.Header} eventKey="0">
-                            Recetas
+                            <Accordion.Collapse eventKey="0">
+                                <Card.Body><Link to='/editProfile' className=' profile-navbar-btn'>Editar imagen</Link></Card.Body>
+                            </Accordion.Collapse>
+                            <Accordion.Collapse eventKey="0">
+                                <Card.Body ><Link to='#' onClick={() => this.handleModal(true)} className=' profile-navbar-btn delete-profile-btn'>Eliminar cuenta</Link></Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                    </Accordion>
+                    <Accordion defaultActiveKey="1">
+                        <Card>
+                            <Accordion.Toggle as={Card.Header} eventKey="0">
+                                Recetas
                           </Accordion.Toggle>
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body>Mis recetas</Card.Body>
-                        </Accordion.Collapse>
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body>
-                                <Link to='/newRecipe'>
-                                    Añadir receta
+                            <Accordion.Collapse eventKey="0">
+                                <Card.Body>
+                                    <Link to='/userRecipes' className='profile-navbar-btn'>
+                                        Mis recetas
                                 </Link>
-                            </Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                </Accordion>
-                <Accordion defaultActiveKey="1">
-                    <Card>
-                        <Accordion.Toggle as={Card.Header} eventKey="0">
-                            Mis amigos
+                                </Card.Body>
+                            </Accordion.Collapse>
+                            <Accordion.Collapse eventKey="0">
+                                <Card.Body>
+                                    <Link to='/newRecipe' className='profile-navbar-btn'>
+                                        Añadir receta
+                                </Link>
+                                </Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                    </Accordion>
+                    <Accordion defaultActiveKey="1">
+                        <Card>
+                            <Accordion.Toggle as={Card.Header} eventKey="0">
+                                Mis amigos
                         </Accordion.Toggle>
-                        <Accordion.Collapse eventKey="0">
-                            <Card.Body>Amiguinchis por aquí</Card.Body>
-                        </Accordion.Collapse>
-                    </Card>
-                </Accordion>
-            </section>
+                            <Accordion.Collapse eventKey="0">
+                                <Card.Body>Amiguinchis por aquí</Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
+                    </Accordion>
+                </section>
+
+                <Modal show={this.state.showModal} onHide={() => this.handleModal(false)}>
+                    <Modal.Body>
+                        <h3>¿Estás seguro que quieres eliminar la cuenta?</h3>
+                        <p>Si la eliminas no podrás recuperarla.</p>
+                        <Button variant="dark" className='btn' onClick={() => this.handleModal(false)}>Cancelar</Button>
+                        <Button variant="danger" className='btn' onClick={this.deleteUser}>Eliminar cuenta</Button>
+                    </Modal.Body>
+                </Modal>
+            </>
 
         )
     }

@@ -11,10 +11,6 @@ const userSch = new Schema({
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true
-    },
     img: {
         type: String,
     },

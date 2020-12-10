@@ -29,16 +29,12 @@ export default class Profile extends Component {
 
     componentDidMount() {
 
-        this.recipesList
-            .getRecipes()
-            .then(res => this.setState({ recipes: res.data }))
-            .then(() => this.userService.findByName(this.props.match.params.username))
+        this.userService.findByName(this.props.match.params.username)
             .then(user => this.setState({ userProfile: user.data }))
+            .then(() => this.recipesList.getRecipes())
+            .then(res => this.setState({ recipes: res.data }))
             .then(() => this.setState({ allRendered: true }))
-            .then(() => {
-                this.props.loggedUser.username === this.state.userProfile.username && this.setState({ showProfileNavbar: true })
-                this.setState({ allRendered: true })
-            })
+            .then(() => this.props.loggedUser.username === this.state.userProfile.username && this.setState({ showProfileNavbar: true }))
             .catch(err => console.log(err))
     }
 
@@ -69,12 +65,11 @@ export default class Profile extends Component {
                             <ProfileHeader loggedUser={this.state.userProfile} />
                         </Row>
                         <Row className="justify-content-center">
-                            {/* {this.props.loggedUser.username === this.state.userProfile.username && this.handleNavbar(true)
-                            } */}
+
 
                             {this.state.showProfileNavbar === true &&
                                 <Col xs={6} md={3}>
-                                    <ProfileNavbar />
+                                    <ProfileNavbar loggedUser={this.state.userProfile} {...this.props} />
                                 </Col>
                             }
 

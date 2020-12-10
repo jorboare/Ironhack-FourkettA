@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import './App.css';
-import RecipesList from './pages/recipes-list/Recipes-list'
 import Header from './layout/header/header'
 import { Switch, Route } from 'react-router-dom'
 import Homepage from './pages/homepage/homepage'
 import Profile from './pages/profile/profile/profile'
-import Signup from './pages/signup/signup'
-import Login from './pages/login/login'
+import EditProfile from './pages/profile/edit-profile/edit-profile'
+import UserRecipes from './pages/profile/user-recipes/user.recipes'
+import Signup from './pages/auth/signup/signup'
+import Login from './pages/auth/login/login'
 import AuthServices from './../service/auth.service'
 import { Redirect } from 'react-router-dom'
-import NewRecipe from './pages/new-recipe/New-recipe-form'
-import EditRecipe from './pages/edit-recipe/Edit-recipe-form'
-import RecipeDetails from './pages/recipe-details/Recipe-details'
+import NewRecipe from './pages/recipes/new-recipe/New-recipe-form'
+import EditRecipe from './pages/recipes/edit-recipe/Edit-recipe-form'
+import RecipeDetails from './pages/recipes/recipe-details/Recipe-details'
 
 
 class App extends Component {
@@ -42,11 +43,14 @@ class App extends Component {
         <main>
           <Switch>
             <Route path='/' exact render={() => <Homepage />} />
-            <Route path='/profile/:username' exact render={props => <Profile {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} />} />
-            <Route path="/recipes" exact render={() => <RecipesList />} />
+            <Route path='/profile/:username' render={props => this.state.loggedInUser ? <Profile {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
+            <Route path='/editProfile' render={props => this.state.loggedInUser ? <EditProfile {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
+
+            <Route path='/userRecipes' render={props => this.state.loggedInUser ? <UserRecipes {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
+
             <Route path="/newRecipe" render={props => <NewRecipe loggedUser={this.state.loggedInUser} {...props} />} />
             <Route path="/detail/:id" render={props => <RecipeDetails loggedUser={this.state.loggedInUser} {...props} />} />
-            <Route path="/editRecipe/:id" render={props => <EditRecipe {...props} />} />
+            <Route path="/editRecipe/:id" render={props => <EditRecipe storeUser={this.setTheUser} loggedUser={this.state.loggedInUser} {...props} />} />
             <Route path="/signup" exact render={props => <Signup storeUser={this.setTheUser} {...props} />} />
             <Route path="/login" exact render={props => <Login storeUser={this.setTheUser} {...props} />} />
           </Switch>

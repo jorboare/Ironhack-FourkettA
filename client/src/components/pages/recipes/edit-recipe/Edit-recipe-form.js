@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Container, Row, Col, Spinner } from 'react-bootstrap'
 import './Edit-recipe-form.css'
-import Recipes from '../../../service/recipes.service'
+import Recipes from '../../../../service/recipes.service'
 import { Link } from 'react-router-dom'
 
 

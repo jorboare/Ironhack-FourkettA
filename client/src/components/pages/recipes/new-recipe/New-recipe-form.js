@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import './New-recipe-form.css'
-import Recipes from './../../../service/recipes.service'
+import Recipes from './../../../../service/recipes.service'
 
 
 export default class NewRecipe extends Component {
