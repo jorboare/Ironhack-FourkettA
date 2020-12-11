@@ -37,7 +37,7 @@ class Navbar extends Component {
     }
 
     handleMyRecipesClick = () => {
-        this.props.showRecipes()
+
 
         this.state.myRecipesSection ? this.setState({ myRecipesSection: false }) : this.setState({ myRecipesSection: true })
 
@@ -89,12 +89,33 @@ class Navbar extends Component {
 
                                 <Card.Body>
 
-                                    <Link to='#' className='profile-navbar-btn' onClick={this.handleMyRecipesClick}>
-                                        {!this.state.myRecipesSection ?
-                                            'Mis recetas'
-                                            :
-                                            'Recientes'
-                                        }
+                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showRecipes('recents')}>
+
+                                        Recientes
+
+                                    </Link>
+
+                                </Card.Body>
+                            </Accordion.Collapse>
+                            <Accordion.Collapse eventKey="0">
+
+                                <Card.Body>
+
+                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showRecipes('myRecipes')}>
+
+                                        Mis recetas
+
+                                    </Link>
+
+                                </Card.Body>
+                            </Accordion.Collapse>
+                            <Accordion.Collapse eventKey="0">
+
+                                <Card.Body>
+
+                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showRecipes('savedRecipes')}>
+
+                                        Guardadas
 
                                     </Link>
 
@@ -106,7 +127,7 @@ class Navbar extends Component {
 
                                 <Card.Body>
 
-                                    <Link to='/newRecipe' className='profile-navbar-btn'>
+                                    <Link to='/newRecipe' className='profile-navbar-btn newRecipe-Btn'>
 
                                         Añadir receta
 

@@ -36,7 +36,13 @@
   align-items: flex-start;
 }
 
-.recipe-like button{
+.fav-btn{
+  border: none;
+  border-radius: 10px;
+  width: 40px;
+  background-color:#ffdd7f;
+}
+.fav-btn:hover{
   border: none;
   width: 40px;
   background-color:#C49A26;

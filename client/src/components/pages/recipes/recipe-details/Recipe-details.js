@@ -38,9 +38,20 @@ export default class Detail extends Component {
             .deleteRecipe(this.props.match.params.id)
             .then(res => {
                 console.log(res)
-                this.props.history.push('/profile')
+                this.props.history.push(`/profile/${this.props.loggedUser.username}`)
             })
             .catch(err => console.log(err))
+
+
+
+        // let num = this.props.loggedUser.ownRecipes
+
+        // this.recipeService
+        //     .deleteRecipe(this.props.match.params.id)
+        //     .then(res => this.authService.updateUser(this.props.loggedUser._id, { ownRecipes: num -= 1 }))
+        //     .then(user => this.props.setTheUser(user.data))
+        //     .then(() => this.props.history.push(`/profile/${this.props.loggedUser.username}`))
+        //     .catch(err => console.log(err))
     }
 
     handleModal = visible => this.setState({ showModal: visible })

@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import ProfileHeader from './../profile-header/profile-header'
 import ProfileNavbar from './../profile-navbar/profile-Navbar'
 import Recipes from './../../../../service/recipes.service'
-
 import UserService from './../../../../service/auth.service'
 import './profile.css'
 import RecipeCard from './../profile-feed/Recipe-card'
-import UserRecipes from './../user-recipes/user.recipes'
+
 
 
 
@@ -23,7 +22,8 @@ export default class Profile extends Component {
             userProfile: undefined,
             showProfileNavbar: false,
             allRendered: false,
-            showUserRecipes: false
+            showRecipes: 'recents',
+            userRecipes: undefined,
         }
 
         this.recipesList = new Recipes()
@@ -33,10 +33,12 @@ export default class Profile extends Component {
     componentDidMount() {
 
         this.userService.findByName(this.props.match.params.username)
-            .then(user => this.setState({ userProfile: user.data }))
+            .then(user => this.setState({ userProfile: user.data })) //Datos del usuario del perfil (diferentes a los del usuario registrado)
             .then(() => this.recipesList.getRecipes())
-            .then(res => this.setState({ recipes: res.data }))
-            .then(() => this.setState({ allRendered: true }))
+            .then(res => this.setState({ recipes: res.data })) //Todas las recetas
+            .then(res => this.state.recipes.filter(elm => elm.author === this.props.loggedUser._id))
+            .then(res => this.setState({ userRecipes: res })) //Añade las recetas del usuario al state
+            .then(() => this.setState({ allRendered: true })) //Condición para que se rendericen las vistas
             .then(() => this.props.loggedUser.username === this.state.userProfile.username && this.setState({ showProfileNavbar: true }))
             .catch(err => console.log(err))
     }
@@ -46,18 +48,27 @@ export default class Profile extends Component {
     }
 
     handleFavButton = (recipeId) => {
+
+
         const favorites = this.props.loggedUser.favRecipes
 
         this.recipesList
             .getRecipeDetails(recipeId)
-            .then(recipe => favorites.push(recipe.data))
-            .then(() => this.userService.updateUser(this.props.loggedUser._id, { favRecipes: favorites }))
+            .then(recipe => {
+                console.log(favorites)
+                console.log(recipe.data)
+                console.log(favorites.includes(recipe.data))
+                // !favorites.includes(recipe) && favorites.push(recipe.data)
+            })
+            // .then(() => this.userService.updateUser(this.props.loggedUser._id, { favRecipes: favorites }))
             .catch(err => console.log(err))
 
     }
 
-    showUserRecipes = () => {
-        this.state.showUserRecipes ? this.setState({ showUserRecipes: false }) : this.setState({ showUserRecipes: true })
+    showUserRecipes = action => {
+        action === 'recents' && this.setState({ showRecipes: action })
+        action === 'myRecipes' && this.setState({ showRecipes: action })
+        action === 'savedRecipes' && this.setState({ showRecipes: action })
     }
 
     render() {
@@ -67,7 +78,7 @@ export default class Profile extends Component {
                     <Container className='profile-container'>
 
                         <Row className="justify-content-center profile-header">
-                            <ProfileHeader loggedUser={this.state.userProfile} />
+                            <ProfileHeader loggedUser={this.state.userProfile} numberRecipes={this.state.userRecipes.length} />
                         </Row>
                         <Row className="justify-content-center">
 
@@ -78,7 +89,7 @@ export default class Profile extends Component {
                                 </Col>
                             }
 
-                            {!this.state.showUserRecipes ?
+                            {this.state.showRecipes === 'recents' &&
                                 <Col xs={12} md={9} >
                                     <section className='recipes-list'>
                                         <h4>Recientes </h4>
@@ -90,14 +101,30 @@ export default class Profile extends Component {
                                     </section>
 
                                 </Col>
-                                :
+                            }
+
+                            {this.state.showRecipes === 'myRecipes' &&
                                 <Col xs={12} md={9} >
                                     <section className='recipes-list'>
                                         <h4>Mis recetas: </h4>
-                                        <UserRecipes recipes={this.state.recipes} loggedUser={this.props.loggedUser} />
+                                        {this.state.recipes ?
+                                            this.state.userRecipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)
+                                            :
+                                            <Spinner animation="border" variant="warning" />}
+
+                                    </section>
+                                </Col>
+                            }
+
+                            {this.state.showRecipes === 'savedRecipes' &&
+                                <Col xs={12} md={9} >
+                                    <section className='recipes-list'>
+                                        <h4>Recetas guardadas: </h4>
+                                        {this.props.loggedUser.favRecipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)}
                                     </section>
                                 </Col>}
                         </Row>
+
                     </Container>
                     :
                     <Spinner animation="border" variant="warning" />

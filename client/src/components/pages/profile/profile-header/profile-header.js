@@ -18,7 +18,7 @@ const Info = props => {
                     <h3>
                         {user.username}
                     </h3>
-                    <p>Number of recipes: 15 | Friends: 30</p>
+                    <p>Number of recipes: {props.numberRecipes} | Friends: 30</p>
                 </section>
             </Col>
         </>

@@ -57,12 +57,7 @@ export default class NewRecipe extends Component {
 
         this.recipesList
             .newRecipe(this.state.recipe)
-            .then(res => {
-                console.log(res)
-                this.props.history.push(`/profile/${this.props.loggedUser.username}`)
-
-
-            })
+            .then(res => this.props.history.push(`/profile/${this.props.loggedUser.username}`))
             .catch(err => console.log(err))
     }
     handleInputChange = e => {
