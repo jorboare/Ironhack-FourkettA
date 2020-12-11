@@ -44,17 +44,17 @@ export default class Profile extends Component {
             .catch(err => console.log(err))
     }
 
-    handleNavbar = (command) => {
-        this.setState({ showProfileNavbar: command })
-    }
+    handleNavbar = (command) => this.setState({ showProfileNavbar: command })
+
 
     handleFavButton = (recipeId) => {
 
 
         const favorites = this.props.loggedUser.favRecipes
+
         let included = false
 
-        favorites.forEach(elm => elm._id === recipeId ? included = true : included = false)
+        favorites.forEach(elm => included = elm._id === recipeId)
 
         if (!included) {
             this.recipesList
@@ -69,18 +69,24 @@ export default class Profile extends Component {
     //WORK IN PROGRESS
     handleFollowButton = (userId) => {
 
-        // const followedUsers = this.props.loggedUser.friends
-        // followedUsers.push(userId)
-        // console.log(followedUsers)
-        // // let included = false
-        // // followedUsers.forEach(elm => elm === userId ? included = true : included = false)
+        const followedUsers = [...this.props.loggedUser.friends]
 
-        // // if (!included) {
-        // this.userService
-        //     .updateUser(this.props.loggedUser._id, { friends: followedUsers })
-        //     .then(res => this.props.setTheUser(res.data))
-        //     .catch(err => console.log(err))
-        // // }
+        console.log(followedUsers)
+
+
+        console.log(followedUsers)
+
+
+        // let included = false
+        // followedUsers.forEach(elm => elm === userId ? included = true : included = false)
+
+        // if (!included) {
+        this.userService
+            .addFriend(this.props.loggedUser._id, userId)
+            .then(res => this.userService.findAuthor(this.props.loggedUser._id))
+            .then(res => this.props.setTheUser(res.data))
+            .catch(err => console.log(err))
+        // }
 
     }
 

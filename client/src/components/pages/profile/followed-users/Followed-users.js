@@ -3,7 +3,7 @@ import Recipes from './../../../../service/recipes.service'
 import UserService from './../../../../service/auth.service'
 import './followed-users.css'
 
-import { Container, Row, Col, Spinner } from 'react-bootstrap'
+import { Form, FormControl, Button } from 'react-bootstrap'
 
 
 export default class FollowedUsers extends Component {
@@ -40,7 +40,10 @@ export default class FollowedUsers extends Component {
     render() {
         return (
             <>
-                <h1>Usuarios seguidos:</h1>
+                <Form inline>
+                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                    <Button variant="outline-success">Search</Button>
+                </Form>
             </>
 
 

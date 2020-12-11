@@ -107,6 +107,19 @@ router.get('/userData', (req, res) => {
 
 })
 
+//Follow users
+router.put('/updateUser', (req, res) => {
+
+    console.log(req.query.user_Id)
+    console.log(req.query.friend_Id)
+
+    User
+        .findByIdAndUpdate(req.query.user_Id, { $push: { friends: req.query.friend_Id } })
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(500).json(err))
+
+})
+
 //Update User
 router.put('/updateUser', (req, res) => {
 
