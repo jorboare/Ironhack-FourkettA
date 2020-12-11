@@ -6,7 +6,7 @@ const Homepage = () => {
     return (
 
         <section className='hero'>
-            <h1>RecipeApp</h1>
+            <h1>FourkettA</h1>
             <p>Para cocinillas organizados</p>
             <div className='homepage-btn'>
                 <Link to='/signup'>

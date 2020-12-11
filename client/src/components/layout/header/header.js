@@ -30,7 +30,7 @@ class Header extends Component {
         return (
             <Navbar className='navbar' >
                 <Link to='/'>
-                    <Navbar.Brand>_AppName</Navbar.Brand>
+                    <Navbar.Brand>FourkettA</Navbar.Brand>
                 </Link>
                 <Nav className="mr-auto">
 

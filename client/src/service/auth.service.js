@@ -11,6 +11,7 @@ export default class AuthService {
     login = user => this.apiHandler.post(`/login`, user)
     logout = () => this.apiHandler.post(`/logout`)
     isLoggedIn = () => this.apiHandler.get(`/loggedin`)
+    friends = userId => this.apiHandler.get(`/getFriends?user_Id=${userId}`)
     findAuthor = userId => this.apiHandler.get(`/author?user_Id=${userId}`)
     findByName = userName => this.apiHandler.get(`/userData?username=${userName}`)
     updateUser = (userId, userData) => this.apiHandler.put(`/updateUser?user_Id=${userId}`, userData)

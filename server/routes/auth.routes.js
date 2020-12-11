@@ -67,6 +67,21 @@ router.post('/logout', (req, res) => {
 
 router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'Unauthorized' }))
 
+
+
+//Find Recipe Author
+
+router.get('/getFriends', (req, res) => {
+
+    console.log(req.query.user_Id)
+
+    User
+        .findById(req.query.user_Id)
+        .populate('friends')
+        .then(author => res.json(author))
+        .catch(err => res.status(500).json(err))
+
+})
 //Find Recipe Author
 
 router.get('/author', (req, res) => {

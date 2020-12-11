@@ -17,9 +17,10 @@ const userSch = new Schema({
     favRecipes: {
         type: [Object]
     },
-    friends: {
-        type: [Object]
-    },
+    friends: [{
+        type: Schema.Types.ObjectId,
+        ref: 'users'
+    }],
     ownRecipes: {
         type: Number,
         default: 0

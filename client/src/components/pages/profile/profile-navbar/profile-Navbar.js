@@ -36,13 +36,7 @@ class Navbar extends Component {
             .catch(err => console.log(err))
     }
 
-    handleMyRecipesClick = () => {
 
-
-        this.state.myRecipesSection ? this.setState({ myRecipesSection: false }) : this.setState({ myRecipesSection: true })
-
-
-    }
 
     render() {
 
@@ -89,7 +83,7 @@ class Navbar extends Component {
 
                                 <Card.Body>
 
-                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showRecipes('recents')}>
+                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showInfo('recents')}>
 
                                         Recientes
 
@@ -101,7 +95,7 @@ class Navbar extends Component {
 
                                 <Card.Body>
 
-                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showRecipes('myRecipes')}>
+                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showInfo('myRecipes')}>
 
                                         Mis recetas
 
@@ -113,7 +107,7 @@ class Navbar extends Component {
 
                                 <Card.Body>
 
-                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showRecipes('savedRecipes')}>
+                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showInfo('savedRecipes')}>
 
                                         Guardadas
 
@@ -147,13 +141,19 @@ class Navbar extends Component {
 
                             <Accordion.Toggle as={Card.Header} eventKey="0">
 
-                                Mis amigos
+                                Usuarios seguidos
 
                         </Accordion.Toggle>
 
                             <Accordion.Collapse eventKey="0">
 
-                                <Card.Body>Amiguinchis por aquí</Card.Body>
+                                <Card.Body>
+                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showInfo('followedUsers')}>
+
+                                        Mostrar todos
+
+                                </Link>
+                                </Card.Body>
 
                             </Accordion.Collapse>
 
