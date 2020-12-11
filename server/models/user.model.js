@@ -19,6 +19,10 @@ const userSch = new Schema({
     },
     friends: {
         type: [Object]
+    },
+    ownRecipes: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true })
 
