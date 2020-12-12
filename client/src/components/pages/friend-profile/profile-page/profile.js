@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import ProfileHeader from './../profile-header/profile-header'
 import ProfileNavbar from './../profile-navbar/profile-Navbar'
-import FollowedUsers from './../followed-users/Followed-users'
 import Recipes from './../../../../service/recipes.service'
 import UserService from './../../../../service/auth.service'
 import './profile.css'
@@ -20,7 +19,7 @@ export default class Profile extends Component {
 
         this.state = {
             recipes: undefined,
-            user: this.props.loggedUser,
+            userProfile: undefined,
             showProfileNavbar: false,
             allRendered: false,
             showInfo: 'recents',
@@ -33,10 +32,15 @@ export default class Profile extends Component {
 
     componentDidMount() {
 
-        this.recipesList.getRecipes()
+        this.props.location.pathname === `/user/${this.props.loggedUser.username}` && this.props.history.push('/profile')
+
+        this.userService.findByName(this.props.match.params.username)
+            .then(user => this.setState({ userProfile: user.data })) //Datos del usuario del perfil (diferentes a los del usuario registrado)
+            .then(() => this.recipesList.getRecipes())
             .then(res => this.setState({ recipes: res.data })) //Todas las recetas
             .then(res => this.state.recipes.filter(elm => elm.author === this.props.loggedUser._id))
             .then(res => this.setState({ userRecipes: res })) //Añade las recetas del usuario al state
+            .then(() => this.setState({ allRendered: true })) //Condición para que se rendericen las vistas
             .then(() => this.props.loggedUser.username === this.state.userProfile.username && this.setState({ showProfileNavbar: true }))
             .catch(err => console.log(err))
     }
@@ -90,57 +94,15 @@ export default class Profile extends Component {
                     <Container className='profile-container'>
 
                         <Row className="justify-content-center profile-header">
-                            <ProfileHeader userProfile={this.state.user} numberRecipes={this.state.userRecipes.length} followButton={this.handleFollowButton} />
+                            <ProfileHeader userProfile={this.state.userProfile} numberRecipes={this.state.userRecipes.length} followButton={this.handleFollowButton} />
                         </Row>
                         <Row className="justify-content-center">
-
-
-
-                            <Col xs={6} md={3}>
-                                <ProfileNavbar loggedUser={this.state.user} {...this.props} showInfo={this.changeShowedInfo} />
+                            <Col md={12}>
+                                {this.state.recipes ?
+                                    this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)
+                                    :
+                                    <Spinner animation="border" variant="warning" />}
                             </Col>
-
-
-                            {this.state.showInfo === 'recents' &&
-                                <Col xs={12} md={9} >
-                                    <section className='recipes-list'>
-                                        <h4>Recientes </h4>
-
-                                        {this.state.recipes ?
-                                            this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)
-                                            :
-                                            <Spinner animation="border" variant="warning" />}
-                                    </section>
-
-                                </Col>
-                            }
-
-                            {this.state.showInfo === 'myRecipes' &&
-                                <Col xs={12} md={9} >
-                                    <section className='recipes-list'>
-                                        <h4>Mis recetas: </h4>
-                                        {this.state.recipes ?
-                                            this.state.userRecipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)
-                                            :
-                                            <Spinner animation="border" variant="warning" />}
-
-                                    </section>
-                                </Col>
-                            }
-
-                            {this.state.showInfo === 'savedRecipes' &&
-                                <Col xs={12} md={9} >
-                                    <section className='recipes-list'>
-                                        <h4>Recetas guardadas: </h4>
-                                        {this.props.loggedUser.favRecipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)}
-                                    </section>
-                                </Col>}
-
-                            {this.state.showInfo === 'followedUsers' &&
-                                <Col xs={12} md={9} >
-
-                                    <FollowedUsers userFriends={this.props.loggedUser.friends} />
-                                </Col>}
                         </Row>
 
                     </Container>

@@ -26,9 +26,8 @@ export default class Detail extends Component {
         this.recipeService
             .getRecipeDetails(this.props.match.params.id)
             .then(res => this.setState({ recipe: res.data }))
-            .then(() => this.authService.findAuthor(this.state.recipe.author))
-            .then(author => this.setState({ author: author.data }))
-            .then(() => this.setState({ loggedUser: this.props.loggedUser }))
+            .then(() => this.authService.findUserById(this.state.recipe.author))
+            .then(author => this.setState({ author: author.data, loggedUser: this.props.loggedUser }))
             .catch(err => console.log(err))
 
     }
@@ -69,7 +68,7 @@ export default class Detail extends Component {
                                     <h3>{this.state.recipe.name}</h3>
                                     <div >
                                         <p >Añadida por:
-                                            <Link to={`/profile/${this.state.author.username}`} className='created-by'>
+                                            <Link to={`/user/${this.state.author.username}`} className='created-by'>
                                                 <Image className='recipe-author-img' src={this.state.author.img} />
                                                 {this.state.author.username}
                                             </Link>
@@ -82,9 +81,9 @@ export default class Detail extends Component {
                                     <p>Tipo de receta: {this.state.recipe.type}</p>
                                     <p> {this.state.recipe.origin}</p>
                                     <p>Ingredientes:</p>
-                                    <p>{this.state.recipe.ingredients}</p>
+                                    <p className='textarea'>{this.state.recipe.ingredients}</p>
                                     <p>Instrucciones:</p>
-                                    <p>{this.state.recipe.instructions}</p>
+                                    <p className='textarea'>{this.state.recipe.instructions}</p>
                                     {this.state.author._id === this.state.loggedUser._id &&
                                         <>
                                             <Button variant="dark" className='btn' onClick={() => this.handleModal(true)}>Eliminar receta</Button>

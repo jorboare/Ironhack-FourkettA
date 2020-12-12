@@ -39,7 +39,7 @@ class Header extends Component {
                     {this.props.loggedUser
                         ?
                         <>
-                            <Link to={`/profile/${this.props.loggedUser.username}`} className='profile-link'>
+                            <Link to={`/profile`} className='profile-link'>
                                 <Image className='header-img' src={this.props.loggedUser.img}></Image>
                                 <Nav.Link as='div'>{this.props.loggedUser.username}</Nav.Link>
                             </Link>
