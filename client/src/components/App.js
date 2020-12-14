@@ -42,7 +42,7 @@ class App extends Component {
         <Header storeUser={this.setTheUser} loggedUser={this.state.loggedInUser} />
         <main>
           <Switch>
-            <Route path='/' exact render={() => <Homepage />} />
+            <Route path='/' exact render={() => <Homepage loggedUser={this.state.loggedInUser} />} />
             <Route path='/profile' exact render={props => this.state.loggedInUser ? <Profile {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
             <Route path='/user/:username' render={props => this.state.loggedInUser ? <Friend {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
             <Route path='/editProfile' render={props => this.state.loggedInUser ? <EditProfile {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />

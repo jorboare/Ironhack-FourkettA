@@ -14,17 +14,14 @@ const userSch = new Schema({
     img: {
         type: String,
     },
-    favRecipes: {
-        type: [Object]
-    },
-    friends: [{
-        type: Schema.Types.ObjectId,
-        ref: 'users'
+    favRecipes: [{
+        type: [Schema.Types.ObjectId],
+        ref: 'recipes'
     }],
-    ownRecipes: {
-        type: Number,
-        default: 0
-    }
+    friends: [{
+        type: [Schema.Types.ObjectId],
+        ref: 'users'
+    }]
 }, { timestamps: true })
 
 module.exports = mongoose.model('User', userSch)

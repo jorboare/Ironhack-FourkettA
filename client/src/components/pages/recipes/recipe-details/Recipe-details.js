@@ -37,7 +37,7 @@ export default class Detail extends Component {
             .deleteRecipe(this.props.match.params.id)
             .then(res => {
                 console.log(res)
-                this.props.history.push(`/profile/${this.props.loggedUser.username}`)
+                this.props.history.push(`/profile`)
             })
             .catch(err => console.log(err))
 
@@ -73,16 +73,15 @@ export default class Detail extends Component {
                                                 {this.state.author.username}
                                             </Link>
                                         </p>
-
                                     </div>
                                     <Image className='recipe-img-cover' src={this.state.recipe.img} />
                                     <p>Raciones: {this.state.recipe.servings}</p>
                                     <p>Tiempo de preparación: {this.state.recipe.time} minutos</p>
                                     <p>Tipo de receta: {this.state.recipe.type}</p>
                                     <p> {this.state.recipe.origin}</p>
-                                    <p>Ingredientes:</p>
+                                    <p><b>Ingredientes:</b></p>
                                     <p className='textarea'>{this.state.recipe.ingredients}</p>
-                                    <p>Instrucciones:</p>
+                                    <p><b>Instrucciones:</b></p>
                                     <p className='textarea'>{this.state.recipe.instructions}</p>
                                     {this.state.author._id === this.state.loggedUser._id &&
                                         <>

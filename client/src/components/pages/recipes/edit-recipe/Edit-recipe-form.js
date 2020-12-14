@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Form, Button, Container, Row, Col, Spinner } from 'react-bootstrap'
 import './Edit-recipe-form.css'
-import Recipes from '../../../../service/recipes.service'
+import RecipesService from '../../../../service/recipes.service'
+import FilesService from '../../../../service/upload.service'
 import { Link } from 'react-router-dom'
 
 
@@ -13,7 +14,8 @@ export default class EditRecipe extends Component {
             recipe: undefined
         }
 
-        this.recipesService = new Recipes()
+        this.recipesService = new RecipesService()
+        this.filesService = new FilesService()
 
     }
 
@@ -44,14 +46,33 @@ export default class EditRecipe extends Component {
     handleInputChange = e => {
 
         this.setState(prevState =>
-            ({
-                recipe: {
-                    ...prevState.recipe,
-                    [e.target.name]: e.target.value
-                }
-            }))
+        ({
+            recipe: {
+                ...prevState.recipe,
+                [e.target.name]: e.target.value
+            }
+        }))
     }
 
+    handleImageUpload = e => {
+
+        const uploadData = new FormData()
+        uploadData.append('imageUrl', e.target.files[0])
+
+        this.setState({ uploadingActive: true })
+
+        this.filesService
+            .uploadImage(uploadData)
+            .then(response => {
+
+                console.log(response.data)
+                this.setState({
+                    recipe: { ...this.state.recipe, img: response.data.secure_url },
+                    uploadingActive: false
+                })
+            })
+            .catch(err => console.log('Error:', err))
+    }
 
 
     render() {
@@ -67,9 +88,9 @@ export default class EditRecipe extends Component {
                                         <Form.Label>Nombre de la receta:</Form.Label>
                                         <Form.Control type="text" placeholder="Nombre de la receta" name='name' value={this.state.recipe.name} onChange={this.handleInputChange} />
                                     </Form.Group>
-                                    <Form.Group controlId="name">
-                                        <Form.Label>Url imagen:</Form.Label>
-                                        <Form.Control type="text" placeholder="URL" name='img' value={this.state.recipe.img} onChange={this.handleInputChange} />
+
+                                    <Form.Group>
+                                        <Form.File id="exampleFormControlFile1" label="Foto portada receta" name="imageUrl" onChange={this.handleImageUpload} />
                                     </Form.Group>
 
 
@@ -81,18 +102,22 @@ export default class EditRecipe extends Component {
                                             <option value='vegana'>Vegana</option>
                                         </Form.Control>
                                     </Form.Group>
+
                                     <Form.Group controlId="name">
                                         <Form.Label>País de origen:</Form.Label>
                                         <Form.Control type="text" placeholder="En caso de tener" name='origin' value={this.state.recipe.origin} onChange={this.handleInputChange} />
                                     </Form.Group>
+
                                     <Form.Group controlId="name">
                                         <Form.Label>Raciones:</Form.Label>
                                         <Form.Control type="text" placeholder="Número de raciones" name='servings' value={this.state.recipe.servings} onChange={this.handleInputChange} />
                                     </Form.Group>
+
                                     <Form.Group controlId="name">
                                         <Form.Label>Tiempo de preparación:</Form.Label>
                                         <Form.Control type="text" placeholder="En minutos" name='time' value={this.state.recipe.time} onChange={this.handleInputChange} />
                                     </Form.Group>
+
                                     <Form.Label>Ingredientes</Form.Label>
                                     <Row >
                                         <Col md={12}>

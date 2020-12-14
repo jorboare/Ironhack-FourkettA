@@ -28,8 +28,12 @@ const RecipeCard = (props) => {
                             </Container>
                         </Link>
                     </Col>
+                    {!props.loggedUser.favRecipes.includes(props._id) ?
+                        <Button className='fav-btn' onClick={() => props.likeButton(props._id)}>💛</Button>
+                        :
+                        <Button className='fav-btn' onClick={() => props.likeButton(props._id)}>💔</Button>
 
-                    <Button className='fav-btn' onClick={() => props.likeButton(props._id)}>💛</Button>
+                    }
 
                 </Row>
             </Container>

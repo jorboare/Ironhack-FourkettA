@@ -29,8 +29,8 @@ class Header extends Component {
     render() {
         return (
             <Navbar className='navbar' >
-                <Link to='/'>
-                    <Navbar.Brand>FourkettA</Navbar.Brand>
+                <Link to='/' className='brand'>
+                    <Navbar.Brand ><span className='page-title'>FourkettA</span></Navbar.Brand>
                 </Link>
                 <Nav className="mr-auto">
 

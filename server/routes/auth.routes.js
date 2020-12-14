@@ -69,19 +69,20 @@ router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.status(200).js
 
 
 
-//Find Recipe Author
+//Search friends
 
-router.get('/getFriends', (req, res) => {
-
-    console.log(req.query.user_Id)
+router.get('/searchFriends', (req, res) => {
 
     User
-        .findById(req.query.user_Id)
-        .populate('friends')
-        .then(author => res.json(author))
+        .find()
+        .then(users => {
+            const filteredArray = users.filter(elm => elm.username.toLowerCase().includes(req.query.username.toLowerCase()))
+            res.json(filteredArray)
+        })
         .catch(err => res.status(500).json(err))
 
 })
+
 //Find Recipe Author
 
 router.get('/author', (req, res) => {
@@ -94,6 +95,7 @@ router.get('/author', (req, res) => {
         .catch(err => res.status(500).json(err))
 
 })
+
 //Find User by Username
 
 router.get('/userData', (req, res) => {
@@ -108,10 +110,7 @@ router.get('/userData', (req, res) => {
 })
 
 //Follow users
-router.put('/updateUser', (req, res) => {
-
-    console.log(req.query.user_Id)
-    console.log(req.query.friend_Id)
+router.put('/addFriends', (req, res) => {
 
     User
         .findByIdAndUpdate(req.query.user_Id, { $push: { friends: req.query.friend_Id } })
@@ -120,8 +119,44 @@ router.put('/updateUser', (req, res) => {
 
 })
 
+//Delete friend
+router.put('/deleteFriend', (req, res) => {
+
+    const filteredFriends = req.body.friends.filter(elm => elm != req.query.friend_Id)
+
+    User
+        .findByIdAndUpdate(req.body._id, { friends: filteredFriends })
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(500).json(err))
+
+})
+
+//ADD RECIPE LIKE
+
+router.put('/favRecipe', (req, res) => {
+
+    User
+        .findByIdAndUpdate(req.query.user_Id, { $push: { favRecipes: req.query.recipe_Id } })
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(500).json(err))
+
+})
+
+//Delete friend
+router.put('/deleteFav', (req, res) => {
+
+    const filteredFavorites = req.body.favRecipes.filter(elm => elm != req.query.recipe_Id)
+
+    User
+        .findByIdAndUpdate(req.body._id, { favRecipes: filteredFavorites })
+        .then(updatedUser => res.json(updatedUser))
+        .catch(err => res.status(500).json(err))
+
+})
+
+
 //Update User
-router.put('/updateUser', (req, res) => {
+router.put('/updateUserImg', (req, res) => {
 
     console.log(req.query.user_Id)
 
@@ -137,7 +172,7 @@ router.get('/deleteUser', (req, res) => {
     console.log(req.query.user_Id)
 
     User
-        .findByIdAndDelete(req.query.user_Id, req.body)
+        .findByIdAndDelete(req.query.user_Id)
         .then(updatedUser => res.json(updatedUser))
         .catch(err => res.status(500).json(err))
 

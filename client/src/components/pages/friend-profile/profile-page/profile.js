@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import ProfileHeader from './../profile-header/profile-header'
 import ProfileNavbar from './../profile-navbar/profile-Navbar'
-import Recipes from './../../../../service/recipes.service'
+import RecipesService from './../../../../service/recipes.service'
 import UserService from './../../../../service/auth.service'
 import './profile.css'
 import RecipeCard from './../profile-feed/Recipe-card'
-
-
-
 
 
 import { Container, Row, Col, Spinner } from 'react-bootstrap'
@@ -20,13 +17,11 @@ export default class Profile extends Component {
         this.state = {
             recipes: undefined,
             userProfile: undefined,
-            showProfileNavbar: false,
-            allRendered: false,
             showInfo: 'recents',
-            userRecipes: undefined,
+            user: this.props.loggedUser
         }
 
-        this.recipesList = new Recipes()
+        this.recipesService = new RecipesService()
         this.userService = new UserService()
     }
 
@@ -36,11 +31,8 @@ export default class Profile extends Component {
 
         this.userService.findByName(this.props.match.params.username)
             .then(user => this.setState({ userProfile: user.data })) //Datos del usuario del perfil (diferentes a los del usuario registrado)
-            .then(() => this.recipesList.getRecipes())
+            .then(() => this.recipesService.getUserRecipes(this.state.userProfile._id))
             .then(res => this.setState({ recipes: res.data })) //Todas las recetas
-            .then(res => this.state.recipes.filter(elm => elm.author === this.props.loggedUser._id))
-            .then(res => this.setState({ userRecipes: res })) //Añade las recetas del usuario al state
-            .then(() => this.setState({ allRendered: true })) //Condición para que se rendericen las vistas
             .then(() => this.props.loggedUser.username === this.state.userProfile.username && this.setState({ showProfileNavbar: true }))
             .catch(err => console.log(err))
     }
@@ -67,19 +59,30 @@ export default class Profile extends Component {
 
     }
 
-    //WORK IN PROGRESS
-    handleFollowButton = (userId) => {
+
+    handleFollowButton = (friendId) => {
 
         const followedUsers = [...this.props.loggedUser.friends]
 
         let included = false
-        followedUsers.forEach(elm => included = elm === userId)
+        followedUsers.forEach(elm => included = elm === friendId)
 
         if (!included) {
+
             this.userService
-                .addFriend(this.props.loggedUser._id, userId)
+                .addFriend(this.props.loggedUser._id, friendId)
                 .then(res => this.userService.findUserById(this.props.loggedUser._id))
                 .then(res => { this.props.setTheUser(res.data) })
+                .catch(err => console.log(err))
+
+        } else {
+
+            console.log(friendId)
+
+            this.userService
+                .deleteFriend(this.props.loggedUser, friendId)
+                .then(res => this.userService.findUserById(this.props.loggedUser._id))
+                .then(res => this.props.setTheUser(res.data))
                 .catch(err => console.log(err))
         }
 
@@ -90,14 +93,15 @@ export default class Profile extends Component {
     render() {
         return (
             <>
-                {this.state.userRecipes ?
+                {this.state.recipes ?
                     <Container className='profile-container'>
 
                         <Row className="justify-content-center profile-header">
-                            <ProfileHeader userProfile={this.state.userProfile} numberRecipes={this.state.userRecipes.length} followButton={this.handleFollowButton} />
+                            <ProfileHeader userProfile={this.state.userProfile} loggedUser={this.props.loggedUser} numberRecipes={this.state.recipes.length} followButton={this.handleFollowButton} />
                         </Row>
                         <Row className="justify-content-center">
                             <Col md={12}>
+                                <h5>Recetas de {this.state.userProfile.username}:</h5>
                                 {this.state.recipes ?
                                     this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)
                                     :

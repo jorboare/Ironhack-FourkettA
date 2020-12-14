@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import ProfileHeader from './../profile-header/profile-header'
 import ProfileNavbar from './../profile-navbar/profile-Navbar'
 import FollowedUsers from './../followed-users/Followed-users'
-import Recipes from './../../../../service/recipes.service'
-import UserService from './../../../../service/auth.service'
+import RecipesService from './../../../../service/recipes.service'
+import AuthService from './../../../../service/auth.service'
 import './profile.css'
-import RecipeCard from './../profile-feed/Recipe-card'
+import Discover from './discover/Discover'
+import MyRecipes from './my-recipes/My-Recipes'
+import FavRecipes from './saved-recipes/Saved-recipes'
 
 
 
@@ -27,59 +29,83 @@ export default class Profile extends Component {
             userRecipes: undefined,
         }
 
-        this.recipesList = new Recipes()
-        this.userService = new UserService()
+        this.recipesService = new RecipesService()
+        this.authService = new AuthService()
     }
 
     componentDidMount() {
 
-        this.recipesList.getRecipes()
-            .then(res => this.setState({ recipes: res.data })) //Todas las recetas
-            .then(res => this.state.recipes.filter(elm => elm.author === this.props.loggedUser._id))
-            .then(res => this.setState({ userRecipes: res })) //Añade las recetas del usuario al state
+        this.recipesService
+            .getUserRecipes(this.props.loggedUser._id) // Recibir las rutas creadas por el usuario loggeado
+            .then(res => this.setState({ userRecipes: res.data })) //Añade las recetas del usuario al state
             .then(() => this.props.loggedUser.username === this.state.userProfile.username && this.setState({ showProfileNavbar: true }))
             .catch(err => console.log(err))
     }
+
+
 
     handleNavbar = (command) => this.setState({ showProfileNavbar: command })
 
 
     handleFavButton = (recipeId) => {
 
+        const favorites = [...this.props.loggedUser.favRecipes]
 
-        const favorites = this.props.loggedUser.favRecipes
+        console.log(favorites)
 
         let included = false
 
-        favorites.forEach(elm => included = elm._id === recipeId)
+        favorites.forEach(elm => included = elm === recipeId)
+
+        console.log(included)
 
         if (!included) {
-            this.recipesList
-                .getRecipeDetails(recipeId)
-                .then(recipe => favorites.push(recipe.data))
-                .then(() => this.userService.updateUser(this.props.loggedUser._id, { favRecipes: favorites }))
+            this.authService
+                .addFavorite(this.props.loggedUser._id, recipeId)
+                .then(recipe => this.authService.findUserById(this.props.loggedUser._id))
+                .then(res => this.props.setTheUser(res.data))
+                .catch(err => console.log(err))
+        } else {
+
+            console.log(recipeId)
+
+            this.authService
+                .deleteFavorite(this.props.loggedUser, recipeId)
+                .then(res => this.authService.findUserById(this.props.loggedUser._id))
+                .then(res => this.props.setTheUser(res.data))
                 .catch(err => console.log(err))
         }
 
     }
 
-    //WORK IN PROGRESS
-    handleFollowButton = (userId) => {
+    handleFollowButton = (friendId) => {
 
         const followedUsers = [...this.props.loggedUser.friends]
 
         let included = false
-        followedUsers.forEach(elm => included = elm === userId)
+        followedUsers.forEach(elm => included = elm === friendId)
 
         if (!included) {
+
             this.userService
-                .addFriend(this.props.loggedUser._id, userId)
+                .addFriend(this.props.loggedUser._id, friendId)
                 .then(res => this.userService.findUserById(this.props.loggedUser._id))
                 .then(res => { this.props.setTheUser(res.data) })
+                .catch(err => console.log(err))
+
+        } else {
+
+            console.log(friendId)
+
+            this.userService
+                .deleteFriend(this.props.loggedUser, friendId)
+                .then(res => this.userService.findUserById(this.props.loggedUser._id))
+                .then(res => this.props.setTheUser(res.data))
                 .catch(err => console.log(err))
         }
 
     }
+
 
     changeShowedInfo = action => this.setState({ showInfo: action })
 
@@ -90,7 +116,7 @@ export default class Profile extends Component {
                     <Container className='profile-container'>
 
                         <Row className="justify-content-center profile-header">
-                            <ProfileHeader userProfile={this.state.user} numberRecipes={this.state.userRecipes.length} followButton={this.handleFollowButton} />
+                            <ProfileHeader userProfile={this.props.loggedUser} numberRecipes={this.state.userRecipes.length} followButton={this.handleFollowButton} />
                         </Row>
                         <Row className="justify-content-center">
 
@@ -103,43 +129,32 @@ export default class Profile extends Component {
 
                             {this.state.showInfo === 'recents' &&
                                 <Col xs={12} md={9} >
-                                    <section className='recipes-list'>
-                                        <h4>Recientes </h4>
 
-                                        {this.state.recipes ?
-                                            this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)
-                                            :
-                                            <Spinner animation="border" variant="warning" />}
-                                    </section>
+                                    <Discover loggedUser={this.props.loggedUser} randomRecipes={this.randomRecipes} handleFavButton={this.handleFavButton} />
 
                                 </Col>
                             }
 
                             {this.state.showInfo === 'myRecipes' &&
                                 <Col xs={12} md={9} >
-                                    <section className='recipes-list'>
-                                        <h4>Mis recetas: </h4>
-                                        {this.state.recipes ?
-                                            this.state.userRecipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)
-                                            :
-                                            <Spinner animation="border" variant="warning" />}
 
-                                    </section>
+                                    <MyRecipes loggedUser={this.props.loggedUser} handleFavButton={this.handleFavButton} />
+
                                 </Col>
                             }
 
                             {this.state.showInfo === 'savedRecipes' &&
                                 <Col xs={12} md={9} >
-                                    <section className='recipes-list'>
-                                        <h4>Recetas guardadas: </h4>
-                                        {this.props.loggedUser.favRecipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)}
-                                    </section>
+
+                                    <FavRecipes loggedUser={this.props.loggedUser} setTheUser={this.props.setTheUser} userFavorites={this.props.loggedUser.favRecipes} handleFavButton={this.handleFavButton} />
+
                                 </Col>}
 
                             {this.state.showInfo === 'followedUsers' &&
                                 <Col xs={12} md={9} >
 
-                                    <FollowedUsers userFriends={this.props.loggedUser.friends} />
+                                    <FollowedUsers loggedUser={this.props.loggedUser} userFriends={this.props.loggedUser.friends} />
+
                                 </Col>}
                         </Row>
 

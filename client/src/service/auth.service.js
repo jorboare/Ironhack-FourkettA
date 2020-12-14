@@ -11,12 +11,16 @@ export default class AuthService {
     login = user => this.apiHandler.post(`/login`, user)
     logout = () => this.apiHandler.post(`/logout`)
     isLoggedIn = () => this.apiHandler.get(`/loggedin`)
-    friends = userId => this.apiHandler.get(`/getFriends?user_Id=${userId}`)
+    searchFriends = friendUserName => this.apiHandler.get(`/searchFriends?username=${friendUserName}`)
     findUserById = userId => this.apiHandler.get(`/author?user_Id=${userId}`)
     findByName = userName => this.apiHandler.get(`/userData?username=${userName}`)
-    addFriend = (userId, friendId) => this.apiHandler.put(`/updateUser?user_Id=${userId}&friend_Id=${friendId}`)
-    updateUser = (userId, userData) => this.apiHandler.put(`/updateUser?user_Id=${userId}`, userData)
+    addFriend = (userId, friendId) => this.apiHandler.put(`/addFriends?user_Id=${userId}&friend_Id=${friendId}`)
+    deleteFriend = (user, friend_id) => this.apiHandler.put(`/deleteFriend?friend_Id=${friend_id}`, user)
+    addFavorite = (userId, recipeId) => this.apiHandler.put(`/favRecipe?user_Id=${userId}&recipe_Id=${recipeId}`)
+    deleteFavorite = (user, recipeId) => this.apiHandler.put(`/deleteFav?recipe_Id=${recipeId}`, user)
+    updateUser = (userId, userImg) => this.apiHandler.put(`/updateUserImg?user_Id=${userId}`, userImg)
     deleteUser = userId => this.apiHandler.get(`/deleteUser?user_Id=${userId}`)
+
 
 }
 

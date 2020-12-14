@@ -27,7 +27,7 @@ class Login extends Component {
             .login(this.state)
             .then(theLoggedInUser => {
                 this.props.storeUser(theLoggedInUser.data)
-                this.props.history.push(`/profile/${theLoggedInUser.data.username}`)        // redirección JS
+                this.props.history.push(`/profile`)        // redirección JS
             })
             .catch(err => console.log('HA HABIDO UN ERROR', err))
     }

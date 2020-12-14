@@ -1,0 +1,49 @@
+.feed {
+  border: 1px solid;
+  border-radius: 15px;
+  margin-top: 15px;
+  transition: 0.5s;
+}
+
+.feed:hover {
+  background-color: #FFEFC1
+}
+
+.recipe-img {
+  height: 100px;
+  object-fit:cover;
+  width: 100%;
+  border-radius: 15px;
+  margin: 0;
+}
+
+.card-content{
+  padding: 10px 0;
+}
+
+.recipe-link {
+  color: black;
+  text-decoration: none
+}
+.recipe-link:hover {
+  color: black;
+  text-decoration: none
+}
+
+.recipe-like{
+  display:flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.fav-btn{
+  border: none;
+  border-radius: 10px;
+  width: 40px;
+  background-color:#ffdd7f;
+}
+.fav-btn:hover{
+  border: none;
+  width: 40px;
+  background-color:#C49A26;
+}

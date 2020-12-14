@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from './../../../../service/auth.service'
+import FilesService from './../../../../service/upload.service'
 import './edit-profile.css'
 
 import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap'
@@ -13,6 +14,7 @@ class EditForm extends Component {
         }
 
         this.authService = new AuthService()
+        this.filesService = new FilesService()
 
     }
 
@@ -23,12 +25,12 @@ class EditForm extends Component {
     handleInputChange = e => {
         console.log(this.state.user)
         this.setState(prevState =>
-            ({
-                user: {
-                    ...prevState.user,
-                    [e.target.name]: e.target.value
-                }
-            }))
+        ({
+            user: {
+                ...prevState.user,
+                [e.target.name]: e.target.value
+            }
+        }))
     }
     handleSubmit = e => {
 
@@ -36,13 +38,37 @@ class EditForm extends Component {
 
         this.authService
             .updateUser(this.props.loggedUser._id, this.state.user)
-            .then(theLoggedInUser => {
-                this.props.setTheUser(theLoggedInUser.data)
-                this.props.history.push(`/profile/${this.state.user.username}`)        // redirección JS
-            })
+            .then(() => this.authService.findUserById(this.props.loggedUser._id)
+                .then(res => {
+                    this.props.setTheUser(res.data)
+                    this.props.history.push(`/profile`)
+                })
+
+            )
             .catch(err => console.log('HA HABIDO UN ERROR', err))
     }
 
+    handleImageUpload = e => {
+
+        const uploadData = new FormData()
+        uploadData.append('imageUrl', e.target.files[0])
+        console.log('ESTO ES UNA IMAGEN EN MEMORIA:', e.target.files[0])
+
+
+        this.setState({ uploadingActive: true })
+
+        this.filesService
+            .uploadImage(uploadData)
+            .then(response => {
+
+                console.log(response.data)
+                this.setState({
+                    user: { ...this.state.user, img: response.data.secure_url },
+                    uploadingActive: false
+                })
+            })
+            .catch(err => console.log('ERRORRR!', err))
+    }
 
     render() {
 
@@ -55,15 +81,13 @@ class EditForm extends Component {
                             <Col md={{ span: 8, offset: 2 }}>
                                 <h3>Editar imagen:</h3>
                                 <hr />
-                                <Form onSubmit={this.handleSubmit}>
-                                    <Form.Group controlId="password">
-                                        <Form.Label>URL imagen</Form.Label>
-                                        <Form.Control type="text" name="img" value={this.state.user.img} onChange={this.handleInputChange} />
+                                <Form className='form' onSubmit={this.handleSubmit}>
+                                    <Form.Group>
+                                        <Form.File id="exampleFormControlFile1" label="Foto portada receta" name="imageUrl" onChange={this.handleImageUpload} />
                                     </Form.Group>
-
-
-                                    <Button variant="dark" type="submit">Registrarme</Button>
+                                    <Button variant="primary" type="submit">Editar imagen</Button>
                                 </Form>
+
                             </Col>
                         </Row>
                     </Container>

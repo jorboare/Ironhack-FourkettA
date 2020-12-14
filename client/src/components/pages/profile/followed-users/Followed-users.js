@@ -28,13 +28,8 @@ export default class FollowedUsers extends Component {
         e.preventDefault()
 
         this.authService
-            .findByName(this.state.search)
-            .then(res => {
-                console.log(res.data.username)
-                this.setState({ result: res.data })
-                this.forceUpdate()
-                console.log(this.state.result._id)
-            })
+            .searchFriends(this.state.search)
+            .then(res => this.setState({ result: res.data }))
             .catch(err => this.setState({ result: undefined }))
     }
 
@@ -53,13 +48,15 @@ export default class FollowedUsers extends Component {
                         {this.state.result &&
                             <>
                                 <h5>Resultado</h5>
-                                <FriendCard friendId={this.state.result._id} />
+                                {this.state.result.map(elm =>
+                                    <FriendCard key={elm._id} friendId={elm._id} />
+                                )}
 
                             </>
                         }
                     </Row>
                     <Row>
-                        {this.state.userFriends.map(elm => <FriendCard friendId={elm} />)}
+                        {this.state.userFriends.map((elm, idx) => <FriendCard key={idx} friendId={elm} />)}
                     </Row>
                 </Container>
             </>

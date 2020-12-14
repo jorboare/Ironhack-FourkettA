@@ -40,6 +40,11 @@ const recipeSchema = new Schema({
     },
     img: {
         type: String
+    },
+    visible: {
+        type: String,
+        enum: ["visible", "hide"],
+        default: "hide"
     }
 
 },

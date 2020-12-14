@@ -1,14 +1,14 @@
 .hero {
-    height: 400px;
+    height: 100vh;
    background: #ff6e7f;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #bfe9ff, #ff6e7f);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #bfe9ff, #ff6e7f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background: -webkit-linear-gradient(to right, #bfe9ff, #ff6e7f);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #bfe9ff, #ff6e7f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     display:flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 100px;
-    font-family: 'Noto Sans JP', sans-serif;
+    padding-top: 35vh;
+    position: relative;
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
 }
 
 .hero h1 {
@@ -16,11 +16,51 @@ background: linear-gradient(to right, #bfe9ff, #ff6e7f); /* W3C, IE 10+/ Edge, F
     font-size: 60px;
     color: white
 }
+.hero p {
+    color: white
+}
 
 .homepage-btn .btn {
     margin-right: 15px;
     border-radius: 25px;
     padding-bottom:10px;
-    background-color: #c49a27;
-    border: none
+    color: #f38597;
+    background-color: white;
+    border: none;
+
+}
+.fork-img-right{
+    width: 100px;
+    position: absolute;
+    z-index: 50;
+    bottom: 0px;;
+    right: 100px;
+    opacity: 0.5;
+}
+.fork-img-left{
+    width: 100px;
+    position: absolute;
+    z-index: 50;
+    bottom: 0px;;
+    left: 100px;
+    opacity: 0.5;
+}
+
+.spliter{
+    background-color: #BEE9FE;
+    height: 30px;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+
+}
+
+.home-info{
+    height: 400px;
+    background-color:#E998AB ;
+}
+.home-info-container {
+  padding-top: 80px;
+   color: white;
+   font-weight: 100;
 }

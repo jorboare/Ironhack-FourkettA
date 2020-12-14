@@ -8,6 +8,7 @@ import './profile-header.css'
 const Info = props => {
 
     const user = props.userProfile
+
     return (
         <>
             <Col xs={6} md={3} className='image-Col'>
@@ -22,8 +23,18 @@ const Info = props => {
                 </section>
             </Col>
             <Col xs={12} md={1} >
+
                 <section className='profile-info'>
-                    <Button variant="info" onClick={() => props.followButton(user._id)}>Seguir</Button>
+                    {props.loggedUser.friends.includes(user._id) ?
+                        <Button variant="info" className="unfollow" onClick={() => props.followButton(user._id)}>
+                            <span className='following'>Siguiendo</span>
+                            <span className='unfollow-btn'>Dejar de seguir</span>
+                        </Button>
+
+                        :
+
+                        <Button variant="info" onClick={() => props.followButton(user._id)}>Seguir</Button>
+                    }
                 </section>
             </Col>
         </>
