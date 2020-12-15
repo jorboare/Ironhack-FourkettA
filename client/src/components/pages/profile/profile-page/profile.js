@@ -6,6 +6,7 @@ import RecipesService from './../../../../service/recipes.service'
 import AuthService from './../../../../service/auth.service'
 import './profile.css'
 import Discover from './discover/Discover'
+import Search from './search/Search'
 import MyRecipes from './my-recipes/My-Recipes'
 import FavRecipes from './saved-recipes/Saved-recipes'
 
@@ -25,7 +26,7 @@ export default class Profile extends Component {
             user: this.props.loggedUser,
             showProfileNavbar: false,
             allRendered: false,
-            showInfo: 'recents',
+            showInfo: 'myRecipes',
             userRecipes: undefined,
         }
 
@@ -111,7 +112,7 @@ export default class Profile extends Component {
 
     render() {
         return (
-            <>
+            <div className='general-background'>
                 {this.state.userRecipes ?
                     <Container className='profile-container'>
 
@@ -122,7 +123,7 @@ export default class Profile extends Component {
 
 
 
-                            <Col xs={6} md={3}>
+                            <Col xs={8} md={3}>
                                 <ProfileNavbar loggedUser={this.state.user} {...this.props} showInfo={this.changeShowedInfo} />
                             </Col>
 
@@ -156,13 +157,20 @@ export default class Profile extends Component {
                                     <FollowedUsers loggedUser={this.props.loggedUser} userFriends={this.props.loggedUser.friends} />
 
                                 </Col>}
+
+                            {this.state.showInfo === 'search' &&
+                                <Col xs={12} md={9} >
+
+                                    <Search loggedUser={this.props.loggedUser} handleFavButton={this.handleFavButton} />
+
+                                </Col>}
                         </Row>
 
                     </Container>
                     :
                     <Spinner animation="border" variant="warning" />
                 }
-            </>
+            </div>
 
 
 

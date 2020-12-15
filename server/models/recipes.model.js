@@ -16,9 +16,6 @@ const recipeSchema = new Schema({
         required: true,
         default: 'ingredientes'
     },
-    origin: {
-        type: String
-    },
     instructions: {
         type: String,
         required: true,
@@ -45,6 +42,9 @@ const recipeSchema = new Schema({
         type: String,
         enum: ["visible", "hide"],
         default: "hide"
+    },
+    instructionsImgs: {
+        type: [String],
     }
 
 },

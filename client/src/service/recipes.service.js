@@ -9,6 +9,7 @@ export default class RecipeService {
     }
     getRecipes = () => this.apiHandler.get('/getAllRecipes')
     getUserRecipes = userId => this.apiHandler.get(`/getUserRecipes?user_Id=${userId}`)
+    getFriendRecipes = userId => this.apiHandler.get(`/getFriendRecipes?user_Id=${userId}`)
     getRecipeDetails = recipeId => this.apiHandler.get(`/getOneRecipe?id=${recipeId}`)
     searchRecipe = search => this.apiHandler.get(`/searchRecipe?search=${search}`)
     newRecipe = recipeData => this.apiHandler.post(`/newRecipe`, recipeData)

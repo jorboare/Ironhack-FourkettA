@@ -22,8 +22,7 @@ class FavRecipes extends Component {
 
         return (
             <section className='recipes-list' >
-                <h4>Guardadas: </h4>
-
+                <h4 className='saved-title'>Guardadas </h4>
                 {this.state.favRecipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} setTheUser={this.props.setTheUser} recipe={elm} key={elm._id} likeButton={this.props.handleFavButton} />)}
             </section>
         )

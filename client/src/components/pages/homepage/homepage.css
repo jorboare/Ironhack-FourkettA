@@ -1,8 +1,17 @@
+/* colors {
+    light-blue: #9ad3bc;
+    sepia: #f3eac2;
+    orange: #f5b461;
+    red: #ec524b
+} */
+
+
+
+
+
 .hero {
-    height: 100vh;
-   background: #ff6e7f;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #bfe9ff, #ff6e7f);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #bfe9ff, #ff6e7f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 90vh;
+    background-color: #f3eac2;  /* fallback for old browsers */
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -13,24 +22,28 @@
 
 .hero h1 {
     font-weight: 900;
-    font-size: 60px;
-    color: white
+    font-size: 80px;
+    color: #9ad3bc
 }
 .hero p {
-    color: white
+    color: #f5b461
+}
+
+.title-focused{
+color: #f5b461
 }
 
 .homepage-btn .btn {
     margin-right: 15px;
     border-radius: 25px;
     padding-bottom:10px;
-    color: #f38597;
-    background-color: white;
+    color: #ffffff;
+    background-color: #f5b461;
     border: none;
 
 }
 .fork-img-right{
-    width: 100px;
+    width: 115px;
     position: absolute;
     z-index: 50;
     bottom: 0px;;
@@ -38,7 +51,7 @@
     opacity: 0.5;
 }
 .fork-img-left{
-    width: 100px;
+    width: 115px;
     position: absolute;
     z-index: 50;
     bottom: 0px;;
@@ -47,7 +60,7 @@
 }
 
 .spliter{
-    background-color: #BEE9FE;
+    background-color: #9ad3bc;
     height: 30px;
     padding: 0;
     margin: 0;
@@ -57,7 +70,7 @@
 
 .home-info{
     height: 400px;
-    background-color:#E998AB ;
+    background-color:#f5b461 ;
 }
 .home-info-container {
   padding-top: 80px;

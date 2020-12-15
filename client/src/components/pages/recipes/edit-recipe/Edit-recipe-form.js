@@ -74,6 +74,29 @@ export default class EditRecipe extends Component {
             .catch(err => console.log('Error:', err))
     }
 
+    handleGaleryUpload = e => {
+
+        const uploadData = new FormData()
+        uploadData.append('imageUrl', e.target.files[0])
+
+        this.setState({ uploadingActive: true })
+
+        this.filesService
+            .uploadImage(uploadData)
+            .then(response => {
+
+                const instructionsImgsCopy = [...this.state.recipe.instructionsImgs]
+                instructionsImgsCopy.push(response.data.secure_url)
+
+
+                this.setState({
+                    recipe: { ...this.state.recipe, instructionsImgs: instructionsImgsCopy },
+                    uploadingActive: false
+                })
+            })
+            .catch(err => console.log('Error:', err))
+    }
+
 
     render() {
         return (
@@ -92,20 +115,26 @@ export default class EditRecipe extends Component {
                                     <Form.Group>
                                         <Form.File id="exampleFormControlFile1" label="Foto portada receta" name="imageUrl" onChange={this.handleImageUpload} />
                                     </Form.Group>
+                                    {this.state.uploadingActive &&
+                                        <Spinner animation="border" variant="warning" />
+                                    }
 
 
                                     <Form.Group controlId="type">
                                         <Form.Label>Tipo de receta:</Form.Label>
                                         <Form.Control as="select" size="sm" name='type' custom onChange={this.handleInputChange}>
-                                            <option value='normal'>Normal</option>
+                                            <option value='normal'>Sin especificar</option>
                                             <option value='vegetariana'>Vegetariana</option>
                                             <option value='vegana'>Vegana</option>
                                         </Form.Control>
                                     </Form.Group>
 
-                                    <Form.Group controlId="name">
-                                        <Form.Label>País de origen:</Form.Label>
-                                        <Form.Control type="text" placeholder="En caso de tener" name='origin' value={this.state.recipe.origin} onChange={this.handleInputChange} />
+                                    <Form.Group controlId="visible">
+                                        <Form.Label>Visibilidad:</Form.Label>
+                                        <Form.Control as="select" size="sm" name='visible' custom onChange={this.handleInputChange}>
+                                            <option value="hide" selected>Oculta</option>
+                                            <option value="visible">Visible</option>
+                                        </Form.Control>
                                     </Form.Group>
 
                                     <Form.Group controlId="name">
@@ -123,19 +152,29 @@ export default class EditRecipe extends Component {
                                         <Col md={12}>
                                             <Form.Group controlId="ingredients">
 
-                                                <Form.Control as="textarea" placeholder="Ingredientes" name='ingredients' key={this.state.recipe._id} className='ingredients-list' value={this.state.recipe.ingredients} onChange={this.handleInputChange} />)
+                                                <Form.Control as="textarea" rows={7} placeholder="Ingredientes" name='ingredients' className='ingredients' value={this.state.recipe.ingredients} onChange={this.handleInputChange} />
 
                                             </Form.Group>
                                         </Col>
                                     </Row>
-                                    <Form.Label>Pasos</Form.Label>
+                                    <Form.Label>Instrucciones</Form.Label>
                                     <Row >
                                         <Col md={12}>
                                             <Form.Group controlId="instructions">
 
-                                                <Form.Control as="textarea" placeholder="Paso" name='instructions' key={this.state.recipe._id} className='ingredients-list' value={this.state.recipe.instructions} onChange={this.handleInputChange} />
+                                                <Form.Control as="textarea" rows={7} placeholder="Instrucciones" name='instructions' className='steps' value={this.state.recipe.instructions} onChange={this.handleInputChange} />
 
                                             </Form.Group>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={12}>
+                                            <Form.Group>
+                                                <Form.File id="exampleFormControlFile1" label="Galería imágenes" name="imageUrl" onChange={this.handleGaleryUpload} />
+                                            </Form.Group>
+                                            {this.state.uploadingActive &&
+                                                <Spinner animation="border" variant="warning" />
+                                            }
                                         </Col>
                                     </Row>
 

@@ -7,6 +7,8 @@
 
 .profile-navbar{
     margin-top: 15px;
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+
 }
 
 .profile-navbar-btn {
@@ -22,4 +24,24 @@
     color: #B68F24
 }
 
+.modal-body{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.card-header {
+    background-color: #F4D192;
+
+    font-weight: 100;
+    text-transform: uppercase;
+    text-align: center;
+}
+.card-body {
+    background-color: #f7e7d2;
+    text-align: center
+
+}
+
+.card {
+    border: 1px solid #F4D192
+}
 

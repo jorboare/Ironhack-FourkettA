@@ -1,32 +1,4 @@
-.image-Col{
-    text-align: center
-}
 
-.profile-img {
-    height: 180px;
-    object-fit:cover;
-    width:180px;
-    border-radius:50%;
-    border: 10px solid white
-}
-
-.profile-header{
-    margin-top: 50px;
-    padding: 15px;
-    background-color: #ffefc1;
-     font-family: 'Noto Sans JP', sans-serif;
-     border-radius: 15px;
-}
-
-h3 {
-    font-weight: 100;
-    font-size: 40px;
-}
-
-.profile-info p{
-    font-weight: 100;
-    margin: 0
-}
 
 .unfollow{
     border: none;

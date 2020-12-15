@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import RecipeCard from './../../profile-feed/Recipe-card'
 import RecipesService from './../../../../../service/recipes.service'
+import './discover.css'
 
 
 import { Spinner, Button, Form, FormControl } from 'react-bootstrap'
@@ -36,51 +37,15 @@ class Discover extends Component {
 
     }
 
-    handleInput = e => {
-
-        this.setState({ search: e.target.value })
-
-        if (this.state.search.length > 0) {
-            this.recipesService
-                .searchRecipe(this.state.search)
-                .then(res => this.setState({ result: res.data }))
-                .catch(err => console.log(err))
-        } else {
-            this.setState({ result: undefined })
-        }
-
-    }
-
-
-    handleSubmit = e => {
-        e.preventDefault()
-
-        this.recipesService
-            .searchRecipe(this.state.search)
-            .then(res => this.setState({ result: res.data }))
-            .catch(err => console.log(err))
-
-        if (this.state.search.length < 1) {
-
-        }
-    }
-
 
     render() {
         return (
             <section className='recipes-list' >
-                <h4>Descubre nuevas recetas: </h4>
-
-                <Form className='search-form' onSubmit={this.handleSubmit}>
-                    <FormControl type="text" placeholder="Search" className="search-bar" value={this.state.search} onChange={this.handleInput} />
-                    <Button variant="outline-success" type='submit' className='shuffleButton'>Buscar</Button>
-                </Form>
-
-                {this.state.result &&
-                    this.state.result.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.props.handleFavButton} />)
-                }
-
-                <Button onClick={this.randomRecipes} className='shuffleButton'>Descubre</Button>
+                <div className='discover-text'>
+                    <h4>Descubre</h4>
+                    <p>¡Cinco recetas aleatorias para que de den ideas!</p>
+                    <Button onClick={this.randomRecipes} className='shuffleButton'>Descubre</Button>
+                </div>
 
                 { this.state.recipes ?
                     this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.props.handleFavButton} />)

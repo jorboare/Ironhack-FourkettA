@@ -26,6 +26,17 @@ router.get('/getUserRecipes', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+// Get User Recipes
+
+router.get('/getFriendRecipes', (req, res) => {
+
+
+    Recipe
+        .find({ author: req.query.user_Id, visible: 'visible' })
+        .then(allRecipes => res.json(allRecipes))
+        .catch(err => res.status(500).json(err))
+})
+
 // Get Favorite Recipes
 
 router.get('/getFavRecipes', (req, res) => {
@@ -51,7 +62,7 @@ router.get('/getRandomRecipes', (req, res) => {
                 allRecipes[j] = temp
             }
 
-            return res.json(allRecipes.splice(0, 5))
+            return res.json(allRecipes.splice(0, 3))
         })
         .catch(err => res.status(500).json(err))
 })

@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     z-index: 300;
-    background-color: #F38799;  /* fallback for old browsers */
+    background-color: #f5b461;  /* fallback for old browsers */
     box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
 }
 
@@ -21,7 +21,7 @@
 }
 
 .page-title {
-    color: white;
+    color: #beead8;
     font-weight: 700;
 }
 

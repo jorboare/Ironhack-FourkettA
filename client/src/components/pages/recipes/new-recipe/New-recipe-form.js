@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import { Form, Button, Container, Row, Col, Spinner } from 'react-bootstrap'
 import './New-recipe-form.css'
 import RecipesService from './../../../../service/recipes.service'
 import FilesService from './../../../../service/upload.service'
@@ -19,12 +19,8 @@ export default class NewRecipe extends Component {
                 servings: '',
                 updated: '',
                 time: '',
-                author: this.props.loggedUser ? this.props.loggedUser._id : '',
-                img: ''
+                author: this.props.loggedUser ? this.props.loggedUser._id : ''
             },
-            numIngredients: ['+'],
-            numInstructions: ['+']
-
 
         }
         this.recipesService = new RecipesService()
@@ -56,15 +52,37 @@ export default class NewRecipe extends Component {
         const uploadData = new FormData()
         uploadData.append('imageUrl', e.target.files[0])
 
-        this.setState({ uploadingActive: true })
+        this.setState({ uploadingActive: true, img: '' })
 
         this.filesService
             .uploadImage(uploadData)
             .then(response => {
 
-                console.log(response.data)
                 this.setState({
                     recipe: { ...this.state.recipe, img: response.data.secure_url },
+                    uploadingActive: false
+                })
+            })
+            .catch(err => console.log('Error:', err))
+    }
+
+    handleGaleryUpload = e => {
+
+        const uploadData = new FormData()
+        uploadData.append('imageUrl', e.target.files[0])
+
+        this.setState({ uploadingActive: true, instructionsImgs: [] })
+
+        this.filesService
+            .uploadImage(uploadData)
+            .then(response => {
+
+                const instructionsImgsCopy = [...this.state.recipe.instructionsImgs]
+                instructionsImgsCopy.push(response.data.secure_url)
+
+
+                this.setState({
+                    recipe: { ...this.state.recipe, instructionsImgs: instructionsImgsCopy },
                     uploadingActive: false
                 })
             })
@@ -87,16 +105,14 @@ export default class NewRecipe extends Component {
                             <Form.Group>
                                 <Form.File id="exampleFormControlFile1" label="Foto portada receta" name="imageUrl" onChange={this.handleImageUpload} />
                             </Form.Group>
-                            {/* <Form.Group controlId="name">
-                                <Form.Label>Url imagen:</Form.Label>
-                                <Form.Control type="text" placeholder="URL" name='img' value={this.state.recipe.img} onChange={this.handleInputChange} />
-                            </Form.Group> */}
-
+                            {this.state.uploadingActive &&
+                                <Spinner animation="border" variant="warning" />
+                            }
 
                             <Form.Group controlId="type">
                                 <Form.Label>Tipo de receta:</Form.Label>
                                 <Form.Control as="select" size="sm" name='type' custom onChange={this.handleInputChange}>
-                                    <option value='normal'>Normal</option>
+                                    <option value='normal'>Sin especificar</option>
                                     <option value='vegetariana'>Vegetariana</option>
                                     <option value='vegana'>Vegana</option>
                                 </Form.Control>
@@ -110,10 +126,6 @@ export default class NewRecipe extends Component {
                                 </Form.Control>
                             </Form.Group>
 
-                            <Form.Group controlId="name">
-                                <Form.Label>País de origen:</Form.Label>
-                                <Form.Control type="text" placeholder="Rellenar en caso de tener una nacionalidad concreta" name='origin' value={this.state.recipe.origin} onChange={this.handleInputChange} />
-                            </Form.Group>
 
                             <Form.Group controlId="name">
                                 <Form.Label>Raciones:</Form.Label>
@@ -121,8 +133,11 @@ export default class NewRecipe extends Component {
                             </Form.Group>
 
                             <Form.Group controlId="name">
+
                                 <Form.Label>Tiempo de preparación:</Form.Label>
+
                                 <Form.Control type="text" placeholder="En minutos" name='time' value={this.state.recipe.time} onChange={this.handleInputChange} />
+
                             </Form.Group>
 
                             <Form.Label>Ingredientes</Form.Label>
@@ -130,29 +145,27 @@ export default class NewRecipe extends Component {
                                 <Col md={12}>
                                     <Form.Group controlId="ingredients">
 
-                                        {this.state.numIngredients.map((elm, idx) => <Form.Control as="textarea" placeholder="Ingredientes" name='ingredients' key={idx} className='ingredients-list' value={this.state.recipe.ingredients} onChange={this.handleInputChange} />)}
+                                        <Form.Control as="textarea" placeholder="Ingredientes" name='ingredients' className='ingredients-list' value={this.state.recipe.ingredients} onChange={this.handleInputChange} />
 
                                     </Form.Group>
                                 </Col>
-
-                                {/* <Col md={12} className='add-sub-btns'>
-                                    <Button onClick={() => this.add('numIngredients')} className='form-btn'>+</Button>
-                                    {this.state.numIngredients.length > 1 && <Button onClick={() => this.substract('numIngredients')}>-</Button>}
-                                </Col> */}
                             </Row>
-                            <Form.Label>Pasos</Form.Label>
+                            <Form.Label>Instrucciones</Form.Label>
                             <Row >
                                 <Col md={12}>
                                     <Form.Group controlId="instructions">
 
-                                        {this.state.numInstructions.map((elm, idx) => <Form.Control as="textarea" placeholder="Paso" name='instructions' key={idx} className='ingredients-list' value={this.state.recipe.instructions} onChange={this.handleInputChange} />)}
+                                        <Form.Control as="textarea" placeholder="Instrucciones" name='instructions' className='ingredients-list' value={this.state.recipe.instructions} onChange={this.handleInputChange} />
 
                                     </Form.Group>
                                 </Col>
-                                {/* <Col md={12} className='add-sub-btns'>
-                                    <Button onClick={() => this.add('numInstructions')} className='form-btn'>+</Button>
-                                    {this.state.numInstructions.length > 1 && <Button onClick={() => this.substract('numInstructions')}>-</Button>}
-                                </Col> */}
+
+                                <Form.Group>
+                                    <Form.File id="exampleFormControlFile1" label="Galería imágenes" name="imageUrl" onChange={this.handleGaleryUpload} />
+                                </Form.Group>
+                                {this.state.uploadingActive &&
+                                    <Spinner animation="border" variant="warning" />
+                                }
                             </Row>
 
 

@@ -4,6 +4,9 @@ import AuthService from './../../../../service/auth.service'
 import { Link } from 'react-router-dom'
 import './Recipe-details.css'
 import { Container, Row, Col, Spinner, Button, Image, Modal } from 'react-bootstrap'
+import Raciones from './images/user.png'
+import Tiempo from './images/stopwatch.png'
+import Hoja from './images/leaf.png'
 
 
 export default class Detail extends Component {
@@ -41,32 +44,22 @@ export default class Detail extends Component {
             })
             .catch(err => console.log(err))
 
-
-
-        // let num = this.props.loggedUser.ownRecipes
-
-        // this.recipeService
-        //     .deleteRecipe(this.props.match.params.id)
-        //     .then(res => this.authService.updateUser(this.props.loggedUser._id, { ownRecipes: num -= 1 }))
-        //     .then(user => this.props.setTheUser(user.data))
-        //     .then(() => this.props.history.push(`/profile/${this.props.loggedUser.username}`))
-        //     .catch(err => console.log(err))
     }
 
     handleModal = visible => this.setState({ showModal: visible })
 
     render() {
         return (
-            <>
-                <Container className='recipe-detail'>
+            <div className='recipe-detail'>
+                <Container>
 
                     <Row>
 
-                        <Col md={{ span: 10, offset: 1 }}>
+                        <Col md={{ span: 10, offset: 1 }} className='recipe-detail-col'>
                             {this.state.recipe && this.state.author && this.state.loggedUser ?
                                 <>
-                                    <h3>{this.state.recipe.name}</h3>
-                                    <div >
+                                    <div className='title-info'>
+                                        <h3>{this.state.recipe.name}</h3>
                                         <p >Añadida por:
                                             <Link to={`/user/${this.state.author.username}`} className='created-by'>
                                                 <Image className='recipe-author-img' src={this.state.author.img} />
@@ -74,15 +67,41 @@ export default class Detail extends Component {
                                             </Link>
                                         </p>
                                     </div>
+
+                                    <div className='recipe-characteristics'>
+
+                                        <p><Image className='recipe-icon' src={Raciones} />
+                                            {this.state.recipe.servings}</p>
+
+                                        <p><Image className='recipe-icon' src={Tiempo} /> {this.state.recipe.time}'</p>
+                                        {this.state.recipe.type === 'vegetariana' || this.state.recipe.type === 'vegana' ?
+                                            <p><Image className='recipe-icon' src={Hoja} />{this.state.recipe.type}</p>
+                                            :
+                                            null
+                                        }
+                                    </div>
                                     <Image className='recipe-img-cover' src={this.state.recipe.img} />
-                                    <p>Raciones: {this.state.recipe.servings}</p>
-                                    <p>Tiempo de preparación: {this.state.recipe.time} minutos</p>
-                                    <p>Tipo de receta: {this.state.recipe.type}</p>
-                                    <p> {this.state.recipe.origin}</p>
-                                    <p><b>Ingredientes:</b></p>
-                                    <p className='textarea'>{this.state.recipe.ingredients}</p>
-                                    <p><b>Instrucciones:</b></p>
-                                    <p className='textarea'>{this.state.recipe.instructions}</p>
+                                    <div className='ingredients'>
+                                        <h4>Ingredientes</h4>
+                                        <hr></hr>
+                                        <p className='textarea'>{this.state.recipe.ingredients}</p>
+                                    </div>
+                                    <div className='gallery'>
+                                        <h4>Galería de Imágenes</h4>
+                                        <hr></hr>
+                                        {this.state.recipe.instructionsImgs.length > 0 ?
+                                            <>
+                                                {this.state.recipe.instructionsImgs.map(elm => <Image className='recipe-img-gallery' src={elm} style={{ 'width': '50px;' }} />)}
+                                            </>
+                                            :
+                                            <p>No hay imágenes disponibles</p>
+                                        }
+                                    </div>
+                                    <div className='steps'>
+                                        <h4>Instrucciones</h4>
+                                        <hr></hr>
+                                        <p className='textarea'>{this.state.recipe.instructions}</p>
+                                    </div>
                                     {this.state.author._id === this.state.loggedUser._id &&
                                         <>
                                             <Button variant="dark" className='btn' onClick={() => this.handleModal(true)}>Eliminar receta</Button>
@@ -106,11 +125,11 @@ export default class Detail extends Component {
                     <Modal.Body>
                         <h3>¿Estás seguro que quieres eliminar la receta?</h3>
                         <p>Si la eliminas no podrás recuperarla.</p>
-                        <Button variant="dark" className='btn' onClick={() => this.handleModal(false)}>Cancelar</Button>
-                        <Button variant="danger" className='btn' onClick={this.deleteRecipe}>Eliminar receta</Button>
+                        <Button variant="dark" className='recipe-details-btn' onClick={() => this.handleModal(false)}>Cancelar</Button>
+                        <Button variant="danger" className='recipe-details-btn' onClick={this.deleteRecipe}>Eliminar receta</Button>
                     </Modal.Body>
                 </Modal>
-            </>
+            </div>
         )
     }
 }

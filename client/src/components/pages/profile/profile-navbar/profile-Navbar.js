@@ -127,18 +127,6 @@ class Navbar extends Component {
 
                                 <Card.Body>
 
-                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showInfo('recents')}>
-
-                                        Descubre
-
-                                    </Link>
-
-                                </Card.Body>
-                            </Accordion.Collapse>
-                            <Accordion.Collapse eventKey="0">
-
-                                <Card.Body>
-
                                     <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showInfo('myRecipes')}>
 
                                         Mis recetas
@@ -147,6 +135,7 @@ class Navbar extends Component {
 
                                 </Card.Body>
                             </Accordion.Collapse>
+
                             <Accordion.Collapse eventKey="0">
 
                                 <Card.Body>
@@ -160,6 +149,32 @@ class Navbar extends Component {
                                 </Card.Body>
 
                             </Accordion.Collapse>
+
+                            <Accordion.Collapse eventKey="0">
+
+                                <Card.Body>
+
+                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showInfo('recents')}>
+
+                                        Descubre
+
+                                    </Link>
+
+                                </Card.Body>
+                            </Accordion.Collapse>
+                            <Accordion.Collapse eventKey="0">
+
+                                <Card.Body>
+
+                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showInfo('search')}>
+
+                                        Búsqueda
+
+                                    </Link>
+
+                                </Card.Body>
+                            </Accordion.Collapse>
+
 
                             <Accordion.Collapse eventKey="0">
 
@@ -207,7 +222,7 @@ class Navbar extends Component {
                 </section>
 
                 <Modal className="editModal" show={this.state.showEditModal} onHide={() => this.handleEditModal(false)}>
-                    <Modal.Body>
+                    <Modal.Body className="editModalBody">
                         <h3>Editar imagen:</h3>
                         <hr />
                         <Form className='form' onSubmit={this.handleSubmit}>

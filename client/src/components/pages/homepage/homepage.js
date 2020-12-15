@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
 import { Button, Image } from 'react-bootstrap'
 import './homepage.css'
-import Fork from './fork.png'
+import Fork from './fork-2.png'
 import { Container, Row, Col } from 'react-bootstrap'
 
 const Homepage = ({ loggedUser }) => {
     return (
         <>
             <section className='hero'>
-                <h1>FourkettA</h1>
+                <h1><span class='title-focused'>F</span>ourkett<span class='title-focused'>A</span></h1>
                 <p>Para cocinillas organizados</p>
                 <div className='homepage-btn'>
                     {!loggedUser ?

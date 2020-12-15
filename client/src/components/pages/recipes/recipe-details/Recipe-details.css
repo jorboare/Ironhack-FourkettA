@@ -1,13 +1,40 @@
-.recipe-detail {
+.recipe-detail-col {
+
+    padding: 30px 30px 100px 30px;
+    background-color: #F3EAC2;
     margin-top: 100px;
     margin-bottom: 100px;
+    border-radius: 25px;
+    box-shadow: 0 10px 10px 0px rgba(0,0,0,.3);
+
+}
+.recipe-detail {
+
+    background-color: #9AD3BC
 }
 
 .recipe-img-cover{
     height: 300px;
     object-fit: cover;
     border-radius: 10px;
-    width: 100%
+    width: 100%;
+    box-shadow: 0 10px 10px -5px rgba(0,0,0,.3);
+}
+
+.recipe-img-gallery{
+ width: 100px;
+ height: 100px;
+ object-fit: cover;
+ margin-right: 15px;
+ transition: 0.5s;
+ border-radius: 15px
+}
+
+.recipe-img-gallery:active{
+    transform: scale(4);
+    object-fit: scale-down;
+    margin: 0 auto;
+
 }
 
 .recipe-author {
@@ -30,4 +57,45 @@
 }
 .textarea {
     white-space: pre-wrap;
+}
+
+.recipe-characteristics{
+    display:flex;
+    align-items: flex-end;
+}
+.recipe-characteristics p{
+    margin-right: 15px;
+}
+
+.recipe-icon{
+    width: 25px;
+}
+.title-info{
+    text-align: center;
+}
+
+.ingredients{
+    margin-top: 20px;
+}
+.ingredients h4{
+    font-weight: 100;
+    font-size: 30px;
+}
+.steps{
+    margin-top: 20px;
+}
+.steps h4{
+    font-weight: 100;
+    font-size: 30px;
+}
+.gallery{
+    margin-top: 20px;
+}
+.gallery h4{
+    font-weight: 100;
+    font-size: 30px;
+}
+
+hr {
+    border: 1px solid #F5B561
 }

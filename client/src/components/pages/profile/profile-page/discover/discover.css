@@ -1,0 +1,21 @@
+
+.discover-text {
+    text-align: center
+}
+.discover-text h4{
+     text-align: center;
+    margin-top: 30px;
+    font-size: 30px;
+    font-weight: 100;
+    text-transform: uppercase;
+}
+
+.shuffleButton{
+    background-color: #F5B561;
+    border: none;
+    margin-bottom: 20px;
+}
+.shuffleButton:hover{
+    background-color: #F5B561;
+ 
+}

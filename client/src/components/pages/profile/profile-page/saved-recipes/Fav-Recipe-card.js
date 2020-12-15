@@ -2,7 +2,7 @@ import { Container, Row, Col, Image, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
 import RecipesService from './../../../../../service/recipes.service'
-import './Recipe-card.css'
+import './Fav-Recipe-card.css'
 
 class RecipeCard extends Component {
 
@@ -40,31 +40,39 @@ class RecipeCard extends Component {
                     <Container className='feed'>
                         <Row className='card-content'>
                             <Col md={11}>
-                                <Link to={`/detail/${favRecipe._id}`} className='recipe-link'>
 
-                                    <Container >
-                                        <Row >
-                                            <Col md={3}>
-                                                <figure>
-                                                    <Image className='recipe-img' src={favRecipe.img} />
-                                                </figure>
-                                            </Col>
-                                            <Col md={8} className='feed-card'>
-                                                <div className='recipe-like'>
-                                                    <h5 className='recipe-name'>{favRecipe.name}</h5>
-                                                </div>
+
+
+                                <Container >
+                                    <Row className='recipe-card'>
+                                        <Col md={{ span: 3, offset: 1 }} className='recipe-img-col'>
+                                            <figure>
+                                                <Link to={`/detail/${favRecipe._id}`}>
+
+                                                    <Image className='recipe-img-card' src={favRecipe.img} />
+                                                </Link>
+
+                                            </figure>
+                                        </Col>
+                                        <Col md={6} className='recipe-card-col'>
+                                            <Link to={`/detail/${favRecipe._id}`} className='recipe-card-text'>
+                                                <h5 className='recipe-name'>{favRecipe.name}</h5>
                                                 <p>Raciones: {favRecipe.servings} | Tiempo de preparación: {favRecipe.time} minutos</p>
-                                            </Col>
-                                        </Row>
-                                    </Container>
-                                </Link>
-                            </Col>
-                            {!this.props.loggedUser.favRecipes.includes(favRecipe._id) ?
-                                <Button className='fav-btn' onClick={() => this.props.likeButton(favRecipe._id)}>💛</Button>
-                                :
-                                <Button className='fav-btn' onClick={() => this.props.likeButton(favRecipe._id)}>💔</Button>
+                                            </Link>
 
-                            }
+                                        </Col>
+                                        <Col md={1} >
+                                            {!this.props.loggedUser.favRecipes.includes(favRecipe._id) ?
+                                                <Button className='fav-btn-card' onClick={() => this.props.likeButton(favRecipe._id)}>💛</Button>
+                                                :
+                                                <Button className='fav-btn-card liked' onClick={() => this.props.likeButton(favRecipe._id)}>💔</Button>
+
+                                            }
+                                        </Col>
+                                    </Row>
+                                </Container>
+
+                            </Col>
 
                         </Row>
                     </Container>

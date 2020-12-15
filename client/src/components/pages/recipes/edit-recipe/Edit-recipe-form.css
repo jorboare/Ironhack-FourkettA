@@ -29,3 +29,7 @@
     border: none;
     background-color: #C49A26;
 }
+
+textarea{
+    height: 400px;
+}

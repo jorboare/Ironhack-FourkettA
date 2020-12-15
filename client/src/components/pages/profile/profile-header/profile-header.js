@@ -1,5 +1,5 @@
 
-import { Col, Image, Button } from 'react-bootstrap'
+import { Col, Image } from 'react-bootstrap'
 
 import './profile-header.css'
 
