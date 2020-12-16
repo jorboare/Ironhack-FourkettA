@@ -19,19 +19,20 @@ class Login extends Component {
 
     }
 
-    handleInputChange = e => this.setState({ user: { [e.target.name]: e.target.value } })
+    handleInputChange = e => this.setState({ user: { ...this.state.user, [e.target.name]: e.target.value } })
 
     handleSubmit = e => {
 
         e.preventDefault()
-
+        console.log(this.state.user)
         this.authService
             .login(this.state.user)
             .then(theLoggedInUser => {
                 this.props.storeUser(theLoggedInUser.data)
                 this.props.history.push(`/profile`)
             })
-            .catch(err => console.log({ err }))
+            .catch(err => this.setState({ errorMsg: err.response.data.message }))
+
     }
 
 
@@ -54,6 +55,11 @@ class Login extends Component {
                                 <Form.Label>Contraseña</Form.Label>
                                 <Form.Control type="password" name="password" value={this.state.user.password} onChange={this.handleInputChange} />
                             </Form.Group>
+                            {this.state.errorMsg &&
+                                <div className='login-error'>
+                                    <p>{this.state.errorMsg}</p>
+                                </div>
+                            }
 
                             <Button variant="dark" type="submit">Iniciar sesión</Button>
                         </Form>

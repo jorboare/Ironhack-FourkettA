@@ -52,8 +52,6 @@ export default class Profile extends Component {
 
         const favorites = [...this.props.loggedUser.favRecipes]
 
-        console.log(favorites)
-
         let included = false
 
         favorites.forEach(elm => included = elm === recipeId)
@@ -66,9 +64,8 @@ export default class Profile extends Component {
                 .then(recipe => this.authService.findUserById(this.props.loggedUser._id))
                 .then(res => this.props.setTheUser(res.data))
                 .catch(err => console.log(err))
-        } else {
 
-            console.log(recipeId)
+        } else {
 
             this.authService
                 .deleteFavorite(this.props.loggedUser, recipeId)
@@ -147,7 +144,7 @@ export default class Profile extends Component {
                             {this.state.showInfo === 'savedRecipes' &&
                                 <Col xs={12} md={9} >
 
-                                    <FavRecipes loggedUser={this.props.loggedUser} setTheUser={this.props.setTheUser} userFavorites={this.props.loggedUser.favRecipes} handleFavButton={this.handleFavButton} />
+                                    <FavRecipes loggedUser={this.props.loggedUser} setTheUser={this.props.setTheUser} handleFavButton={this.handleFavButton} />
 
                                 </Col>}
 

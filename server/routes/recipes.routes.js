@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 
 const Recipe = require('../models/recipes.model')
+const { checkRecipeId, checkParamsRecipeId, checkUserId } = require('./middlewares')
 
 // Endpoints
 
@@ -17,7 +18,7 @@ router.get('/getAllRecipes', (req, res) => {
 
 // Get User Recipes
 
-router.get('/getUserRecipes', (req, res) => {
+router.get('/getUserRecipes', checkUserId, (req, res) => {
 
 
     Recipe
@@ -28,7 +29,7 @@ router.get('/getUserRecipes', (req, res) => {
 
 // Get User Recipes
 
-router.get('/getFriendRecipes', (req, res) => {
+router.get('/getFriendRecipes', checkUserId, (req, res) => {
 
 
     Recipe
@@ -39,7 +40,7 @@ router.get('/getFriendRecipes', (req, res) => {
 
 // Get Favorite Recipes
 
-router.get('/getFavRecipes', (req, res) => {
+router.get('/getFavRecipes', checkUserId, (req, res) => {
 
 
     Recipe
@@ -67,7 +68,7 @@ router.get('/getRandomRecipes', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.get('/getOneRecipe', (req, res) => {
+router.get('/getOneRecipe', checkRecipeId, (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(req.query.id)) {
         res.status(404).json({ message: 'Invalid ID' })
@@ -104,7 +105,7 @@ router.post('/newRecipe', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.put('/editRecipe/:recipe_id', (req, res) => {
+router.put('/editRecipe/:recipe_id', checkParamsRecipeId, (req, res) => {
 
     Recipe
         .findByIdAndUpdate(req.params.recipe_id, req.body)
@@ -112,7 +113,7 @@ router.put('/editRecipe/:recipe_id', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.get('/deleteRecipe/:recipe_id', (req, res) => {
+router.get('/deleteRecipe/:recipe_id', checkParamsRecipeId, (req, res) => {
 
     Recipe
         .findByIdAndDelete(req.params.recipe_id)

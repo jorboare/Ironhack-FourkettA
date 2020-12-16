@@ -6,3 +6,18 @@
 .login-container {
     margin-top: 80px;
 }
+
+.login-error{
+    background-color: #EC524B;
+    height: 40px;
+    border-radius: 5px;
+    text-align:center;
+    margin-bottom: 15px;
+}
+
+.login-error p{
+   font-weight: 100;
+   font-size: 18px;
+color: white;
+padding-top: 5px;
+}

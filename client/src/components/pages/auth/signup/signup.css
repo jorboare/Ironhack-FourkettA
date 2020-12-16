@@ -6,3 +6,18 @@
 .signup-container {
     margin-top: 80px;
 }
+
+.signup-error{
+    background-color: #EC524B;
+    height: 40px;
+    border-radius: 5px;
+    text-align:center;
+    margin-bottom: 15px;
+}
+
+.signup-error p{
+   font-weight: 100;
+   font-size: 18px;
+    color: white;
+    padding-top: 5px;
+}

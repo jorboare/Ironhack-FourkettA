@@ -31,10 +31,10 @@
 }
 
 .recipe-img-gallery:active{
-    transform: scale(4);
-    object-fit: scale-down;
+    transform: scale(5);
+    object-fit: none;
     margin: 0 auto;
-
+    border-radius: 15px
 }
 
 .recipe-author {
@@ -94,6 +94,10 @@
 .gallery h4{
     font-weight: 100;
     font-size: 30px;
+}
+
+.img-gallery{
+    text-align: center
 }
 
 hr {

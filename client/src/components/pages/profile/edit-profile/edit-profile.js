@@ -85,7 +85,10 @@ class EditForm extends Component {
                                     <Form.Group>
                                         <Form.File id="exampleFormControlFile1" label="Foto portada receta" name="imageUrl" onChange={this.handleImageUpload} />
                                     </Form.Group>
-                                    <Button variant="primary" type="submit">Editar imagen</Button>
+                                    {this.state.uploadingActive &&
+                                        <Spinner animation="border" variant="warning" />
+                                    }
+                                    <Button variant="primary" type="submit">Aceptar</Button>
                                 </Form>
 
                             </Col>

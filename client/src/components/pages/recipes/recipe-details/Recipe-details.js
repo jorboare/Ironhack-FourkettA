@@ -89,13 +89,15 @@ export default class Detail extends Component {
                                     <div className='gallery'>
                                         <h4>Galería de Imágenes</h4>
                                         <hr></hr>
-                                        {this.state.recipe.instructionsImgs.length > 0 ?
-                                            <>
-                                                {this.state.recipe.instructionsImgs.map(elm => <Image className='recipe-img-gallery' src={elm} style={{ 'width': '50px;' }} />)}
-                                            </>
-                                            :
-                                            <p>No hay imágenes disponibles</p>
-                                        }
+                                        <div className='img-gallery'>
+                                            {this.state.recipe.instructionsImgs.length > 0 ?
+                                                <>
+                                                    {this.state.recipe.instructionsImgs.map(elm => <Image className='recipe-img-gallery' src={elm} style={{ 'width': '50px;' }} />)}
+                                                </>
+                                                :
+                                                <p>No hay imágenes disponibles</p>
+                                            }
+                                        </div>
                                     </div>
                                     <div className='steps'>
                                         <h4>Instrucciones</h4>

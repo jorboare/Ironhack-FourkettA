@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import RecipeCard from './Fav-Recipe-card'
+import FavRecipeCard from './Fav-Recipe-card'
 import RecipesService from '../../../../../service/recipes.service'
 
 
@@ -11,19 +11,21 @@ class FavRecipes extends Component {
         super(props)
 
         this.state = {
-            favRecipes: this.props.userFavorites
+            favRecipes: this.props.loggedUser.favRecipes
         }
 
         this.recipesService = new RecipesService()
 
     }
 
+
+
     render() {
 
         return (
             <section className='recipes-list' >
                 <h4 className='saved-title'>Guardadas </h4>
-                {this.state.favRecipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} setTheUser={this.props.setTheUser} recipe={elm} key={elm._id} likeButton={this.props.handleFavButton} />)}
+                {this.state.favRecipes.map(elm => <FavRecipeCard loggedUser={this.props.loggedUser} setTheUser={this.props.setTheUser} recipe={elm} key={elm._id} likeButton={this.props.handleFavButton} />)}
             </section>
         )
     }

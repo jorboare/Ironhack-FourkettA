@@ -16,9 +16,6 @@ class RecipeCard extends Component {
         this.recipesService = new RecipesService()
     }
 
-
-
-
     componentDidMount() {
 
         this.recipesService
@@ -28,21 +25,16 @@ class RecipeCard extends Component {
 
     }
 
-
     render() {
 
         const { favRecipe } = this.state
         return (
             <>
-
                 {this.state.favRecipe &&
 
                     <Container className='feed'>
                         <Row className='card-content'>
                             <Col md={11}>
-
-
-
                                 <Container >
                                     <Row className='recipe-card'>
                                         <Col md={{ span: 3, offset: 1 }} className='recipe-img-col'>

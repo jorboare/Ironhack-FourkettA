@@ -5,7 +5,7 @@ import './profile-header.css'
 
 
 
-const Info = ({ userProfile, numberRecipes, followButton }) => {
+const Info = ({ userProfile, numberRecipes }) => {
 
     return (
         <>
