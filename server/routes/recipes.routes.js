@@ -68,12 +68,26 @@ router.get('/getRandomRecipes', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.get('/getOneRecipe', checkRecipeId, (req, res) => {
+//VEGGIE RECIPES
+router.get('/VeggieRecipes', (req, res) => {
 
-    if (!mongoose.Types.ObjectId.isValid(req.query.id)) {
-        res.status(404).json({ message: 'Invalid ID' })
-        return
-    }
+    Recipe
+        .find({ type: "vegetariana" }, { name: 1, type: 1 })
+        .then(VeggieRecipes => res.json(VeggieRecipes))
+        .catch(err => res.status(500).json(err))
+})
+
+//VEGAN RECIPES
+router.get('/VeganRecipes', (req, res) => {
+
+    Recipe
+        .find({ type: "vegana" }, { name: 1, type: 1 })
+        .then(VeggieRecipes => res.json(VeggieRecipes))
+        .catch(err => res.status(500).json(err))
+})
+
+
+router.get('/getOneRecipe', checkRecipeId, (req, res) => {
 
     const recipeId = req.query.id
     Recipe
@@ -87,7 +101,7 @@ router.get('/getOneRecipe', checkRecipeId, (req, res) => {
 router.get('/searchRecipe', (req, res) => {
 
     Recipe
-        .find()
+        .find({ visible: 'visible' })
         .then(result => {
             const resultFiltered = result.filter(elm => elm.name.toLowerCase().includes(req.query.search.toLowerCase()))
             res.json(resultFiltered)
