@@ -11,21 +11,20 @@ class FavRecipes extends Component {
         super(props)
 
         this.state = {
-            favRecipes: this.props.loggedUser.favRecipes
+            favRecipes: this.props.loggedUser.favRecipes,
+            fav: this.props.fav
         }
 
         this.recipesService = new RecipesService()
 
     }
 
-
-
     render() {
 
         return (
             <section className='recipes-list' >
                 <h4 className='saved-title'>Guardadas </h4>
-                {this.state.favRecipes.map(elm => <FavRecipeCard loggedUser={this.props.loggedUser} setTheUser={this.props.setTheUser} recipe={elm} key={elm._id} likeButton={this.props.handleFavButton} />)}
+                {this.state.fav.map(elm => <FavRecipeCard loggedUser={this.props.loggedUser} setTheUser={this.props.setTheUser} recipe={elm} key={elm._id} likeButton={this.props.handleFavButton} />)}
             </section>
         )
     }

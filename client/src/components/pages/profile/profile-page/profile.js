@@ -28,6 +28,7 @@ export default class Profile extends Component {
             allRendered: false,
             showInfo: 'myRecipes',
             userRecipes: undefined,
+            key: "1"
         }
 
         this.recipesService = new RecipesService()
@@ -43,7 +44,12 @@ export default class Profile extends Component {
             .catch(err => console.log(err))
     }
 
-
+    componentDidUpdate = () => {
+        this.authService
+            .findUserById(this.props.loggedUser._id)
+            .then(() => this.setState({ fav: this.props.loggedUser.favRecipes }))
+            .catch(err => console.log(err))
+    }
 
     handleNavbar = (command) => this.setState({ showProfileNavbar: command })
 
@@ -71,6 +77,7 @@ export default class Profile extends Component {
                 .deleteFavorite(this.props.loggedUser, recipeId)
                 .then(res => this.authService.findUserById(this.props.loggedUser._id))
                 .then(res => this.props.setTheUser(res.data))
+                .then(res => this.setState({ key: this.state.key + 1 }))
                 .catch(err => console.log(err))
         }
 
@@ -144,7 +151,7 @@ export default class Profile extends Component {
                             {this.state.showInfo === 'savedRecipes' &&
                                 <Col xs={12} md={9} >
 
-                                    <FavRecipes loggedUser={this.props.loggedUser} setTheUser={this.props.setTheUser} handleFavButton={this.handleFavButton} />
+                                    <FavRecipes key={this.state.key} loggedUser={this.props.loggedUser} fav={this.props.loggedUser.favRecipes} setTheUser={this.props.setTheUser} handleFavButton={this.handleFavButton} />
 
                                 </Col>}
 

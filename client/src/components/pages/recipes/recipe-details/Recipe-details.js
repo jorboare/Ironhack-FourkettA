@@ -83,12 +83,12 @@ export default class Detail extends Component {
                                     <Image className='recipe-img-cover' src={this.state.recipe.img} />
                                     <div className='ingredients'>
                                         <h4>Ingredientes</h4>
-                                        <hr></hr>
+                                        <hr className='details-hr'></hr>
                                         <p className='textarea'>{this.state.recipe.ingredients}</p>
                                     </div>
                                     <div className='gallery'>
                                         <h4>Galería de Imágenes</h4>
-                                        <hr></hr>
+                                        <hr className='details-hr'></hr>
                                         <div className='img-gallery'>
                                             {this.state.recipe.instructionsImgs.length > 0 ?
                                                 <>
@@ -101,7 +101,7 @@ export default class Detail extends Component {
                                     </div>
                                     <div className='steps'>
                                         <h4>Instrucciones</h4>
-                                        <hr></hr>
+                                        <hr className='details-hr'></hr>
                                         <p className='textarea'>{this.state.recipe.instructions}</p>
                                     </div>
                                     {this.state.author._id === this.state.loggedUser._id &&

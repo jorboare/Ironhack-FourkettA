@@ -8,6 +8,8 @@ export default class RecipeService {
         })
     }
     getRecipes = () => this.apiHandler.get('/getAllRecipes')
+    veggieRecipes = () => this.apiHandler.get('/VeggieRecipes')
+    veganRecipes = () => this.apiHandler.get('/VeganRecipes')
     getUserRecipes = userId => this.apiHandler.get(`/getUserRecipes?user_Id=${userId}`)
     getFriendRecipes = userId => this.apiHandler.get(`/getFriendRecipes?user_Id=${userId}`)
     getRecipeDetails = recipeId => this.apiHandler.get(`/getOneRecipe?id=${recipeId}`)

@@ -65,15 +65,39 @@ color: #f5b461
     padding: 0;
     margin: 0;
     box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+}
 
+.spliter.beige{
+    background-color: #f3eac2;
 }
 
 .home-info{
     height: 400px;
     background-color:#f5b461 ;
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
 }
+
 .home-info-container {
   padding-top: 80px;
    color: white;
    font-weight: 100;
+}
+.home-info-container p{
+  font-size: 20px;
+}
+
+.home-graphics{
+    height: 400px;
+    background-color:#9ad3bc ;
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+}
+
+.home-graphics h2{
+     font-weight: bold;
+     color: white
+}
+
+
+.graphics{
+    height: 400px;
 }
