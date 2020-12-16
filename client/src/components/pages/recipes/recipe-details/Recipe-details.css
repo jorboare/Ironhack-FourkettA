@@ -32,8 +32,8 @@
 
 .recipe-img-gallery:active{
     transform: scale(5);
-    object-fit: none;
     margin: 0 auto;
+    object-fit: scale-down;
     border-radius: 15px
 }
 

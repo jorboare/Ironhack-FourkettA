@@ -3,7 +3,7 @@ import axios from 'axios'
 export default class RecipeService {
     constructor() {
         this.apiHandler = axios.create({
-            baseURL: process.env.REACT_APP_API_URL,
+            baseURL: 'http://localhost:5000/api',
             withCredentials: true
         })
     }
@@ -16,6 +16,6 @@ export default class RecipeService {
     searchRecipe = search => this.apiHandler.get(`/recipes/searchRecipe?search=${search}`)
     newRecipe = recipeData => this.apiHandler.post(`/recipes/newRecipe`, recipeData)
     deleteRecipe = recipeId => this.apiHandler.get(`/recipes/deleteRecipe/${recipeId}`)
-    editRecipe = (recipeId, recipeData) => this.apiHandler.put(`/editRecipe/${recipeId}`, recipeData)
+    editRecipe = (recipeId, recipeData) => this.apiHandler.put(`/recipes/editRecipe/${recipeId}`, recipeData)
     getRandomRecipes = () => this.apiHandler.get('/recipes/getRandomRecipes')
 }

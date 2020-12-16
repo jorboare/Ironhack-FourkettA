@@ -34,7 +34,7 @@ export default class EditRecipe extends Component {
         e.preventDefault()
 
         this.recipesService
-            .editRecipe(this.props.match.params.id, this.state.recipe)
+            .editRecipe(this.state.recipe._id, this.state.recipe)
             .then(res => {
                 console.log(res)
                 this.props.history.push(`/detail/${this.props.match.params.id}`)
@@ -147,6 +147,17 @@ export default class EditRecipe extends Component {
                                         <Form.Control type="text" placeholder="En minutos" name='time' value={this.state.recipe.time} onChange={this.handleInputChange} />
                                     </Form.Group>
 
+                                    <Row>
+                                        <Col md={12}>
+                                            <Form.Group>
+                                                <Form.File id="exampleFormControlFile1" label="Galería imágenes" name="imageUrl" onChange={this.handleGaleryUpload} />
+                                            </Form.Group>
+                                            {this.state.uploadingActive &&
+                                                <Spinner animation="border" variant="warning" />
+                                            }
+                                        </Col>
+                                    </Row>
+
                                     <Form.Label>Ingredientes</Form.Label>
                                     <Row >
                                         <Col md={12}>
@@ -165,16 +176,6 @@ export default class EditRecipe extends Component {
                                                 <Form.Control as="textarea" rows={7} placeholder="Instrucciones" name='instructions' className='steps' value={this.state.recipe.instructions} onChange={this.handleInputChange} />
 
                                             </Form.Group>
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col md={12}>
-                                            <Form.Group>
-                                                <Form.File id="exampleFormControlFile1" label="Galería imágenes" name="imageUrl" onChange={this.handleGaleryUpload} />
-                                            </Form.Group>
-                                            {this.state.uploadingActive &&
-                                                <Spinner animation="border" variant="warning" />
-                                            }
                                         </Col>
                                     </Row>
 
