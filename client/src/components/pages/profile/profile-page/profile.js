@@ -44,14 +44,6 @@ export default class Profile extends Component {
             .catch(err => console.log(err))
     }
 
-    // componentDidUpdate = () => {
-
-    //     //PROBLEMA
-    //     // this.authService
-    //     //     .findUserById(this.props.loggedUser._id)
-    //     //     .then(() => this.setState({ fav: this.props.loggedUser.favRecipes }))
-    //     //     .catch(err => console.log(err))
-    // }
 
     handleNavbar = (command) => this.setState({ showProfileNavbar: command })
 

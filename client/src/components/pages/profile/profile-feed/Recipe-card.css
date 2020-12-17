@@ -44,14 +44,11 @@
   border-radius: 10px;
   box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
   text-align: center;
-  width: 40px;
+  width: 43px;
 
 }
 .fav-btn-card:hover{
-
-
   background-color: #f5b461;
- 
 
 }
 
@@ -73,3 +70,27 @@
   text-decoration: none;
 
 }
+
+button .unlike-btn { display: none; }
+button:hover .likedHeart { display: none; }
+button:hover .unlike-btn { display: inline; }
+
+.emptyHeart{
+  width: 20px;
+  margin: 0 auto;
+}
+.fullHeart{
+  width: 20px;
+  margin: 0 auto;
+  background: none
+}
+
+.servings-img{
+  width: 20px;
+}
+
+.time-img{
+  width: 20px;
+  margin-left: 15px
+}
+

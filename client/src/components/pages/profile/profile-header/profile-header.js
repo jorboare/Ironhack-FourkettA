@@ -17,6 +17,10 @@ const Info = ({ userProfile, numberRecipes }) => {
                     <h3>
                         {userProfile.username}
                     </h3>
+                    <p>{userProfile.description} </p>
+
+                    <hr className='profile-splitter'></hr>
+
                     <p>Recetas subidas: {numberRecipes} | Siguiendo: {userProfile.friends.length}</p>
                 </section>
             </Col>

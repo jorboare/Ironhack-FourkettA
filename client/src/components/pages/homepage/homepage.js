@@ -76,10 +76,10 @@ class Homepage extends Component {
                     <section className='home-graphics'>
                         <Container>
                             <Row>
-                                <Col md={6}>
-                                    <h2>{this.state.allRecipes}</h2>
+                                <Col md={6} className='num-recipes-col'>
+                                    <h2>{this.state.allRecipes} <span className='num-recipes'>recetas</span></h2>
                                     <hr></hr>
-                                    <p>FourkettA es un organizador de recetas así como una plataforma con la que poder acceder facilmente a nuevas recetas, seguir a otros usuarios para tener a mano su contenido y descubrir nuevas recetas con las que inspirarse con solo pulsar un botón.</p>
+                                    <p>Ahora mismo tenemos registradas {this.state.allRecipes} recetas. En <i>FourkettA</i> puedes descubrir cuál será tu próximo plato favorito, o la receta con la que tus invitados van a rebañar el plato. ¡Regístrate y empieza a cocinar!</p>
                                 </Col>
                                 <Col md={6}>
                                     <div className='graphics'>
@@ -93,6 +93,10 @@ class Homepage extends Component {
                         </Container>
                     </section>
                 }
+                <footer className='footer'>
+                    <p>FourkettA &#9400; 2020| Un proyecto de <span className='underline'>Jordi Boronat</span> para Ironhack.</p>
+                    <p>Icons made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+                </footer>
             </>
         )
     }

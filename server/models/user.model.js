@@ -21,7 +21,10 @@ const userSch = new Schema({
     friends: [{
         type: [Schema.Types.ObjectId],
         ref: 'users'
-    }]
+    }],
+    description: {
+        type: String
+    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('User', userSch)

@@ -23,7 +23,7 @@ class Discover extends Component {
 
         this.recipesService
             .getUserRecipes(this.props.loggedUser._id)
-            .then(res => this.setState({ userRecipes: res.data }))
+            .then(res => { this.setState({ userRecipes: res.data }) })
             .catch(err => console.log(err))
     }
 

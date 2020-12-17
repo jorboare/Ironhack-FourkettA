@@ -43,7 +43,7 @@ class Discover extends Component {
             <section className='recipes-list' >
                 <div className='discover-text'>
                     <h4>Descubre</h4>
-                    <p>¡Tres recetas aleatorias para que de den ideas!</p>
+                    <p>¡Tres recetas aleatorias para que te den ideas!</p>
                     <Button onClick={this.randomRecipes} className='shuffleButton'>Descubre</Button>
                 </div>
 

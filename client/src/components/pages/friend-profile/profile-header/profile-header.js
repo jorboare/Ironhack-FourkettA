@@ -14,15 +14,17 @@ const Info = props => {
             <Col xs={6} md={3} className='image-Col'>
                 <Image className='profile-img' src={user.img} />
             </Col>
-            <Col xs={12} md={8} >
+            <Col xs={12} md={6} >
                 <section className='profile-info'>
                     <h3>
                         {user.username}
                     </h3>
-                    <p>Number of recipes: {props.numberRecipes} | Friends: 30</p>
+                    <p>{user.description} </p>
+                    <hr className='profile-splitter'></hr>
+                    <p>Número de recetas: {props.numberRecipes} | Seguidos: {user.friends.length}</p>
                 </section>
             </Col>
-            <Col xs={12} md={1} >
+            <Col xs={12} md={3} >
 
                 <section className='profile-info'>
                     {props.loggedUser.friends.includes(user._id) ?

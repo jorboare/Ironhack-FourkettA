@@ -87,17 +87,64 @@ color: #f5b461
 }
 
 .home-graphics{
-    height: 400px;
+    height: 410px;
     background-color:#9ad3bc ;
     box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
 }
 
 .home-graphics h2{
      font-weight: bold;
-     color: white
+     color: white;
+     text-align: center
+}
+.home-graphics p{
+
+     color: white;
+
 }
 
+.num-recipes-col{
+padding-top: 80px;
+}
+
+.num-recipes-col p{
+text-align: center;
+ font-size: 20px;
+ font-weight: 100;
+}
+
+.num-recipes-col h2{
+    font-size: 45px;
+text-align: center
+}
+
+.num-recipes{
+    font-weight: 100
+}
 
 .graphics{
     height: 400px;
+}
+
+.footer{
+    height: 50px;
+    background-color: #F5B561
+}
+.footer p{
+    color: white;
+    padding: 0 20px;
+    margin: 0;
+    font-weight: 100;
+}
+.footer a{
+    color: white;
+    
+}
+
+.profile-splitter{
+    border: 1px solid #F5B561
+}
+
+.underline{
+    text-decoration: underline;
 }

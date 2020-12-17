@@ -84,7 +84,7 @@ export default class Profile extends Component {
 
             this.authService
                 .addFriend(this.props.loggedUser._id, friendId)
-                .then(res => this.userService.findUserById(this.props.loggedUser._id))
+                .then(res => this.authService.findUserById(this.props.loggedUser._id))
                 .then(res => { this.props.setTheUser(res.data) })
                 .catch(err => console.log(err))
 
@@ -94,7 +94,7 @@ export default class Profile extends Component {
 
             this.authService
                 .deleteFriend(this.props.loggedUser, friendId)
-                .then(res => this.userService.findUserById(this.props.loggedUser._id))
+                .then(res => this.authService.findUserById(this.props.loggedUser._id))
                 .then(res => this.props.setTheUser(res.data))
                 .catch(err => console.log(err))
         }
