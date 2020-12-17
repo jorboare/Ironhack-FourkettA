@@ -23,7 +23,8 @@ const userSch = new Schema({
         ref: 'users'
     }],
     description: {
-        type: String
+        type: String,
+        default: "(Puedes editar o eliminar esta descripción desde: Cuenta - Editar Perfil)"
     }
 }, { timestamps: true })
 
