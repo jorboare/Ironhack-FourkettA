@@ -38,16 +38,19 @@ export default class FollowedUsers extends Component {
             <>
                 <Container>
                     <section className='recipes-list'>
-                        <h4>Usuarios seguidos: </h4>
+                        <h4 className='followed-users-title'>Usuarios seguidos: </h4>
                     </section>
                     <Form className='search-form' onSubmit={this.handleSubmit}>
                         <FormControl type="text" placeholder="Search" className="search-bar" value={this.state.search} onChange={this.handleInput} />
-                        <Button variant="outline-success" type='submit'>Buscar</Button>
+                        <Button variant="outline-success" type='submit' className='search-users-btn'>Buscar</Button>
                     </Form>
                     <Row>
                         {this.state.result &&
-                            <>
-                                <h5>Resultado</h5>
+                            <><Col md={12}>
+
+                                <h5 className='result-title'>Resultado</h5>
+                                <hr></hr>
+                            </Col>
                                 {this.state.result.map(elm =>
                                     <FriendCard key={elm._id} friendId={elm._id} />
                                 )}
@@ -55,6 +58,7 @@ export default class FollowedUsers extends Component {
                             </>
                         }
                     </Row>
+                    <hr></hr>
                     <Row>
                         {this.state.userFriends.map((elm, idx) => <FriendCard key={idx} friendId={elm} />)}
                     </Row>

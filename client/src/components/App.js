@@ -21,7 +21,8 @@ class App extends Component {
     super()
 
     this.state = {
-      loggedInUser: undefined
+      loggedInUser: undefined,
+
     }
     this.authServices = new AuthServices()
   }
@@ -47,7 +48,7 @@ class App extends Component {
             <Route path='/user/:username' render={props => this.state.loggedInUser ? <Friend {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
             <Route path='/editProfile' render={props => this.state.loggedInUser ? <EditProfile {...props} loggedUser={this.state.loggedInUser} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
             <Route path="/newRecipe" render={props => this.state.loggedInUser ? <NewRecipe loggedUser={this.state.loggedInUser} {...props} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
-            <Route path="/detail/:id" render={props => this.state.loggedInUser ? <RecipeDetails loggedUser={this.state.loggedInUser} {...props} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
+            <Route path="/detail/:id" render={props => this.state.loggedInUser ? <RecipeDetails key={this.state.key} updateKey={this.updateKey} loggedUser={this.state.loggedInUser} {...props} setTheUser={this.setTheUser} /> : <Redirect to='/login' />} />
             <Route path="/editRecipe/:id" render={props => this.state.loggedInUser ? <EditRecipe storeUser={this.setTheUser} loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to='/login' />} />
             <Route path="/signup" exact render={props => <Signup storeUser={this.setTheUser} {...props} />} />
             <Route path="/login" exact render={props => <Login storeUser={this.setTheUser} {...props} />} />

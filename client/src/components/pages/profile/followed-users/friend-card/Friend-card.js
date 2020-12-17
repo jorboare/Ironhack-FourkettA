@@ -32,12 +32,13 @@ class FriendCard extends Component {
 
             <>
                 {this.state.friend ?
-                    <Col sm={3} md={3} className='friend-Card'>
-                        <Link to={`/user/${this.state.friend.username}`}>
-                            <Image src={this.state.friend.img} className='friend-img' />
-                            <h5>{this.state.friend.username}</h5>
-                        </Link>
-
+                    <Col sm={3} md={3} >
+                        <div className='friend-Card'>
+                            <Link to={`/user/${this.state.friend.username}`}>
+                                <Image src={this.state.friend.img} className='friend-img' />
+                                <p>{this.state.friend.username}</p>
+                            </Link>
+                        </div>
                     </Col>
                     :
                     <Spinner animation="border" variant="warning" />}

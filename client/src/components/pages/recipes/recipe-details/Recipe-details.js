@@ -7,6 +7,9 @@ import { Container, Row, Col, Spinner, Button, Image, Modal } from 'react-bootst
 import Raciones from './images/user.png'
 import Tiempo from './images/stopwatch.png'
 import Hoja from './images/leaf.png'
+import EmptyHeart from './images/heart.png'
+import FullHeart from './images/heart (1).png'
+import LikeButton from './like-button/like-button'
 
 
 export default class Detail extends Component {
@@ -48,6 +51,36 @@ export default class Detail extends Component {
 
     handleModal = visible => this.setState({ showModal: visible })
 
+    handleFavButton = (recipeId) => {
+
+        const favorites = [...this.props.loggedUser.favRecipes]
+
+        let included = false
+
+        favorites.some(elm => included = elm === recipeId)
+
+        console.log(included)
+
+        if (!included) {
+            this.authService
+                .addFavorite(this.props.loggedUser._id, recipeId)
+                .then(recipe => this.authService.findUserById(this.props.loggedUser._id))
+                .then(res => this.props.setTheUser(res.data))
+                .catch(err => console.log(err))
+
+        } else {
+
+            this.authService
+                .deleteFavorite(this.props.loggedUser, recipeId)
+                .then(res => this.authService.findUserById(this.props.loggedUser._id))
+                .then(res => this.props.setTheUser(res.data))
+                .catch(err => console.log(err))
+        }
+
+        this.props.updateKey()
+
+    }
+
     render() {
         return (
             <div className='recipe-detail'>
@@ -56,7 +89,7 @@ export default class Detail extends Component {
                     <Row>
 
                         <Col md={{ span: 10, offset: 1 }} className='recipe-detail-col'>
-                            {this.state.recipe && this.state.author && this.state.loggedUser ?
+                            {this.state.loggedUser ?
                                 <>
                                     <div className='title-info'>
                                         <h3>{this.state.recipe.name}</h3>
@@ -66,6 +99,7 @@ export default class Detail extends Component {
                                                 {this.state.author.username}
                                             </Link>
                                         </p>
+
                                     </div>
 
                                     <div className='recipe-characteristics'>

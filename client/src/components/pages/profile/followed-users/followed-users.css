@@ -6,3 +6,34 @@
     width: 100%;
     margin-right: 10px;
 }
+
+.followed-users-title {
+    text-align: center;
+    margin: 30px;
+    font-size: 30px;
+    font-weight: 100;
+    text-transform: uppercase;
+    border: 2px dotted #F5B561;
+    background-color: #F4D192;
+    border-radius: 15px;
+    padding: 5px 0;
+}
+
+.search-users-btn{
+    display:inline;
+    background-color: #F5B561;
+    border: none;
+    margin-bottom: 20px;
+    color: white
+}
+.search-users-btn:hover{
+    background-color: #d69d53;
+}
+
+.result-title{
+    font-weight: 100;
+    font-size: 30px;
+    text-transform: uppercase;
+    display:block;
+    text-align: center;
+}

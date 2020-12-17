@@ -52,11 +52,24 @@ class RecipeCard extends Component {
                                             </figure>
                                         </Col>
                                         <Col md={6} className='fav-recipe-card-col'>
-                                            <Link to={`/detail/${favRecipe._id}`} className='recipe-card-text'>
-                                                <h5 className='recipe-name'>{favRecipe.name}</h5>
-                                                <p>Raciones: {favRecipe.servings} | Tiempo de preparación: {favRecipe.time} minutos</p>
-                                            </Link>
+                                            <div className='fav-recipe-border-line'>
+                                                <Link to={`/detail/${favRecipe._id}`} className='recipe-card-text'>
+                                                    <h5 className='recipe-name'>{favRecipe.name}</h5>
+                                                    <div className='recipe-information'>
+                                                        <p>
+                                                            <Image className='servings-img' src={Servings} />
+                                                            {favRecipe.servings}
+                                                        </p>
+                                                        <p>
+                                                            <Image className='time-img' src={Time} />
+                                                            {favRecipe.time}'
+                                </p>
 
+                                                        {favRecipe.type === 'vegetariana' && <p><Image className='time-img' src={Leaf} /> vegetariana</p>}
+                                                        {favRecipe.type === 'vegana' && <p><Image className='time-img' src={Leaf} /> vegana</p>}
+                                                    </div>
+                                                </Link>
+                                            </div>
                                         </Col>
                                         <Col md={1} >
                                             {!this.props.loggedUser.favRecipes.includes(favRecipe._id) ?

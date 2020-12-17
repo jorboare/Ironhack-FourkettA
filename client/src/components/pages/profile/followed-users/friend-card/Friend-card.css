@@ -1,10 +1,24 @@
 .friend-Card {
     text-align: center;
+    background-color:#F4D192;
+    border-radius: 15px;
+padding-top: 10px;
+width: 120px;
+  box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+
+
+
+}
+.friend-Card p{
+   font-weight: 100;
+   color: black
 }
 
 .friend-img{
-    height: 70px;
+    height: 60px;
     object-fit:cover;
-    width:70px;
+    width:60px;
     border-radius:50%;
+      box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+
 }

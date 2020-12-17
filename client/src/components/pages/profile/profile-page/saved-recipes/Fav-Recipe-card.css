@@ -23,13 +23,14 @@
 }
 
 .fav-recipe-card-col{
-  background-color: #f7e7d2;
+   background-color: #f7e7d2;
   border-radius: 15px;
   margin: 0 0 0 10px;
   height: 120px;
-  padding-top: 10px;
+  padding-top: 15px;
   box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
   transition: 0.2s;
+
 
 
 }
@@ -84,4 +85,10 @@
     background-color: #F4D192;
     border-radius: 15px;
     padding: 5px 0;
+}
+
+
+.fav-recipe-border-line{
+  border: 2px dotted #9AD3BC;
+  border-radius: 15px;
 }

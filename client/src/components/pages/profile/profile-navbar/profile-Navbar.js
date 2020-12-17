@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Accordion, Card, Modal, Button, Form } from 'react-bootstrap'
+import { Accordion, Card, Modal, Button, Form, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import './profile-Navbar.css'
 import AuthService from './../../../../service/auth.service'
@@ -244,6 +244,10 @@ class Navbar extends Component {
                             <Form.Group>
                                 <Form.File id="exampleFormControlFile1" name="imageUrl" onChange={this.handleImageUpload} />
                             </Form.Group>
+                            {this.state.uploadingActive &&
+                                <Spinner animation="border" variant="warning" />
+                            }
+
                             <div style={{ textAlign: 'center' }}>
                                 <Button variant="primary" type="submit" className='edit-profile-botton'>Aceptar</Button>
                             </div>

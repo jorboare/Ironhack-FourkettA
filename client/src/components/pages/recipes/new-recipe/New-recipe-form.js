@@ -15,7 +15,7 @@ export default class NewRecipe extends Component {
                 type: 'normal',
                 ingredients: '',
                 origin: '',
-                instructions: '',
+                instructionsImgs: [],
                 servings: '',
                 updated: '',
                 time: '',
@@ -71,7 +71,7 @@ export default class NewRecipe extends Component {
         const uploadData = new FormData()
         uploadData.append('imageUrl', e.target.files[0])
 
-        this.setState({ uploadingActive: true, instructionsImgs: [] })
+        this.setState({ uploadingActive: true })
 
         this.filesService
             .uploadImage(uploadData)
@@ -92,91 +92,94 @@ export default class NewRecipe extends Component {
 
     render() {
         return (
-            <Container>
-                <h3 className='newRecipeTitle'>Nueva receta</h3>
-                <Row className="justify-content-center">
-                    <Col md={10}>
-                        <Form className='form' onSubmit={this.handleSubmit}>
-                            <Form.Group controlId="name">
-                                <Form.Label>Nombre de la receta:</Form.Label>
-                                <Form.Control type="text" placeholder="Nombre de la receta" name='name' value={this.state.recipe.name} onChange={this.handleInputChange} />
-                            </Form.Group>
 
-                            <Form.Group>
-                                <Form.File id="exampleFormControlFile1" label="Foto portada receta" name="imageUrl" onChange={this.handleImageUpload} />
-                            </Form.Group>
-                            {this.state.uploadingActive &&
-                                <Spinner animation="border" variant="warning" />
-                            }
+            <div className='edit-recipe-form'>
 
-                            <Form.Group controlId="type">
-                                <Form.Label>Tipo de receta:</Form.Label>
-                                <Form.Control as="select" size="sm" name='type' custom onChange={this.handleInputChange}>
-                                    <option value='normal'>Sin especificar</option>
-                                    <option value='vegetariana'>Vegetariana</option>
-                                    <option value='vegana'>Vegana</option>
-                                </Form.Control>
-                            </Form.Group>
-
-                            <Form.Group controlId="visible">
-                                <Form.Label>Visibilidad:</Form.Label>
-                                <Form.Control as="select" size="sm" name='visible' custom onChange={this.handleInputChange}>
-                                    <option value="hide" selected>Oculta</option>
-                                    <option value="visible">Visible</option>
-                                </Form.Control>
-                            </Form.Group>
-
-
-                            <Form.Group controlId="name">
-                                <Form.Label>Raciones:</Form.Label>
-                                <Form.Control type="text" placeholder="Número de raciones" name='servings' value={this.state.recipe.servings} onChange={this.handleInputChange} />
-                            </Form.Group>
-
-                            <Form.Group controlId="name">
-
-                                <Form.Label>Tiempo de preparación:</Form.Label>
-
-                                <Form.Control type="text" placeholder="En minutos" name='time' value={this.state.recipe.time} onChange={this.handleInputChange} />
-
-                            </Form.Group>
-
-                            <Form.Label>Ingredientes</Form.Label>
-                            <Row >
-                                <Col md={12}>
-                                    <Form.Group controlId="ingredients">
-
-                                        <Form.Control as="textarea" placeholder="Ingredientes" name='ingredients' className='ingredients-list' value={this.state.recipe.ingredients} onChange={this.handleInputChange} />
-
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                            <Form.Label>Instrucciones</Form.Label>
-                            <Row >
-                                <Col md={12}>
-                                    <Form.Group controlId="instructions">
-
-                                        <Form.Control as="textarea" placeholder="Instrucciones" name='instructions' className='ingredients-list' value={this.state.recipe.instructions} onChange={this.handleInputChange} />
-
-                                    </Form.Group>
-                                </Col>
+                <Container>
+                    <Row className="justify-content-center">
+                        <Col md={10} className='new-recipe-form-col'>
+                            <h3 className='newRecipeTitle'>Nueva receta</h3>
+                            <Form className='form' onSubmit={this.handleSubmit}>
+                                <Form.Group controlId="name">
+                                    <Form.Label>Nombre de la receta:</Form.Label>
+                                    <Form.Control type="text" placeholder="Nombre de la receta" name='name' value={this.state.recipe.name} onChange={this.handleInputChange} />
+                                </Form.Group>
 
                                 <Form.Group>
-                                    <Form.File id="exampleFormControlFile1" label="Galería imágenes" name="imageUrl" onChange={this.handleGaleryUpload} />
+                                    <Form.File id="exampleFormControlFile1" label="Foto portada receta" name="imageUrl" onChange={this.handleImageUpload} />
                                 </Form.Group>
                                 {this.state.uploadingActive &&
                                     <Spinner animation="border" variant="warning" />
                                 }
-                            </Row>
+
+                                <Form.Group controlId="type">
+                                    <Form.Label>Tipo de receta:</Form.Label>
+                                    <Form.Control as="select" size="sm" name='type' custom onChange={this.handleInputChange}>
+                                        <option value='normal'>Sin especificar</option>
+                                        <option value='vegetariana'>Vegetariana</option>
+                                        <option value='vegana'>Vegana</option>
+                                    </Form.Control>
+                                </Form.Group>
+
+                                <Form.Group controlId="visible">
+                                    <Form.Label>Visibilidad:</Form.Label>
+                                    <Form.Control as="select" size="sm" name='visible' custom onChange={this.handleInputChange}>
+                                        <option value="hide" selected>Oculta</option>
+                                        <option value="visible">Visible</option>
+                                    </Form.Control>
+                                </Form.Group>
 
 
-                            <div className='add-sub-btns'>
-                                <Button variant="primary" type="submit">Añadir receta</Button>
-                            </div>
-                        </Form>
-                    </Col>
-                </Row>
-            </Container>
+                                <Form.Group controlId="name">
+                                    <Form.Label>Raciones:</Form.Label>
+                                    <Form.Control type="text" placeholder="Número de raciones" name='servings' value={this.state.recipe.servings} onChange={this.handleInputChange} />
+                                </Form.Group>
 
+                                <Form.Group controlId="name">
+
+                                    <Form.Label>Tiempo de preparación:</Form.Label>
+
+                                    <Form.Control type="text" placeholder="En minutos" name='time' value={this.state.recipe.time} onChange={this.handleInputChange} />
+
+                                </Form.Group>
+
+                                <Form.Label>Ingredientes</Form.Label>
+                                <Row >
+                                    <Col md={12}>
+                                        <Form.Group controlId="ingredients">
+
+                                            <Form.Control as="textarea" rows={7} placeholder="Ingredientes" name='ingredients' className='ingredients-list' value={this.state.recipe.ingredients} onChange={this.handleInputChange} />
+
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                                <Form.Label>Instrucciones</Form.Label>
+                                <Row >
+                                    <Col md={12}>
+                                        <Form.Group controlId="instructions">
+
+                                            <Form.Control as="textarea" rows={7} placeholder="Instrucciones" name='instructions' className='ingredients-list' value={this.state.recipe.instructions} onChange={this.handleInputChange} />
+
+                                        </Form.Group>
+                                    </Col>
+
+                                    <Form.Group>
+                                        <Form.File id="exampleFormControlFile1" label="Galería imágenes" name="imageUrl" onChange={this.handleGaleryUpload} />
+                                    </Form.Group>
+                                    {this.state.uploadingActive &&
+                                        <Spinner animation="border" variant="warning" />
+                                    }
+                                </Row>
+
+
+                                <div className='edit-cancel-btns'>
+                                    <Button variant="primary" type="submit">Añadir receta</Button>
+                                </div>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         )
     }
 }

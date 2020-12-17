@@ -136,3 +136,31 @@
     border: none;
     background-color: #b73935;
 }
+
+button .detail-unlike-btn { display: none; }
+button:hover .detail-likedHeart { display: none; }
+button:hover .detail-unlike-btn { display: inline; }
+
+button .detail-likeHeart { display: none; }
+button:hover .detail-unliked-btn  { display: none; }
+button:hover .detail-likeHeart{ display: inline; }
+
+
+.detail-fav-btn-card{
+
+  border: none;
+  background-color: #9AD3BC;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+  text-align: center;
+  width: 50px;
+  padding: 8px 10px 8px 10px;
+
+}
+.detail-fav-btn-card:hover{
+
+
+  background-color: #da9f52;
+ 
+
+}
