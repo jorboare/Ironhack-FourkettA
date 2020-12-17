@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col, Spinner } from 'react-bootstrap'
 import './New-recipe-form.css'
 import RecipesService from './../../../../service/recipes.service'
 import FilesService from './../../../../service/upload.service'
+import { Link } from 'react-router-dom'
 
 
 export default class NewRecipe extends Component {
@@ -143,6 +144,10 @@ export default class NewRecipe extends Component {
 
                                 </Form.Group>
 
+                                <Form.Group>
+                                    <Form.File id="exampleFormControlFile1" label="Galería imágenes" name="imageUrl" onChange={this.handleGaleryUpload} />
+                                </Form.Group>
+
                                 <Form.Label>Ingredientes</Form.Label>
                                 <Row >
                                     <Col md={12}>
@@ -163,9 +168,7 @@ export default class NewRecipe extends Component {
                                         </Form.Group>
                                     </Col>
 
-                                    <Form.Group>
-                                        <Form.File id="exampleFormControlFile1" label="Galería imágenes" name="imageUrl" onChange={this.handleGaleryUpload} />
-                                    </Form.Group>
+
                                     {this.state.uploadingActive &&
                                         <Spinner animation="border" variant="warning" />
                                     }
@@ -174,6 +177,7 @@ export default class NewRecipe extends Component {
 
                                 <div className='edit-cancel-btns'>
                                     <Button variant="primary" type="submit">Añadir receta</Button>
+                                    <Link to='/profile'><Button variant="primary">Cancelar</Button></Link>
                                 </div>
                             </Form>
                         </Col>
