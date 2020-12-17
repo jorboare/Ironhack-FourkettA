@@ -17,4 +17,9 @@
     font-size: 30px;
     font-weight: 100;
     text-transform: uppercase;
+    background-color:#F4D192 ;
+    border-radius: 15px;
+    width: 400px;
+    padding: 5px 10px;
+margin: 30px auto;
 }

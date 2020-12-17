@@ -23,7 +23,7 @@
 }
 
 .fav-recipe-card-col{
-   background-color: #f7e7d2;
+   background-color: #F4D192;
   border-radius: 15px;
   margin: 0 0 0 10px;
   height: 120px;
@@ -34,7 +34,7 @@
 
 
 }
-.recipe-card-col:hover{
+.fav-recipe-card-col:hover{
   background-color: #f5b461;
 
 

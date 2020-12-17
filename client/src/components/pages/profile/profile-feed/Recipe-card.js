@@ -15,14 +15,14 @@ const RecipeCard = ({ _id, img, name, servings, time, type, likeButton, loggedUs
             <Container className='recipe-card'>
                 <Row >
 
-                    <Col md={{ span: 3, offset: 1 }} className='recipe-img-col'>
+                    <Col md={3} className='profile-recipe-img-col'>
                         <figure>
                             <Link to={`/detail/${_id}`}>
                                 <Image className='recipe-img-card' src={img} />
                             </Link>
                         </figure>
                     </Col>
-                    <Col md={6} className='recipe-card-col'>
+                    <Col md={7} className='recipe-card-col'>
                         <div className='recipe-border-line'>
                             <Link to={`/detail/${_id}`} className='recipe-card-text'>
                                 <h5>{name}</h5>
