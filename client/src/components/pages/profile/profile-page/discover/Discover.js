@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import RecipeCard from './../../profile-feed/Recipe-card'
 import RecipesService from './../../../../../service/recipes.service'
 import './discover.css'
+import ShuffleIcon from './images/kisspng-computer-icons-random-icons-5ac9b210505967.8304824615231677603291-removebg-preview.png'
 
 
-import { Spinner, Button, Form, FormControl } from 'react-bootstrap'
+import { Spinner, Button, Image, Form, FormControl } from 'react-bootstrap'
 
 
 class Discover extends Component {
@@ -44,7 +45,10 @@ class Discover extends Component {
                 <div className='discover-text'>
                     <h4>Descubre</h4>
                     <p>¡Tres recetas aleatorias para que te den ideas!</p>
-                    <Button onClick={this.randomRecipes} className='shuffleButton'>Descubre</Button>
+                </div>
+                <div className='align-shuffleButton'>
+
+                    <Button onClick={this.randomRecipes} className='shuffleButton'><Image className='shuffleImg' src={ShuffleIcon} /></Button>
                 </div>
 
                 { this.state.recipes ?

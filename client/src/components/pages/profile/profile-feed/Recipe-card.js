@@ -5,8 +5,9 @@ import EmptyHeart from './images/heart.png'
 import FullHeart from './images/heart (1).png'
 import Servings from './images/user.png'
 import Time from './images/stopwatch.png'
+import Leaf from './images/leaf.png'
 
-const RecipeCard = ({ _id, img, name, servings, time, likeButton, loggedUser }) => {
+const RecipeCard = ({ _id, img, name, servings, time, type, likeButton, loggedUser }) => {
 
     return (
         <>
@@ -22,15 +23,34 @@ const RecipeCard = ({ _id, img, name, servings, time, likeButton, loggedUser }) 
                         </figure>
                     </Col>
                     <Col md={6} className='recipe-card-col'>
-                        <Link to={`/detail/${_id}`} className='recipe-card-text'>
-                            <h5>{name}</h5>
-                            <p><Image className='servings-img' src={Servings} /> {servings}<Image className='time-img' src={Time} />  {time} minutos</p>
-                        </Link>
+                        <div className='recipe-border-line'>
+                            <Link to={`/detail/${_id}`} className='recipe-card-text'>
+                                <h5>{name}</h5>
+                                <div className='recipe-information'>
+                                    <p>
+                                        <Image className='servings-img' src={Servings} />
+                                        {servings}
+                                    </p>
+                                    <p>
+                                        <Image className='time-img' src={Time} />
+                                        {time}'
+                                </p>
+
+                                    {type === 'vegetariana' && <p><Image className='time-img' src={Leaf} /> vegetariana</p>}
+                                    {type === 'vegana' && <p><Image className='time-img' src={Leaf} /> vegana</p>}
+                                </div>
+                            </Link>
+                        </div>
                     </Col>
                     <Col md={1} >
 
                         {!loggedUser.favRecipes.includes(_id) ?
-                            <Button className='fav-btn-card' onClick={() => likeButton(_id)}><Image className='emptyHeart' src={EmptyHeart} /></Button>
+                            <Button className='fav-btn-card' onClick={() => likeButton(_id)}>
+                                <span className='unliked-btn'><Image className='emptyHeart' src={EmptyHeart} /></span>
+                                <span className='likeHeart'><Image className='fullHeart' src={FullHeart} /></span>
+
+
+                            </Button>
                             :
                             <Button className='fav-btn-card liked' onClick={() => likeButton(_id)}>
                                 <span className='likedHeart'><Image className='fullHeart' src={FullHeart} /></span>

@@ -42,6 +42,8 @@ class Navbar extends Component {
             .catch(err => console.log(err))
     }
 
+    handleInputChange = e => this.setState({ user: { ...this.state.user, description: e.target.value } })
+
     handleSubmit = e => {
 
         e.preventDefault()
@@ -99,7 +101,7 @@ class Navbar extends Component {
 
                             <Accordion.Collapse eventKey="0">
 
-                                <Card.Body><Link to='#' className='profile-navbar-btn' onClick={() => this.handleEditModal(true)}>Editar imagen</Link></Card.Body>
+                                <Card.Body><Link to='#' className='profile-navbar-btn' onClick={() => this.handleEditModal(true)}>Editar perfil</Link></Card.Body>
 
                             </Accordion.Collapse>
 
@@ -223,13 +225,28 @@ class Navbar extends Component {
 
                 <Modal className="editModal" show={this.state.showEditModal} onHide={() => this.handleEditModal(false)}>
                     <Modal.Body className="editModalBody">
-                        <h3>Editar imagen:</h3>
-                        <hr />
+
                         <Form className='form' onSubmit={this.handleSubmit}>
-                            <Form.Group>
-                                <Form.File id="exampleFormControlFile1" label="Foto portada receta" name="imageUrl" onChange={this.handleImageUpload} />
+
+                            <h4 className='profile-edit-title'>Editar Perfil</h4>
+
+                            <h6 className='profile-edit-label'>Descripción</h6>
+                            <hr />
+
+                            <Form.Group controlId="description">
+
+                                <Form.Control as="textarea" rows={4} placeholder="Ingredientes" name='description' className='ingredients' value={this.state.user.description} onChange={this.handleInputChange} />
+
                             </Form.Group>
-                            <Button variant="primary" type="submit">Aceptar</Button>
+                            <h6 className='profile-edit-label'>Editar foto de perfil</h6>
+                            <hr />
+
+                            <Form.Group>
+                                <Form.File id="exampleFormControlFile1" name="imageUrl" onChange={this.handleImageUpload} />
+                            </Form.Group>
+                            <div style={{ textAlign: 'center' }}>
+                                <Button variant="primary" type="submit" className='edit-profile-botton'>Aceptar</Button>
+                            </div>
                         </Form>
                     </Modal.Body>
                 </Modal>
@@ -238,8 +255,8 @@ class Navbar extends Component {
                     <Modal.Body>
                         <h3>¿Estás seguro que quieres eliminar la cuenta?</h3>
                         <p>Si la eliminas no podrás recuperarla.</p>
-                        <Button variant="dark" className='btn' onClick={() => this.handleDeleteModal(false)}>Cancelar</Button>
-                        <Button variant="danger" className='btn' onClick={this.deleteUser}>Eliminar cuenta</Button>
+                        <Button variant="danger" className='delete-profile-botton' onClick={this.deleteUser}>Eliminar cuenta</Button>
+                        <Button variant="dark" className='cancel-delete-profile-botton' onClick={() => this.handleDeleteModal(false)}>Cancelar</Button>
                     </Modal.Body>
                 </Modal>
             </>

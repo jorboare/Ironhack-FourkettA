@@ -18,10 +18,11 @@
 }
 
 .recipe-img-col{
+  margin-left: 100px;
   padding: 0
 }
 
-.recipe-card-col{
+.fav-recipe-card-col{
   background-color: #f7e7d2;
   border-radius: 15px;
   margin: 0 0 0 10px;
@@ -79,4 +80,8 @@
     font-size: 30px;
     font-weight: 100;
     text-transform: uppercase;
+    border: 2px dotted #F5B561;
+    background-color: #F4D192;
+    border-radius: 15px;
+    padding: 5px 0;
 }

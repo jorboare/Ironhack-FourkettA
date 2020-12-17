@@ -8,28 +8,70 @@
 
 .newRecipeTitle {
     text-align: center;
-     margin-top: 100px;
      font-size: 60px;
+     margin: 0
 }
 
 
-.add-sub-btns{
-    text-align: center
-    
+.edit-cancel-btns{
+    text-align: center;
+
 }
-.add-sub-btns button{
-    color: #C49A26;
-    margin-right: 10px;
-    border: none;
-    background-color: #FFEFC1
-}
-.add-sub-btns button:hover{
+
+.edit-cancel-btns button{
     color: white;
     margin-right: 10px;
     border: none;
-    background-color: #C49A26;
+    background-color: #9AD3BC;
+}
+.edit-cancel-btns button:hover{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #F5B561;
+    
 }
 
 textarea{
     height: 400px;
+}
+
+.new-recipe-form-col{
+    background-color: #FFEFC1;
+    padding: 60px 60px 0 60px;
+    margin: 100px 0;
+    border-radius: 20px;
+    align-items: center;
+}
+
+.edit-recipe-form{
+    background-color:#9AD3BC
+}
+
+.edit-section .form-file-label{
+    text-align: center;
+    font-size: 25px;
+    font-weight: 100
+}
+
+
+button .unlike-btn { display: none; }
+button:hover .likedHeart { display: none; }
+button:hover .unlike-btn { display: inline; }
+
+button .likeHeart { display: none; }
+button:hover .unliked-btn  { display: none; }
+button:hover .likeHeart{ display: inline; }
+
+.emptyHeart{
+  width: 17px;
+  display: inline;
+      margin-left:1px;
+  margin: 0;
+}
+.fullHeart{
+  width: 17px;
+    display: inline;
+    margin-left:1px;
+  background: none
 }

@@ -54,7 +54,7 @@ export default class Profile extends Component {
 
         let included = false
 
-        favorites.forEach(elm => included = elm === recipeId)
+        favorites.some(elm => included = elm === recipeId)
 
         console.log(included)
 

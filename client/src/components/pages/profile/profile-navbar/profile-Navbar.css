@@ -24,9 +24,6 @@
     color: #B68F24
 }
 
-.modal-body{
-    background-color: rgba(255, 255, 255, 0.5);
-}
 
 .card-header {
     background-color: #F4D192;
@@ -38,10 +35,68 @@
 .card-body {
     background-color: #f7e7d2;
     text-align: center
-
 }
 
 .card {
     border: 1px solid #F4D192
 }
 
+.editModalBody{
+    padding: 0 40px;
+}
+.profile-edit-title{
+    font-size: 35px;
+    font-weight: 100;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.profile-edit-label{
+   font-weight: 100;
+   font-size: 20px;
+   text-align: center;
+}
+
+.edit-profile-botton{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #9AD3BC;
+width: 100%}
+
+.edit-profile-botton:hover{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #F5B561;
+}
+
+.cancel-delete-profile-botton{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #9AD3BC;
+width: 100%}
+
+.cancel-delete-profile-botton:hover{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #7cb49e;
+}
+
+.delete-profile-botton{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #EC524B;
+width: 100%;
+margin-bottom: 10px;
+}
+
+.delete-profile-botton:hover{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #c24039;
+}

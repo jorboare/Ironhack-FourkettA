@@ -63,39 +63,41 @@ class Signup extends Component {
     render() {
 
         return (
+            <div className='signup-form-background'>
 
-            <Container className='signup-container'>
+                <Container className='signup-container'>
 
-                <Row>
-                    <Col md={{ span: 6, offset: 3 }}>
-                        <h1>Registro</h1>
-                        <hr />
-                        <Form onSubmit={this.handleSubmit}>
-                            <Form.Group controlId="username">
-                                <Form.Label>Nombre de usuario</Form.Label>
-                                <Form.Control type="text" name="username" value={this.state.user.username} onChange={this.handleInputChange} />
-                            </Form.Group>
-                            <Form.Group controlId="password">
-                                <Form.Label>Contraseña</Form.Label>
-                                <Form.Control type="password" name="password" value={this.state.user.password} onChange={this.handleInputChange} />
-                            </Form.Group>
+                    <Row>
+                        <Col md={{ span: 6, offset: 3 }} className='signup-form-col' style={{ padding: '50px' }}>
+                            <h1>Registro</h1>
+                            <hr className='signup-splitter' />
+                            <Form onSubmit={this.handleSubmit}>
+                                <Form.Group controlId="username">
+                                    <Form.Label>Nombre de usuario</Form.Label>
+                                    <Form.Control type="text" name="username" value={this.state.user.username} onChange={this.handleInputChange} />
+                                </Form.Group>
+                                <Form.Group controlId="password">
+                                    <Form.Label>Contraseña</Form.Label>
+                                    <Form.Control type="password" name="password" value={this.state.user.password} onChange={this.handleInputChange} />
+                                </Form.Group>
 
-                            <Form.Group>
-                                <Form.File id="exampleFormControlFile1" label="Imagen de perfil" name="imageUrl" onChange={this.handleImageUpload} />
-                            </Form.Group>
-                            {this.state.uploadingActive &&
-                                <Spinner animation="border" variant="warning" />
-                            }
-                            {this.state.errorMsg &&
-                                <div className='signup-error'>
-                                    <p>{this.state.errorMsg}</p>
-                                </div>
-                            }
-                            <Button variant="dark" type="submit">Registrarme</Button>
-                        </Form>
-                    </Col>
-                </Row>
-            </Container>
+                                <Form.Group>
+                                    <Form.File id="exampleFormControlFile1" label="Imagen de perfil" name="imageUrl" onChange={this.handleImageUpload} />
+                                </Form.Group>
+                                {this.state.uploadingActive &&
+                                    <Spinner animation="border" variant="warning" />
+                                }
+                                {this.state.errorMsg &&
+                                    <div className='signup-error'>
+                                        <p>{this.state.errorMsg}</p>
+                                    </div>
+                                }
+                                <Button variant="dark" type="submit">Registrarme</Button>
+                            </Form>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         )
     }
 }

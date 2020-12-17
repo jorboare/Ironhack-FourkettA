@@ -105,12 +105,12 @@ export default class Detail extends Component {
                                         <p className='textarea'>{this.state.recipe.instructions}</p>
                                     </div>
                                     {this.state.author._id === this.state.loggedUser._id &&
-                                        <>
-                                            <Button variant="dark" className='btn' onClick={() => this.handleModal(true)}>Eliminar receta</Button>
+                                        <div className='add-sub-btns'>
+                                            <Button variant="dark" onClick={() => this.handleModal(true)}>Eliminar receta</Button>
                                             <Link to={`/editRecipe/${this.state.recipe._id}`}>
                                                 <Button variant="dark" className='btn'>Editar receta</Button>
                                             </Link>
-                                        </>
+                                        </div>
                                     }
                                 </>
                                 :
@@ -127,8 +127,10 @@ export default class Detail extends Component {
                     <Modal.Body>
                         <h3>¿Estás seguro que quieres eliminar la receta?</h3>
                         <p>Si la eliminas no podrás recuperarla.</p>
-                        <Button variant="dark" className='recipe-details-btn' onClick={() => this.handleModal(false)}>Cancelar</Button>
-                        <Button variant="danger" className='recipe-details-btn' onClick={this.deleteRecipe}>Eliminar receta</Button>
+                        <div className='add-sub-btns'>
+                            <Button variant="dark" className='recipe-details-btn' onClick={() => this.handleModal(false)}>Cancelar</Button>
+                            <Button variant="danger" className='delete-details-btn' onClick={this.deleteRecipe}>Eliminar receta</Button>
+                        </div>
                     </Modal.Body>
                 </Modal>
             </div>

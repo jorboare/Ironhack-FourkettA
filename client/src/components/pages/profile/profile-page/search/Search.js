@@ -44,7 +44,7 @@ class Discover extends Component {
 
                 <Form className='search-form' onSubmit={this.handleSubmit}>
                     <FormControl type="text" placeholder="Buscar recetas" className="search-bar" value={this.state.search} onChange={this.handleInput} />
-                    <Button variant="outline-success" type='submit' className='shuffleButton'>Buscar</Button>
+                    <Button variant="outline-success" type='submit' className='searchButtoon'>Buscar</Button>
                 </Form>
 
                 {this.state.result &&

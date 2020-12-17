@@ -103,3 +103,36 @@
 .details-hr {
     border: 1px solid #F5B561
 }
+
+.add-sub-btns{
+    text-align: center
+    
+}
+
+.add-sub-btns button{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #9AD3BC;
+}
+
+.add-sub-btns button:hover{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #F5B561;
+}
+
+.add-sub-btns .delete-details-btn{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #EC524B;
+}
+
+.add-sub-btns .delete-details-btn:hover{
+    color: white;
+    margin-right: 10px;
+    border: none;
+    background-color: #b73935;
+}

@@ -21,3 +21,20 @@
 color: white;
 padding-top: 5px;
 }
+
+.login-form-background{
+    padding-top:10px;
+     background-color:#9AD3BC;
+     height: 100vh;
+}
+
+.login-form-col{
+    background-color: #FFEFC1;
+    border-radius: 20px;
+    box-shadow: 0 15px 15px -10px rgba(0,0,0,.2);
+
+}
+
+.login-splitter{
+    border: 1px solid #E59F44
+}

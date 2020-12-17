@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
 import RecipesService from './../../../../../service/recipes.service'
 import './Fav-Recipe-card.css'
+import EmptyHeart from './images/heart.png'
+import FullHeart from './images/heart (1).png'
+import Servings from './images/user.png'
+import Time from './images/stopwatch.png'
+import Leaf from './images/leaf.png'
 
 class RecipeCard extends Component {
 
@@ -46,7 +51,7 @@ class RecipeCard extends Component {
 
                                             </figure>
                                         </Col>
-                                        <Col md={6} className='recipe-card-col'>
+                                        <Col md={6} className='fav-recipe-card-col'>
                                             <Link to={`/detail/${favRecipe._id}`} className='recipe-card-text'>
                                                 <h5 className='recipe-name'>{favRecipe.name}</h5>
                                                 <p>Raciones: {favRecipe.servings} | Tiempo de preparación: {favRecipe.time} minutos</p>
@@ -55,10 +60,18 @@ class RecipeCard extends Component {
                                         </Col>
                                         <Col md={1} >
                                             {!this.props.loggedUser.favRecipes.includes(favRecipe._id) ?
-                                                <Button className='fav-btn-card' onClick={() => this.props.likeButton(favRecipe._id)}>💛</Button>
-                                                :
-                                                <Button className='fav-btn-card liked' onClick={() => this.props.likeButton(favRecipe._id)}>💔</Button>
+                                                <Button className='fav-btn-card' onClick={() => this.props.likeButton(favRecipe._id)}>
+                                                    <span className='unliked-btn'><Image className='emptyHeart' src={EmptyHeart} /></span>
+                                                    <span className='likeHeart'><Image className='fullHeart' src={FullHeart} /></span>
 
+
+                                                </Button>
+                                                :
+                                                <Button className='fav-btn-card liked' onClick={() => this.props.likeButton(favRecipe._id)}>
+                                                    <span className='likedHeart'><Image className='fullHeart' src={FullHeart} /></span>
+                                                    <span className='unlike-btn'><Image className='emptyHeart' src={EmptyHeart} /></span>
+
+                                                </Button>
                                             }
                                         </Col>
                                     </Row>

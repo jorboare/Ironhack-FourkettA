@@ -32,8 +32,8 @@ class App extends Component {
 
     this.authServices
       .isLoggedIn()
-      .then(response => this.setTheUser(response.data))
-      .catch(err => this.setTheUser({ loggedInUser: undefined }))
+      .then(response => this.setState({ loggedInUser: response.data }))
+      .catch(err => this.setState({ loggedInUser: null }))
   }
 
   render() {

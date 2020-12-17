@@ -79,6 +79,15 @@ class EditForm extends Component {
 
                         <Row>
                             <Col md={{ span: 8, offset: 2 }}>
+                                <Form.Label>Ingredientes</Form.Label>
+
+                                <Form.Group controlId="ingredients">
+
+                                    <Form.Control as="textarea" rows={4} placeholder="Ingredientes" name='ingredients' className='ingredients' value={this.state.user.description} onChange={this.handleInputChange} />
+
+                                </Form.Group>
+
+
                                 <h3>Editar imagen:</h3>
                                 <hr />
                                 <Form className='form' onSubmit={this.handleSubmit}>

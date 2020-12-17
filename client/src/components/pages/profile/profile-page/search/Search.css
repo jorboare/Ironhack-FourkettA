@@ -1,7 +1,23 @@
 .search-title {
-     text-align: center;
+    text-align: center;
     margin: 30px;
     font-size: 30px;
     font-weight: 100;
     text-transform: uppercase;
+    border: 2px dotted #F5B561;
+    background-color: #F4D192;
+    border-radius: 15px;
+    padding: 5px 0;
+}
+
+.searchButtoon{
+ display:inline;
+    background-color: #F5B561;
+    border: none;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.searchButtoon:hover{
+    background-color: #e59f44;
 }

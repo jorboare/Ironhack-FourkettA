@@ -35,7 +35,7 @@ class Homepage extends Component {
         return (
             <>
                 <section className='hero'>
-                    <h1><span class='title-focused'>F</span>ourkett<span class='title-focused'>A</span></h1>
+                    <h1><span className='title-focused'>F</span>ourkett<span class='title-focused'>A</span></h1>
                     <p>Para cocinillas organizados</p>
                     <div className='homepage-btn'>
                         {!this.props.loggedUser ?

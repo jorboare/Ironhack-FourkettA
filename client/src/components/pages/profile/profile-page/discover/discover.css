@@ -1,21 +1,40 @@
 
 .discover-text {
-    text-align: center
-}
-.discover-text h4{
-     text-align: center;
-    margin-top: 30px;
+    text-align: center;
+    margin: 30px 30px 8px 30px;
     font-size: 30px;
     font-weight: 100;
+    border: 2px dotted #F5B561;
+    background-color: #F4D192;
+    border-radius: 15px;
+    padding-top: 5px;
+}
+.discover-text h4 {
     text-transform: uppercase;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 100;
+}
+.discover-text p{
+    font-weight: 100;
+    font-size: 18px;
 }
 
 .shuffleButton{
+    display:inline;
     background-color: #F5B561;
     border: none;
     margin-bottom: 20px;
 }
 .shuffleButton:hover{
     background-color: #F5B561;
- 
+}
+
+.align-shuffleButton{
+text-align: center
+}
+
+.shuffleImg{
+    width: 40px;
+    filter: invert(1)
 }

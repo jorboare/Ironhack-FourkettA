@@ -31,6 +31,7 @@ class Discover extends Component {
     render() {
         return (
             <section className='recipes-list' >
+
                 <h4 className='my-recipes-title'>Mis recetas</h4>
 
                 { this.state.userRecipes ?
