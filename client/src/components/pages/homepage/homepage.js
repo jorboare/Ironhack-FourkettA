@@ -84,7 +84,7 @@ class Homepage extends Component {
                                 <Col md={6} className='num-recipes-col'>
                                     <h2>{this.state.allRecipes} <span className='num-recipes'>recetas</span></h2>
                                     <hr></hr>
-                                    <p>Ahora mismo tenemos registradas {this.state.allRecipes} recetas. En <i>FourkettA</i> puedes descubrir cuál será tu próximo plato favorito, o la receta con la que tus invitados van a rebañar el plato. ¡Regístrate y empieza a cocinar!</p>
+                                    <p>Ahora mismo tenemos registradas {this.state.allRecipes} recetas. En <i>FourkettA</i> puedes descubrir cuál será tu nueva comida favorita, o la receta con la que tus invitados van a rebañar el plato. ¡Regístrate y empieza a cocinar!</p>
                                 </Col>
                                 <Col md={6}>
                                     <div className='graphics'>
