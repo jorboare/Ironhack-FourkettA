@@ -1,11 +1,14 @@
 import { Link } from 'react-router-dom'
 import { Button, Image } from 'react-bootstrap'
 import './homepage.css'
-import Fork from './fork-2.png'
+import Plate1 from './images/plato-1.png'
+import Plate2 from './images/plato-2.png'
 import { Container, Row, Col } from 'react-bootstrap'
 import Pie from './graphics/Pie'
 import React, { Component } from 'react'
 import RecipesService from './../../../service/recipes.service'
+import ParallaxImg from './parallax.png'
+import { Parallax } from 'react-scroll-parallax';
 
 class Homepage extends Component {
 
@@ -50,8 +53,8 @@ class Homepage extends Component {
                             <Link to='/profile'>
                                 <Button variant="dark" className='btn'>Perfil</Button>
                             </Link>}
-                        <Image src={Fork} alt='Fork image' className='fork-img-right' />
-                        <Image src={Fork} alt='Fork image' className='fork-img-left' />
+                        <Image src={Plate1} alt='plate image' className='plate-img-left' />
+                        <Image src={Plate2} alt='plate image' className='plate-img-right' />
 
                     </div>
                 </section>
@@ -60,7 +63,9 @@ class Homepage extends Component {
                     <Container className='home-info-container'>
                         <Row>
                             <Col md={6}>
-
+                                <Parallax className="custom-class" y={[-20, 20]} tagOuter="figure">
+                                    <Image src={ParallaxImg} className='parallax-img' alt='imagen huevos fritos' />
+                                </Parallax>
                             </Col>
                             <Col md={6}>
                                 <h2>¿Qué es <b>FourkettA</b>?</h2>

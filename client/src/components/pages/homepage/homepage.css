@@ -42,21 +42,22 @@ color: #f5b461
     border: none;
 
 }
-.fork-img-right{
-    width: 115px;
+.plate-img-right{
+    width: 500px;
     position: absolute;
     z-index: 50;
-    bottom: 0px;;
-    right: 100px;
-    opacity: 0.5;
+    bottom: 70px;;
+    right: -240px;
+transform: rotate(10deg)
 }
-.fork-img-left{
-    width: 115px;
+.plate-img-left{
+    width: 470px;
     position: absolute;
     z-index: 50;
-    bottom: 0px;;
-    left: 100px;
-    opacity: 0.5;
+    bottom: 60px;;
+    left: -240px;
+    transform: rotate(200deg)
+
 }
 
 .spliter{
@@ -141,10 +142,9 @@ text-align: center
     
 }
 
-.profile-splitter{
-    border: 1px solid #F5B561
-}
 
-.underline{
-    text-decoration: underline;
+.parallax-img{
+   position: absolute;
+   width: 380px;
+   top: -70px
 }

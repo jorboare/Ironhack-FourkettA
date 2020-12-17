@@ -28,3 +28,17 @@ h3 {
     font-weight: 100;
     margin: 0
 }
+
+.header-numbers{
+    font-weight: 100;
+    font-size: 19px;
+}
+
+.profile-splitter{
+    border: 1px solid #F5B561;
+
+}
+.profile-splitter.username{
+    border: 1px solid #F5B561;
+    width: 300px;
+}
