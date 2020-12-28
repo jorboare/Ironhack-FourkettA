@@ -43,12 +43,12 @@ color: #f5b461
 
 }
 .plate-img-right{
-    width: 500px;
+    width: 265px;
     position: absolute;
     z-index: 50;
     bottom: 70px;;
-    right: -240px;
-transform: rotate(10deg)
+    right: 0px;
+transform: rotate(0deg)
 }
 .plate-img-left{
     width: 470px;
