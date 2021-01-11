@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import Recipes from './../../../../service/recipes.service'
 import AuthService from './../../../../service/auth.service'
 import FriendCard from './friend-card/Friend-card'
 import './followed-users.css'
 
-import { Form, FormControl, Button, Container, Row, Col, Spinner } from 'react-bootstrap'
+import { Form, FormControl, Button, Container, Row, Col } from 'react-bootstrap'
 
 
 

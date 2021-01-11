@@ -7,9 +7,6 @@ import { Container, Row, Col, Spinner, Button, Image, Modal } from 'react-bootst
 import Raciones from './images/user.png'
 import Tiempo from './images/stopwatch.png'
 import Hoja from './images/leaf.png'
-import EmptyHeart from './images/heart.png'
-import FullHeart from './images/heart (1).png'
-import LikeButton from './like-button/like-button'
 
 
 export default class Detail extends Component {

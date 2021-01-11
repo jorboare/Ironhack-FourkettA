@@ -5,7 +5,7 @@ import './discover.css'
 import ShuffleIcon from './images/kisspng-computer-icons-random-icons-5ac9b210505967.8304824615231677603291-removebg-preview.png'
 
 
-import { Spinner, Button, Image, Form, FormControl } from 'react-bootstrap'
+import { Spinner, Button, Image } from 'react-bootstrap'
 
 
 class Discover extends Component {

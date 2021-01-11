@@ -3,7 +3,6 @@ import FavRecipeCard from './Fav-Recipe-card'
 import RecipesService from '../../../../../service/recipes.service'
 
 
-import { Spinner } from 'react-bootstrap'
 
 
 class FavRecipes extends Component {

@@ -8,7 +8,7 @@ import Pie from './graphics/Pie'
 import React, { Component } from 'react'
 import RecipesService from './../../../service/recipes.service'
 import ParallaxImg from './parallax.png'
-import { Parallax } from 'react-scroll-parallax';
+
 
 class Homepage extends Component {
 
@@ -38,7 +38,7 @@ class Homepage extends Component {
         return (
             <>
                 <section className='hero'>
-                    <h1><span className='title-focused'>F</span>ourkett<span class='title-focused'>A</span></h1>
+                    <h1><span className='title-focused'>F</span>ourkett<span className='title-focused'>A</span></h1>
                     <p>Para cocinillas organizados</p>
                     <div className='homepage-btn'>
                         {!this.props.loggedUser ?
@@ -63,9 +63,9 @@ class Homepage extends Component {
                     <Container className='home-info-container'>
                         <Row>
                             <Col md={6}>
-                                <Parallax className="custom-class" y={[-20, 20]} tagOuter="figure">
-                                    <Image src={ParallaxImg} className='parallax-img' alt='imagen huevos fritos' />
-                                </Parallax>
+
+                                <Image src={ParallaxImg} className='parallax-img' alt='imagen huevos fritos' />
+
                             </Col>
                             <Col md={6}>
                                 <h2>¿Qué es <b>FourkettA</b>?</h2>

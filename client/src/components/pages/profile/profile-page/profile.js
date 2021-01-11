@@ -40,7 +40,6 @@ export default class Profile extends Component {
         this.recipesService
             .getUserRecipes(this.props.loggedUser._id) // Recibir las rutas creadas por el usuario loggeado
             .then(res => this.setState({ userRecipes: res.data })) //Añade las recetas del usuario al state
-            .then(() => this.props.loggedUser.username === this.state.userProfile.username && this.setState({ showProfileNavbar: true }))
             .catch(err => console.log(err))
     }
 

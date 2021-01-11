@@ -3,7 +3,7 @@ import axios from 'axios'
 export default class RecipeService {
     constructor() {
         this.apiHandler = axios.create({
-            baseURL: 'http://localhost:5000/api',
+            baseURL: "https://fourketta-api.herokuapp.com/api",
             withCredentials: true
         })
     }

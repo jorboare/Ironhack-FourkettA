@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { ResponsivePie } from '@nivo/pie'
-import RecipesService from '../../../../service/recipes.service'
 
 
 const MyResponsivePie = ({ vegan, veggie, allRecipes }) => {
