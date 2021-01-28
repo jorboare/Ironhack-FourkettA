@@ -43,7 +43,7 @@ class Header extends Component {
                                 <Image className='header-img' src={this.props.loggedUser.img}></Image>
                                 <Nav.Link as='div'>{this.props.loggedUser.username}</Nav.Link>
                             </Link>
-                            <Nav.Link as='div' onClick={this.logOut}>Cerrar sesión</Nav.Link>
+                            <Nav.Link as='div' onClick={this.logOut}>Salir</Nav.Link>
                         </>
                         :
                         <>

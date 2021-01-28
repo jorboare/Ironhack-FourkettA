@@ -38,8 +38,9 @@ export default class Profile extends Component {
     componentDidMount() {
 
         this.recipesService
-            .getUserRecipes(this.props.loggedUser._id) // Recibir las rutas creadas por el usuario loggeado
+            .getUserRecipes(this.props.loggedUser._id) // Recibir las recetas creadas por el usuario loggeado
             .then(res => this.setState({ userRecipes: res.data })) //Añade las recetas del usuario al state
+            .then(() => this.props.loggedUser.username === this.state.userProfile.username && this.setState({ showProfileNavbar: true }))
             .catch(err => console.log(err))
     }
 
@@ -111,59 +112,35 @@ export default class Profile extends Component {
         return (
             <div className='general-background'>
                 {this.state.userRecipes ?
-                    <Container className='profile-container'>
 
-                        <Row className="justify-content-center profile-header">
-                            <ProfileHeader userProfile={this.props.loggedUser} numberRecipes={this.state.userRecipes.length} followButton={this.handleFollowButton} />
-                        </Row>
-                        <Row className="justify-content-center">
+                    <>
+                        <ProfileHeader userProfile={this.props.loggedUser} numberRecipes={this.state.userRecipes.length} followButton={this.handleFollowButton} />
 
-
-
-                            <Col xs={8} md={3}>
-                                <ProfileNavbar loggedUser={this.state.user} {...this.props} showInfo={this.changeShowedInfo} />
-                            </Col>
+                        <Container className='profile-container'>
+                            <Row className="justify-content-center">
 
 
-                            {this.state.showInfo === 'recents' &&
-                                <Col xs={12} md={9} >
-
-                                    <Discover loggedUser={this.props.loggedUser} randomRecipes={this.randomRecipes} handleFavButton={this.handleFavButton} />
-
+                                <Col xs={8} md={3}>
+                                    <ProfileNavbar loggedUser={this.state.user} {...this.props} showInfo={this.changeShowedInfo} />
                                 </Col>
-                            }
 
-                            {this.state.showInfo === 'myRecipes' &&
+
                                 <Col xs={12} md={9} >
+                                    {this.state.showInfo === 'discover' && <Discover loggedUser={this.props.loggedUser} randomRecipes={this.randomRecipes} handleFavButton={this.handleFavButton} />}
 
-                                    <MyRecipes loggedUser={this.props.loggedUser} handleFavButton={this.handleFavButton} />
+                                    {this.state.showInfo === 'myRecipes' && <MyRecipes loggedUser={this.props.loggedUser} handleFavButton={this.handleFavButton} />}
 
+                                    {this.state.showInfo === 'savedRecipes' && <FavRecipes key={this.state.key} loggedUser={this.props.loggedUser} fav={this.props.loggedUser.favRecipes} setTheUser={this.props.setTheUser} handleFavButton={this.handleFavButton} />}
+
+                                    {this.state.showInfo === 'followedUsers' && <FollowedUsers loggedUser={this.props.loggedUser} userFriends={this.props.loggedUser.friends} />}
+
+                                    {this.state.showInfo === 'search' && <Search loggedUser={this.props.loggedUser} handleFavButton={this.handleFavButton} />}
                                 </Col>
-                            }
 
-                            {this.state.showInfo === 'savedRecipes' &&
-                                <Col xs={12} md={9} >
+                            </Row>
 
-                                    <FavRecipes key={this.state.key} loggedUser={this.props.loggedUser} fav={this.props.loggedUser.favRecipes} setTheUser={this.props.setTheUser} handleFavButton={this.handleFavButton} />
-
-                                </Col>}
-
-                            {this.state.showInfo === 'followedUsers' &&
-                                <Col xs={12} md={9} >
-
-                                    <FollowedUsers loggedUser={this.props.loggedUser} userFriends={this.props.loggedUser.friends} />
-
-                                </Col>}
-
-                            {this.state.showInfo === 'search' &&
-                                <Col xs={12} md={9} >
-
-                                    <Search loggedUser={this.props.loggedUser} handleFavButton={this.handleFavButton} />
-
-                                </Col>}
-                        </Row>
-
-                    </Container>
+                        </Container>
+                    </>
                     :
                     <Spinner animation="border" variant="warning" />
                 }

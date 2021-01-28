@@ -26,20 +26,17 @@
 
 
 .card-header {
-    background-color: #F4D192;
-
+    background-color: rgb(216, 242, 235);
     font-weight: 100;
     text-transform: uppercase;
     text-align: center;
 }
+
 .card-body {
-    background-color: #f7e7d2;
     text-align: center
 }
 
-.card {
-    border: 1px solid #F4D192
-}
+
 
 .editModalBody{
     padding: 0 40px;

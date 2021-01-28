@@ -3,7 +3,7 @@ import RecipeCard from '../../profile-feed/Recipe-card'
 import RecipesService from '../../../../../service/recipes.service'
 import './Search.css'
 
-import { Button, Form, FormControl } from 'react-bootstrap'
+import { Button, Form, FormControl, Row, Container } from 'react-bootstrap'
 
 
 class Discover extends Component {
@@ -48,7 +48,12 @@ class Discover extends Component {
                 </Form>
 
                 {this.state.result &&
-                    this.state.result.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.props.handleFavButton} />)
+                    <Container >
+
+                        <Row className='recipe-card-row'>
+                            {this.state.result.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.props.handleFavButton} />)}
+                        </Row>
+                    </Container>
                 }
 
             </section>

@@ -1,24 +1,28 @@
 .friend-Card {
     text-align: center;
-    background-color:#F4D192;
-    border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.7);
 padding-top: 10px;
 width: 120px;
   box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
-
-
-
+  transition: 0.2s;
+  margin: 0 auto;
+}
+.friend-Card:hover {
+    transform: scale(1.04)
 }
 .friend-Card p{
    font-weight: 100;
    color: black
 }
 
+.friend-link:hover{
+   text-decoration: none;
+}
 .friend-img{
     height: 60px;
     object-fit:cover;
     width:60px;
     border-radius:50%;
-      box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
 
 }

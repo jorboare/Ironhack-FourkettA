@@ -1,5 +1,5 @@
 
-import { Col, Image, Button } from 'react-bootstrap'
+import { Col, Image, Button, Container, Row } from 'react-bootstrap'
 
 import './profile-header.css'
 
@@ -11,35 +11,47 @@ const Info = props => {
 
     return (
         <>
-            <Col xs={6} md={3} className='image-Col'>
-                <Image className='profile-img' src={user.img} />
-            </Col>
-            <Col xs={12} md={6} >
-                <section className='profile-info'>
-                    <h3>
-                        {user.username}
-                    </h3>
-                    <p>{user.description} </p>
-                    <hr className='profile-splitter'></hr>
-                    <p>Número de recetas: {props.numberRecipes} | Seguidos: {user.friends.length}</p>
-                </section>
-            </Col>
-            <Col xs={12} md={3} >
+            <div className='profile-header-div'>
+                <Container>
+                    <Row>
+                        <Col xs={12} sm={12} md={12} lg={3} className='image-Col'>
+                            <Image className='profile-img' src={user.img} />
 
-                <section className='profile-info'>
-                    {props.loggedUser.friends.includes(user._id) ?
-                        <Button variant="info" className="unfollow" onClick={() => props.followButton(user._id)}>
-                            <span className='following'>Siguiendo</span>
-                            <span className='unfollow-btn'>Dejar de seguir</span>
-                        </Button>
 
-                        :
+                            <div className='follow-button'>
+                                {props.loggedUser.friends.includes(user._id) ?
+                                    <Button variant="info" className="unfollow" onClick={() => props.followButton(user._id)}>
+                                        <span className='following'>Siguiendo</span>
+                                        <span className='unfollow-btn'>Dejar de seguir</span>
+                                    </Button>
 
-                        <Button variant="info" onClick={() => props.followButton(user._id)}>Seguir</Button>
-                    }
-                </section>
-            </Col>
+                                    :
+
+                                    <Button variant="info" onClick={() => props.followButton(user._id)}>Seguir</Button>
+                                }
+                            </div>
+
+                        </Col>
+                        <Col xs={12} sm={12} md={12} lg={9}>
+                            <section className='profile-info'>
+                                <h3>
+                                    {user.username}
+                                </h3>
+                                <hr className='profile-splitter username'></hr>
+
+                                <p>{user.description} </p>
+
+                                <hr className='profile-splitter'></hr>
+
+                                <p className='header-numbers'>Recetas subidas: {props.numberRecipes} | Siguiendo: {user.friends.length}</p>
+                            </section>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
+
         </>
+
 
 
     )

@@ -1,11 +1,9 @@
 .profile-container {
     margin-bottom: 50px;
-    margin-top: 90px;
+    margin-top: 20px;
 }
 
-.profile-header {
-    text-align: center
-}
+
 
 .recipes-list{
     margin-top: 20px;
@@ -13,7 +11,6 @@
 
 .general-background{
     padding: 1px 0 30px 0;
-
     background: url("./background-copia.png");
     background-size: 500px 500px;
     

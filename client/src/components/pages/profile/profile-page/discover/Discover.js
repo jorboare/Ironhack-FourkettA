@@ -5,7 +5,7 @@ import './discover.css'
 import ShuffleIcon from './images/kisspng-computer-icons-random-icons-5ac9b210505967.8304824615231677603291-removebg-preview.png'
 
 
-import { Spinner, Button, Image } from 'react-bootstrap'
+import { Spinner, Button, Image, Container, Row } from 'react-bootstrap'
 
 
 class Discover extends Component {
@@ -44,7 +44,7 @@ class Discover extends Component {
             <section className='recipes-list' >
                 <div className='discover-text'>
                     <h4>Descubre</h4>
-                    <p>¡Tres recetas aleatorias para que te den ideas!</p>
+                    <p>Cuatro recetas aleatorias para que te den ideas!</p>
                 </div>
                 <div className='align-shuffleButton'>
 
@@ -52,9 +52,17 @@ class Discover extends Component {
                 </div>
 
                 { this.state.recipes ?
-                    this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.props.handleFavButton} />)
+                    <Container >
+
+                        <Row className='recipe-card-row'>
+                            {this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.props.handleFavButton} />)}
+                        </Row>
+
+                    </Container>
                     :
-                    <Spinner animation="border" variant="warning" />}
+                    <Spinner animation="border" variant="warning" />
+                }
+
             </section>
         )
     }

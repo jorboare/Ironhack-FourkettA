@@ -32,9 +32,9 @@ class FriendCard extends Component {
 
             <>
                 {this.state.friend ?
-                    <Col sm={3} md={3} >
+                    <Col xs={6} sm={3} md={3} >
                         <div className='friend-Card'>
-                            <Link to={`/user/${this.state.friend.username}`}>
+                            <Link to={`/user/${this.state.friend.username}`} className='friend-link'>
                                 <Image src={this.state.friend.img} className='friend-img' />
                                 <p>{this.state.friend.username}</p>
                             </Link>

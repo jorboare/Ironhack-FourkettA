@@ -27,7 +27,7 @@ class App extends Component {
     this.authServices = new AuthServices()
   }
 
-  setTheUser = user => this.setState({ loggedInUser: user })
+  setTheUser = user => this.setState({ loggedInUser: user }, () => console.log('El nuevo estado de App es:', this.state))
 
   componentDidMount = () => {
 

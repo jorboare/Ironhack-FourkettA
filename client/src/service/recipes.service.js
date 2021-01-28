@@ -3,15 +3,15 @@ import axios from 'axios'
 export default class RecipeService {
     constructor() {
         this.apiHandler = axios.create({
-            baseURL: "https://fourketta-api.herokuapp.com/api",
+            baseURL: 'http://localhost:5000/api',
             withCredentials: true
         })
     }
     getRecipes = () => this.apiHandler.get('/recipes/getAllRecipes')
     veggieRecipes = () => this.apiHandler.get('/recipes/VeggieRecipes')
     veganRecipes = () => this.apiHandler.get('/recipes/VeganRecipes')
-    getUserRecipes = userId => this.apiHandler.get(`/recipes/getUserRecipes?user_Id=${userId}`)
-    getFriendRecipes = userId => this.apiHandler.get(`/recipes/getFriendRecipes?user_Id=${userId}`)
+    getUserRecipes = userId => this.apiHandler.get(`/recipes/getUserRecipes?id=${userId}`)
+    getFriendRecipes = userId => this.apiHandler.get(`/recipes/getFriendRecipes?id=${userId}`)
     getRecipeDetails = recipeId => this.apiHandler.get(`/recipes/getOneRecipe?id=${recipeId}`)
     searchRecipe = search => this.apiHandler.get(`/recipes/searchRecipe?search=${search}`)
     newRecipe = recipeData => this.apiHandler.post(`/recipes/newRecipe`, recipeData)

@@ -20,7 +20,7 @@ const MyResponsivePie = ({ vegan, veggie, allRecipes }) => {
                         "color": "hsl(49, 67%, 86%)"
                     },
                     {
-                        "id": "Vegetarianas",
+                        "id": "Veggie",
                         "value": `${veggie}`,
                         "color": "hsl(156, 39%, 71%)"
                     }

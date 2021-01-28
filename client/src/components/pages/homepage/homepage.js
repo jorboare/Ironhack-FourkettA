@@ -7,7 +7,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Pie from './graphics/Pie'
 import React, { Component } from 'react'
 import RecipesService from './../../../service/recipes.service'
-import ParallaxImg from './parallax.png'
+import Gradient from './gradient copia.png'
 
 
 class Homepage extends Component {
@@ -25,14 +25,21 @@ class Homepage extends Component {
 
     componentDidMount() {
 
-        this.recipesService
-            .getRecipes()
-            .then(res => this.setState({ allRecipes: res.data.length }))
-            .then(res => this.recipesService.veggieRecipes())
-            .then(res => this.setState({ veggie: res.data.length }))
-            .then(res => this.recipesService.veganRecipes())
-            .then(res => this.setState({ vegan: res.data.length }))
+        const getRecipes = this.recipesService.getRecipes()
+        const getVeggies = this.recipesService.veggieRecipes()
+        const getVegan = this.recipesService.veganRecipes()
+
+        Promise
+            .all([getRecipes, getVeggies, getVegan])
+            .then(res => this.setState(
+                {
+                    allRecipes: res[0].data.length,
+                    veggie: res[1].data.length,
+                    vegan: res[2].data.length
+                }
+            ))
             .catch(err => console.log(err))
+
     }
     render() {
         return (
@@ -53,40 +60,50 @@ class Homepage extends Component {
                             <Link to='/profile'>
                                 <Button variant="dark" className='btn'>Perfil</Button>
                             </Link>}
-                        <Image src={Plate1} alt='plate image' className='plate-img-left' />
-                        <Image src={Plate2} alt='plate image' className='plate-img-right' />
+
 
                     </div>
+                    <video autoPlay muted loop playsInLine className='video-hero'>
+                        <source src="https://res.cloudinary.com/jordi-ironhack/video/upload/v1611221686/fotos-webuild/Secuencia_01_m87ppa.mp4" type='video/mp4'>
+                        </source>
+                    </video>
+                    <div className='bg-black'></div>
                 </section>
                 <div className='spliter'></div>
                 <section className='home-info'>
+
+
+                    <Image src={Gradient} className='gradient-img' />
+
+
+                    <Image src={Plate1} alt='plate image' className='plate-img-left' />
+
+
                     <Container className='home-info-container'>
                         <Row>
                             <Col md={6}>
-
-                                <Image src={ParallaxImg} className='parallax-img' alt='imagen huevos fritos' />
-
                             </Col>
                             <Col md={6}>
                                 <h2>¿Qué es <b>FourkettA</b>?</h2>
                                 <hr />
-                                <p>FourkettA es un organizador de recetas así como una plataforma con la que poder acceder facilmente a nuevas recetas, seguir a otros usuarios para tener a mano su contenido y descubrir nuevas recetas con las que inspirarse con solo pulsar un botón.</p>
+                                <p>FourkettA es un organizador de recetas así como una plataforma con la que poder acceder facilmente a nuevas recetas, seguir a otros usuarios para tener a mano su contenido y descubrir recetas con las que inspirarse con solo pulsar un botón.</p>
                             </Col>
                         </Row>
-
                     </Container>
                 </section>
                 <div className='spliter beige'></div>
                 {this.state.vegan &&
                     <section className='home-graphics'>
+                        <Image src={Gradient} className='gradient-img-graphics' />
+
                         <Container>
                             <Row>
-                                <Col md={6} className='num-recipes-col'>
+                                <Col md={5} className='num-recipes-col'>
                                     <h2>{this.state.allRecipes} <span className='num-recipes'>recetas</span></h2>
                                     <hr></hr>
                                     <p>Ahora mismo tenemos registradas {this.state.allRecipes} recetas. En <i>FourkettA</i> puedes descubrir cuál será tu nueva comida favorita, o la receta con la que tus invitados van a rebañar el plato. ¡Regístrate y empieza a cocinar!</p>
                                 </Col>
-                                <Col md={6}>
+                                <Col md={7}>
                                     <div className='graphics'>
 
                                         <Pie vegan={this.state.vegan} veggie={this.state.veggie} allRecipes={this.state.allRecipes} />

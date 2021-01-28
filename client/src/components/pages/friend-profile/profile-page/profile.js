@@ -107,22 +107,23 @@ export default class Profile extends Component {
         return (
             <div className='general-background'>
                 {this.state.recipes ?
-                    <Container className='profile-container'>
+                    <>
+                        <ProfileHeader userProfile={this.state.userProfile} loggedUser={this.props.loggedUser} numberRecipes={this.state.recipes.length} followButton={this.handleFollowButton} />
 
-                        <Row className="justify-content-center profile-header">
-                            <ProfileHeader userProfile={this.state.userProfile} loggedUser={this.props.loggedUser} numberRecipes={this.state.recipes.length} followButton={this.handleFollowButton} />
-                        </Row>
-                        <Row className="justify-content-center">
-                            <Col md={12}>
-                                <h4 className='friend-profile-title'>Recetas de {this.state.userProfile.username}</h4>
+                        <h4 className='friend-profile-title'>Recetas de {this.state.userProfile.username}</h4>
+
+                        <Container className='profile-container'>
+                            <Row className="justify-content">
+
                                 {this.state.recipes ?
-                                    this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} />)
+                                    this.state.recipes.map(elm => <RecipeCard loggedUser={this.props.loggedUser} {...elm} key={elm._id} likeButton={this.handleFavButton} colmd={4} />)
                                     :
                                     <Spinner animation="border" variant="warning" />}
-                            </Col>
-                        </Row>
 
-                    </Container>
+                            </Row>
+
+                        </Container>
+                    </>
                     :
                     <Spinner animation="border" variant="warning" />
                 }

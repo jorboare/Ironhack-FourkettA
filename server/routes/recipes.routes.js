@@ -3,7 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 
 const Recipe = require('../models/recipes.model')
-const { checkRecipeId, checkParamsRecipeId, checkUserId } = require('./middlewares')
+const { checkId, checkParamsId } = require('./middlewares')
 
 // Endpoints
 
@@ -18,37 +18,37 @@ router.get('/getAllRecipes', (req, res) => {
 
 // Get User Recipes
 
-router.get('/getUserRecipes', checkUserId, (req, res) => {
+router.get('/getUserRecipes', checkId, (req, res) => {
 
 
     Recipe
-        .find({ author: req.query.user_Id })
+        .find({ author: req.query.id })
         .then(allRecipes => res.json(allRecipes))
         .catch(err => res.status(500).json(err))
 })
 
 // Get User Recipes
 
-router.get('/getFriendRecipes', checkUserId, (req, res) => {
+router.get('/getFriendRecipes', checkId, (req, res) => {
 
 
     Recipe
-        .find({ author: req.query.user_Id, visible: 'visible' })
+        .find({ author: req.query.id, visible: 'visible' })
         .then(allRecipes => res.json(allRecipes))
         .catch(err => res.status(500).json(err))
 })
 
 // Get Favorite Recipes
 
-router.get('/getFavRecipes', checkUserId, (req, res) => {
+router.get('/getFavRecipes', checkId, (req, res) => {
 
 
     Recipe
-        .find({ favRecipes: req.query.user_Id })
+        .find({ favRecipes: req.query.id })
         .then(allRecipes => res.json(allRecipes))
         .catch(err => res.status(500).json(err))
 })
-// 10 Random Recipes
+// 4 Random Recipes
 
 router.get('/getRandomRecipes', (req, res) => {
 
@@ -63,7 +63,7 @@ router.get('/getRandomRecipes', (req, res) => {
                 allRecipes[j] = temp
             }
 
-            return res.json(allRecipes.splice(0, 3))
+            return res.json(allRecipes.splice(0, 4))
         })
         .catch(err => res.status(500).json(err))
 })
@@ -87,7 +87,7 @@ router.get('/VeganRecipes', (req, res) => {
 })
 
 
-router.get('/getOneRecipe', checkRecipeId, (req, res) => {
+router.get('/getOneRecipe', checkId, (req, res) => {
 
     const recipeId = req.query.id
     Recipe
@@ -119,7 +119,7 @@ router.post('/newRecipe', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.put('/editRecipe/:recipe_id', checkParamsRecipeId, (req, res) => {
+router.put('/editRecipe/:id', checkParamsId, (req, res) => {
 
     Recipe
         .findByIdAndUpdate(req.params.recipe_id, req.body)
@@ -127,10 +127,10 @@ router.put('/editRecipe/:recipe_id', checkParamsRecipeId, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.get('/deleteRecipe/:recipe_id', checkParamsRecipeId, (req, res) => {
+router.get('/deleteRecipe/:id', checkParamsId, (req, res) => {
 
     Recipe
-        .findByIdAndDelete(req.params.recipe_id)
+        .findByIdAndDelete(req.params.id)
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

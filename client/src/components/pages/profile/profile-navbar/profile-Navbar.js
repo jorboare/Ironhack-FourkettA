@@ -156,7 +156,7 @@ class Navbar extends Component {
 
                                 <Card.Body>
 
-                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showInfo('recents')}>
+                                    <Link to='#' className='profile-navbar-btn' onClick={() => this.props.showInfo('discover')}>
 
                                         Descubre
 

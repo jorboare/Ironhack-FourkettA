@@ -8,7 +8,6 @@ import Raciones from './images/user.png'
 import Tiempo from './images/stopwatch.png'
 import Hoja from './images/leaf.png'
 
-
 export default class Detail extends Component {
 
     constructor(props) {
@@ -123,7 +122,7 @@ export default class Detail extends Component {
                                         <div className='img-gallery'>
                                             {this.state.recipe.instructionsImgs.length > 0 ?
                                                 <>
-                                                    {this.state.recipe.instructionsImgs.map(elm => <Image className='recipe-img-gallery' src={elm} style={{ 'width': '50px;' }} />)}
+                                                    {this.state.recipe.instructionsImgs.map((elm, idx) => <Image key={idx} className='recipe-img-gallery' src={elm} />)}
                                                 </>
                                                 :
                                                 <p>No hay imágenes disponibles</p>

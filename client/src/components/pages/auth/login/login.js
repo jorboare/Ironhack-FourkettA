@@ -24,7 +24,6 @@ class Login extends Component {
     handleSubmit = e => {
 
         e.preventDefault()
-        console.log(this.state.user)
         this.authService
             .login(this.state.user)
             .then(theLoggedInUser => {

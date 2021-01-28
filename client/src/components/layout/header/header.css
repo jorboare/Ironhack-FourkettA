@@ -3,7 +3,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 300;
+    z-index: 400;
     background-color: #f5b461;  /* fallback for old browsers */
     box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
 }
@@ -21,7 +21,7 @@
 }
 
 .page-title {
-    color: #beead8;
+    color: #FFF;
     font-weight: 700;
 }
 

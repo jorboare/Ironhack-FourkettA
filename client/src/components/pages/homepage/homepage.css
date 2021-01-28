@@ -7,7 +7,7 @@
 
 
 
-
+/* HERO */
 
 .hero {
     height: 90vh;
@@ -22,15 +22,21 @@
 
 .hero h1 {
     font-weight: 900;
-    font-size: 80px;
-    color: #9ad3bc
+    font-size: 100px;
+    color: #ffffff;
+    position: relative;
+    z-index: 200;
 }
 .hero p {
-    color: #f5b461
+    color: #f5b461;
+    font-size: 20px;
+    position: relative;
+    z-index: 200;
 }
 
 .title-focused{
-color: #f5b461
+color: #9ad3bc
+
 }
 
 .homepage-btn .btn {
@@ -38,10 +44,45 @@ color: #f5b461
     border-radius: 25px;
     padding-bottom:10px;
     color: #ffffff;
-    background-color: #f5b461;
-    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid #f5b461;
+      position: relative;
+    z-index: 200;
 
 }
+
+.homepage-btn .btn:hover {
+    margin-right: 15px;
+    border-radius: 25px;
+    padding-bottom:10px;
+    color: #ffffff;
+    background-color: rgba(245, 180, 97, 0.5);
+    border: 2px solid #f5b461;
+      position: relative;
+    z-index: 200;
+
+}
+
+.bg-black{
+    height: 90vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    position: absolute;
+    z-index: 150;
+    top: 0;
+    left: 0
+
+}
+.video-hero{
+    position: absolute;
+height: 90vh;
+width:100%;
+object-fit: cover;
+   top: 0;
+   left: 0;
+   z-index: 100
+}
+    
 .plate-img-right{
     width: 265px;
     position: absolute;
@@ -50,15 +91,8 @@ color: #f5b461
     right: 0px;
 transform: rotate(0deg)
 }
-.plate-img-left{
-    width: 470px;
-    position: absolute;
-    z-index: 50;
-    bottom: 60px;;
-    left: -240px;
-    transform: rotate(200deg)
 
-}
+
 
 .spliter{
     background-color: #9ad3bc;
@@ -66,31 +100,75 @@ transform: rotate(0deg)
     padding: 0;
     margin: 0;
     box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+    position: relative;
+    z-index: 300;
 }
 
 .spliter.beige{
     background-color: #f3eac2;
 }
 
+
+
+/* HOME INFO */
+
 .home-info{
     height: 400px;
-    background-color:#f5b461 ;
     box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+    position: relative;
+    overflow: hidden;
+    background-color: #f5b461;
+}
+
+.gradient-img{
+width: 1400px;
+position: absolute;
+top: 0;
+right: 0;
+   z-index: 150;
+   opacity: 0.7;
 }
 
 .home-info-container {
   padding-top: 80px;
    color: white;
    font-weight: 100;
+   position: relative;
+   z-index: 200;
 }
 .home-info-container p{
   font-size: 20px;
+  
 }
+
+.plate-img-left{
+   position: absolute;
+   width: 800px;
+   top: -180px;
+   left: -280px;
+   transform: rotate(5deg);
+
+}
+
+.video-home{
+    position: absolute;
+height: 90vh;
+width:100%;
+object-fit: cover;
+   top: 0;
+   left: 0;
+   z-index: 100
+    
+}
+
+/* GRAPHICS */
 
 .home-graphics{
     height: 410px;
     background-color:#9ad3bc ;
     box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+    position: relative;
+    overflow: hidden;
 }
 
 .home-graphics h2{
@@ -106,6 +184,8 @@ transform: rotate(0deg)
 
 .num-recipes-col{
 padding-top: 80px;
+position: relative;
+z-index: 200
 }
 
 .num-recipes-col p{
@@ -123,9 +203,23 @@ text-align: center
     font-weight: 100
 }
 
+.gradient-img-graphics{
+width: 2000px;
+position: absolute;
+top: 0;
+right: 0;
+z-index: 150;
+opacity: 0.7;
+transform: scaleX(-1);
+opacity: 0.5;
+
+}
+
 .graphics{
     height: 400px;
 }
+
+/* FOOTER */
 
 .footer{
     height: 50px;
@@ -142,9 +236,62 @@ text-align: center
     
 }
 
+/* MEDIA QUERYS */
+@media (max-width: 907px){
 
-.parallax-img{
-   position: absolute;
-   width: 380px;
-   top: -70px
+.homepage-btn{
+    margin-top: 0px;
+}
+
+.hero {
+    height: 500px;
+    padding-top: 190px;
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+}
+
+.hero h1 {
+    font-weight: 900;
+    font-size: 80px;
+}
+.hero p {
+    color: #f5b461
+}
+.video-hero{
+height: 500px;
+}
+
+.bg-black{
+    height: 500px;
+}
+}
+
+@media (max-width: 767px){
+.home-graphics{
+    height: 800px;
+    background-color:#9ad3bc ;
+    box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+}
+}
+
+@media (max-width: 455px){
+.hero h1 {
+    font-weight: 900;
+    font-size: 60px;
+}
+
+.home-info{
+    height: 480px;
+
+}
+
+.video-home{
+
+height: 480px;
+
+}
+
+.footer{
+    height: 100px;
+
+}
 }

@@ -3,30 +3,33 @@
 }
 
 .profile-img {
-    height: 180px;
+    height: 200px;
     object-fit:cover;
-    width:180px;
+    width:200px;
     border-radius:50%;
-    border: 5px solid white;
+    border: 5px solid #F5B561;
     box-shadow: 0 15px 15px -10px rgba(0,0,0,.2);
 }
 
-.profile-header{
-    margin-top: 50px;
-    padding: 15px;
-    background-color:#F4D192;
-    border-radius: 15px;
+.profile-header-div{
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 10px 10px -10px rgba(0,0,0,.2);
+    margin-top: 55px;
+    height: 290px;
 }
 
 h3 {
     font-weight: 100;
     font-size: 40px;
+    text-align: center;
 }
 
 .profile-info p{
     font-weight: 100;
-    margin: 0
+    margin: 0;
+    font-size: 17px;
+    text-align: center;
 }
 
 .header-numbers{
@@ -36,9 +39,51 @@ h3 {
 
 .profile-splitter{
     border: 1px solid #F5B561;
+    width: 100%;
 
 }
 .profile-splitter.username{
     border: 1px solid #F5B561;
-    width: 300px;
+    width: 100%;
+}
+
+@media (max-width: 991px) {
+    .profile-img {
+    height: 100px;
+
+    width:100px;
+
+}
+.profile-header-div{
+    
+    height: 340px;
+}
+}
+@media (max-width: 767px) {
+  
+.profile-header-div{
+    
+    height: 370px;
+}
+}
+@media (max-width: 449px) {
+  
+.profile-header-div{
+    
+    height: 390px;
+}
+}
+@media (max-width: 381px) {
+  
+.profile-header-div{
+    
+    height: 440px;
+}
+}
+@media (max-width: 337px) {
+  
+.profile-header-div{
+    
+    height: 460px;
+}
 }

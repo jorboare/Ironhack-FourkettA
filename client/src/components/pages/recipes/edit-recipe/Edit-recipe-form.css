@@ -38,7 +38,7 @@ textarea{
 }
 
 .new-recipe-form-col{
-    background-color: #FFEFC1;
+ background-color: rgba(255, 255, 255, 0.7);
     padding: 0px 60px 0 60px;
     margin: 100px 0;
     border-radius: 20px;
@@ -56,23 +56,3 @@ textarea{
 }
 
 
-button .unlike-btn { display: none; }
-button:hover .likedHeart { display: none; }
-button:hover .unlike-btn { display: inline; }
-
-button .likeHeart { display: none; }
-button:hover .unliked-btn  { display: none; }
-button:hover .likeHeart{ display: inline; }
-
-.emptyHeart{
-  width: 17px;
-  display: inline;
-      margin-left:1px;
-  margin: 0;
-}
-.fullHeart{
-  width: 17px;
-    display: inline;
-    margin-left:1px;
-  background: none
-}

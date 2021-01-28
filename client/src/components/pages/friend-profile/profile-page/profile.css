@@ -1,6 +1,6 @@
 .profile-container {
     margin-bottom: 50px;
-    margin-top: 90px;
+    margin-top: 20px;
 }
 
 .profile-header {
@@ -17,8 +17,7 @@
     font-size: 30px;
     font-weight: 100;
     text-transform: uppercase;
-    background-color:#F4D192 ;
-    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.7);
     width: 400px;
     padding: 5px 10px;
 margin: 30px auto;
