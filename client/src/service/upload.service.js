@@ -4,7 +4,7 @@ export default class FilesService {
 
     constructor() {
         this.apiHandler = axios.create({
-            baseURL: process.env.REACT_APP_API_URL,
+            baseURL: 'https://fourketta-api.herokuapp.com/api',
             withCredentials: true
         })
     }

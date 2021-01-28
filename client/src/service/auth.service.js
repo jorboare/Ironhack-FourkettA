@@ -3,7 +3,7 @@ import axios from 'axios'
 export default class AuthService {
     constructor() {
         this.apiHandler = axios.create({
-            baseURL: process.env.REACT_APP_API_URL,
+            baseURL: 'https://fourketta-api.herokuapp.com/api',
             withCredentials: true
         })
     }
